@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+    <style>
+        .login-form {
+            width: 340px;
+            margin: 50px auto;
+        }
+
+        .login-form form {
+            margin-bottom: 15px;
+            background: #f7f7f7;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+        }
+
+        .login-form h2 {
+            margin: 0 0 15px;
+        }
+
+        .form-control, .btn {
+            min-height: 38px;
+            border-radius: 2px;
+        }
+
+        .btn {
+            font-size: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<header>
+
+</header>
+<main>
+    <div class="container justify-content-center align-content-center">
+        <div class="row">
+            <div class="col">
+                <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                           aria-controls="home"
+                           aria-selected="true">User</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                           aria-controls="profile"
+                           aria-selected="false">Employee</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="login-form">
+                            <form action="{{ url_for('login_user') }}" method="post">
+                                <h2 class="text-center">Log in</h2>
+                                {% if error %}
+                                    <p class="error">Error: Invalid credentials!</p>
+                                {% endif %}
+                                <div class="form-group">
+                                    <p>Username</p>
+                                    <input type="text" class="form-control" placeholder="username" required="required" name="username">
+                                </div>
+                                <div class="form-group">
+                                    <p>Password</p>
+                                    <input type="password" class="form-control" placeholder="password" required="required" name="password">
+                                </div>
+                                <div class="form-group">
+                                <div class="form-group hide">
+                                    <input type="text" class="form-control" hidden="true" value="READER" required="required" name="account_type">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block">Log in</button>
+                                </div>
+                                <div class="clearfix">
+                                    <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
+                                    <a href="#" class="pull-right">Forgot Password?</a>
+                                </div>
+                            </form>
+                            <p class="text-center"><a href="#">Create an Account</a></p>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="login-form">
+                            <form action="{{ url_for('login_employee') }}" method="post">
+                                <h2 class="text-center">Log in</h2>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="username" required="required" name="username">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" placeholder="password" required="required" name="password">
+                                </div>
+                                <div class="form-group hide">
+                                    <input type="text" class="form-control" hidden="true" value="EMPLOYEE" required="required" name="account_type">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block">Log in</button>
+                                </div>
+                                <div class="clearfix">
+                                    <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
+                                    <a href="#" class="pull-right">Forgot Password?</a>
+                                </div>
+                            </form>
+                            <p class="text-center"><a href="#">Create an Account</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</main>
+</body>
+</html>
