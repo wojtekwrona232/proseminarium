@@ -19,6 +19,7 @@ func main() {
 
 	api.HandleFunc("/get-packages/all", getPackages).Methods(http.MethodGet)
 	api.HandleFunc("/get-packages/id/{packageId}", getPackageId).Methods(http.MethodGet)
+	api.HandleFunc("/get-packages/courier/{courierId}", getPackageCourier).Methods(http.MethodGet)
 	api.HandleFunc("/get-packages/number/{packageNumber}", getPackageNumber).Methods(http.MethodGet)
 	api.HandleFunc("/get-packages/sender/{senderId}", getPackageSender).Methods(http.MethodGet)
 	api.HandleFunc("/get-packages/receiver/{receiverId}", getPackageReceiver).Methods(http.MethodGet)

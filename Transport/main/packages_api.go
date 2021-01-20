@@ -163,6 +163,36 @@ func getPackageReceiver(w http.ResponseWriter, r *http.Request)  {
 	}
 }
 
+func getPackageCourier(w http.ResponseWriter, r *http.Request)  {
+	var err2 error
+	err2 = initDB()
+	if err2 != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	params := mux.Vars(r)
+	courierId := params["courierId"]
+
+	var packages []Package
+	db.Preload("Courier").Where("id_courier = ?", courierId).Find(&packages)
+
+	var err3 error
+	err3 = json.NewEncoder(w).Encode(packages)
+	if err3 != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	var err1 error
+	err1 = db.Close()
+	if err1 != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+}
+
 func getPackageDeliveryState(w http.ResponseWriter, r *http.Request)  {
 	var err2 error
 	err2 = initDB()
