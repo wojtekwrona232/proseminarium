@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Podgląd wypożyczeń</title>
+    <title>Wyszukaj książkę</title>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
@@ -26,7 +26,27 @@
             background-size: cover;
         }
 
-
+        td p{
+            margin-bottom: 0;
+        }
+        td {
+            padding-top:15px!important;
+            padding-bottom: 15px!important;
+        }
+        td button{
+            color: white!important;
+            padding-left: 10px!important;
+            padding-right: 10px!important;
+        }
+        .c1{
+            background-color: #9068c7!important;
+        }
+        .c2{
+            background-color: #6864D1!important;
+        }
+        .c3{
+            background-color: #405fdb!important;
+        }
     </style>
 
 </head>
@@ -73,9 +93,13 @@
                                 <div class="card-body">
 
                                     <div class="form-header mbutton" style="margin-bottom: 37px;">
-                                        <h3><i class="fas fa-hand-holding-heart mt-2"></i> Podgląd wypożyczeń</h3>
+                                        <h3><i class="fas fa-search mt-2"></i> Wyszukaj książkę</h3>
                                     </div>
                                     <!--Header-->
+                                    <div class="md-form">
+                                        <input type="text" id="form1" class="form-control">
+                                        <label for="form1">Wyszukaj książkę</label>
+                                    </div>
                                     <div class='table-responsive'>
                                         <!--Table-->
                                         <table id="tablePreview" class="table table-hover">
@@ -83,9 +107,10 @@
                                             <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Wypożyczona książka</th>
-                                                <th>Od</th>
-                                                <th>Do</th>
+                                                <th>Tytuł</th>
+                                                <th>Autor</th>
+                                                <th>Dostępność</th>
+                                                <th>Opcje</th>
 
                                             </tr>
                                             </thead>
@@ -95,32 +120,67 @@
                                             <tr>
                                                 <th scope="row">1</th>
                                                 <td>Zemsta</td>
-                                                <td>25.05.2020</td>
-                                                <td>25.06.2020</td>
+                                                <td>Aleksander Fredro</td>
+                                                <td><p>Ametyst: 5</p><p>Szmaragd: 5</p></td>
+                                                <td><a href="view_book_user.html">
+                                                    <button type="button" class="btn btn-sm c1">Podgląd</button></a>
+                                                    <a href="borrow_user.html">
+                                                        <button type="button" class="btn btn-sm c2">Wypożycz</button></a>
+                                                    <a href="reserve_user.html">
+                                                        <button type="button" class="btn btn-sm c3">Zarezerwuj</button></a>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">2</th>
                                                 <td>Lalka</td>
-                                                <td>25.05.2020</td>
-                                                <td>25.06.2020</td>
+                                                <td>Bolesław Prus</td>
+                                                <td><p>Ametyst: 6</p><p>Szmaragd: 2</p></td>
+                                                <td><a href="view_book_user.html">
+                                                    <button type="button" class="btn btn-sm c1">Podgląd</button></a>
+                                                    <a href="borrow_user.html">
+                                                        <button type="button" class="btn btn-sm c2">Wypożycz</button></a>
+                                                    <a href="reserve_user.html">
+                                                        <button type="button" class="btn btn-sm c3">Zarezerwuj</button></a>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">3</th>
                                                 <td>Cierpienia młodego Wertera</td>
-                                                <td>25.05.2020</td>
-                                                <td>25.06.2020</td>
+                                                <td>Johann Wolfgan </td>
+                                                <td><p>Ametyst: 4</p><p>Szmaragd: 1</p></td>
+                                                <td><a href="view_book_user.html">
+                                                    <button type="button" class="btn btn-sm c1">Podgląd</button></a>
+                                                    <a href="borrow_user.html">
+                                                        <button type="button" class="btn btn-sm c2">Wypożycz</button></a>
+                                                    <a href="reserve_user.html">
+                                                        <button type="button" class="btn btn-sm c3">Zarezerwuj</button></a>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">4</th>
                                                 <td>W pustyni i w puszczy</td>
-                                                <td>25.05.2020</td>
-                                                <td>25.06.2020</td>
+                                                <td>Henryk Sienkiewicz</td>
+                                                <td><p>Ametyst: 9</p><p>Szmaragd: brak</p></td>
+                                                <td><a href="view_book_user.html">
+                                                    <button type="button" class="btn btn-sm c1">Podgląd</button></a>
+                                                    <a href="borrow_user.html">
+                                                        <button type="button" class="btn btn-sm c2">Wypożycz</button></a>
+                                                    <a href="reserve_user.html">
+                                                        <button type="button" class="btn btn-sm c3">Zarezerwuj</button></a>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">5</th>
                                                 <td>Dziady cz. III</td>
-                                                <td>29.02.2020</td>
-                                                <td>11.02.2020</td>
+                                                <td>Adam Mickiewicz</td>
+                                                <td><p>Ametyst: brak</p><p>Szmaragd: 2</p></td>
+                                                <td><a href="view_book_user.html">
+                                                    <button type="button" class="btn btn-sm c1">Podgląd</button></a>
+                                                    <a href="borrow_user.html">
+                                                        <button type="button" class="btn btn-sm c2">Wypożycz</button></a>
+                                                    <a href="reserve_user.html">
+                                                        <button type="button" class="btn btn-sm c3">Zarezerwuj</button></a>
+                                                </td>
                                             </tr>
 
                                             </tbody>
@@ -161,11 +221,10 @@
     new WOW().init();
     $(document).ready(function () {
         $('.mdb-select').materialSelect();
-    });
-    $(document).ready(function()
-    {
         $("tr:odd").css("color", "#370064");
+
     });
+
 </script>
 </body>
 
