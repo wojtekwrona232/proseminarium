@@ -1,0 +1,501 @@
+{
+	"info": {
+		"_postman_id": "8fccc7e8-973b-4e30-808d-a6d003f13ca2",
+		"name": "Proseminarium_transport",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://127.0.0.1:6060/get-all-couriers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:6060/api/v1/get-couriers/all",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "6060",
+					"path": [
+						"api",
+						"v1",
+						"get-couriers",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:6060/get-courier",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:6060/api/v1/get-courier/id/9",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "6060",
+					"path": [
+						"api",
+						"v1",
+						"get-courier",
+						"id",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:6060/update-courier",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 9,\r\n    \"name\": \"United Logics Group\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:6060/api/v1/update-courier",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "6060",
+					"path": [
+						"api",
+						"v1",
+						"update-courier"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:6060/add-courier",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"United Logics Group\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:6060/api/v1/add-courier",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "6060",
+					"path": [
+						"api",
+						"v1",
+						"add-courier"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:6060/delete-courier/id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:6060/api/v1/delete-courier/id/13",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "6060",
+					"path": [
+						"api",
+						"v1",
+						"delete-courier",
+						"id",
+						"13"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:6060/delete-courier/name",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:6060/api/v1/delete-courier/name/Polish%20Logics%20Group",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "6060",
+					"path": [
+						"api",
+						"v1",
+						"delete-courier",
+						"name",
+						"Polish%20Logics%20Group"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:6060/get-all-packages",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:6060/api/v1/get-packages/all",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "6060",
+					"path": [
+						"api",
+						"v1",
+						"get-packages",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:6060/get-packages/id/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:6060/api/v1/get-packages/id/5",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "6060",
+					"path": [
+						"api",
+						"v1",
+						"get-packages",
+						"id",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:6060/get-packages/number/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:6060/api/v1/get-packages/number/DP-815536812-IT",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "6060",
+					"path": [
+						"api",
+						"v1",
+						"get-packages",
+						"number",
+						"DP-815536812-IT"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:6060/get-packages/sender/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:6060/api/v1/get-packages/sender/5fd66f6263bde330b052cb2e",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "6060",
+					"path": [
+						"api",
+						"v1",
+						"get-packages",
+						"sender",
+						"5fd66f6263bde330b052cb2e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:6060/get-packages/receiver/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:6060/api/v1/get-packages/receiver/5fd66f6263bde330b052cb2e",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "6060",
+					"path": [
+						"api",
+						"v1",
+						"get-packages",
+						"receiver",
+						"5fd66f6263bde330b052cb2e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:6060/update-packages",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 51,\r\n    \"id_library_sender\": \"5fd66f6263bde330b052cb2d\",\r\n    \"id_library_receiver\": \"5fd66f6263bde330b052cb2e\",\r\n    \"id_book\": 1000,\r\n    \"courier\": {\r\n        \"id\": 2,\r\n        \"name\": \"Advanced Research Corp.\"\r\n    },\r\n    \"package_number\": \"DT-686454562-IL\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:6060/api/v1/update-packages",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "6060",
+					"path": [
+						"api",
+						"v1",
+						"update-packages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:6060/add-packages",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_library_sender\": \"5fd66f6263bde330b052cb2d\",\r\n    \"id_library_receiver\": \"5fd66f6263bde330b052cb2e\",\r\n    \"id_book\": 1000,\r\n    \"courier\": {\r\n        \"id\": 2,\r\n        \"name\": \"Advanced Research Corp.\"\r\n    },\r\n    \"package_number\": \"DT-686493862-IL\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:6060/api/v1/add-packages",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "6060",
+					"path": [
+						"api",
+						"v1",
+						"add-packages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:6060/delete-packages/package-number",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:6060/api/v1/delete-packages/package-number/DT-686493862-IL",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "6060",
+					"path": [
+						"api",
+						"v1",
+						"delete-packages",
+						"package-number",
+						"DT-686493862-IL"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:6060/delete-packages/package-id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:6060/api/v1/delete-packages/package-id/51",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "6060",
+					"path": [
+						"api",
+						"v1",
+						"delete-packages",
+						"package-id",
+						"51"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:6060/get-packages/delivery-state/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:6060/api/v1/get-packages/delivery-state/GOTOWA_DO_ODBIORU",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "6060",
+					"path": [
+						"api",
+						"v1",
+						"get-packages",
+						"delivery-state",
+						"GOTOWA_DO_ODBIORU"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

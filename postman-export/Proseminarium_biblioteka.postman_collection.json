@@ -1,0 +1,507 @@
+{
+	"info": {
+		"_postman_id": "bac3d01e-f5fd-4195-b404-d996479060f7",
+		"name": "Proseminarium_biblioteka",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://127.0.0.1:7010/api/v1/get-reservations/all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:7010/api/v1/get-reservations/all",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7010",
+					"path": [
+						"api",
+						"v1",
+						"get-reservations",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:7010/api/v1/get-reservations/id/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:7010/api/v1/get-reservations/id/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7010",
+					"path": [
+						"api",
+						"v1",
+						"get-reservations",
+						"id",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:7010/api/v1/update-reservation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 3,\r\n    \"reservation_date\": \"2020-01-19\",\r\n    \"pick_up_date\": \"2020-01-21\",\r\n    \"status\": \"GOTOWA_DO_ODBIORU\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:7010/api/v1/update-reservation",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7010",
+					"path": [
+						"api",
+						"v1",
+						"update-reservation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:7010/api/v1/add-reservation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reservation_date\": \"2020-01-19\",\r\n    \"pick_up_date\": \"2020-01-20\",\r\n    \"status\": \"W_REALIZACJI\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:7010/api/v1/add-reservation",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7010",
+					"path": [
+						"api",
+						"v1",
+						"add-reservation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:7010/api/v1/delete-reservation/id/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:7010/api/v1/delete-reservation/id/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7010",
+					"path": [
+						"api",
+						"v1",
+						"delete-reservation",
+						"id",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:7010/api/v1/get-books-availability/all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:7010/api/v1/get-books-availability/all",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7010",
+					"path": [
+						"api",
+						"v1",
+						"get-books-availability",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:7010/api/v1/get-book-availability/id/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:7010/api/v1/get-book-availability/id/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7010",
+					"path": [
+						"api",
+						"v1",
+						"get-book-availability",
+						"id",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:7010/api/v1/update-book-availability",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 4,\r\n    \"isbn\": \"971-417-906-8\",\r\n    \"available\": false\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:7010/api/v1/update-book-availability",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7010",
+					"path": [
+						"api",
+						"v1",
+						"update-book-availability"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:7010/api/v1/add-book-availability",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"isbn\": \"971-417-906-8\",\r\n    \"available\": true\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:7010/api/v1/add-book-availability",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7010",
+					"path": [
+						"api",
+						"v1",
+						"add-book-availability"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:7010/api/v1/delete-book-availability/id/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"isbn\": \"971-417-906-8\",\r\n    \"available\": true\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:7010/api/v1/delete-book-availability/id/8",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7010",
+					"path": [
+						"api",
+						"v1",
+						"delete-book-availability",
+						"id",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:7010/api/v1/get-reservations/reader/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:7010/api/v1/get-reservations/reader/wojtek232",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7010",
+					"path": [
+						"api",
+						"v1",
+						"get-reservations",
+						"reader",
+						"wojtek232"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:7010/api/v1/get-check-outs/all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:7010/api/v1/get-check-outs/all",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7010",
+					"path": [
+						"api",
+						"v1",
+						"get-check-outs",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:7010/api/v1/get-check-out/id/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:7010/api/v1/get-check-out/id/4",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7010",
+					"path": [
+						"api",
+						"v1",
+						"get-check-out",
+						"id",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:7010/api/v1/get-check-out/reader/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:7010/api/v1/get-check-out/reader/wojtek232",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7010",
+					"path": [
+						"api",
+						"v1",
+						"get-check-out",
+						"reader",
+						"wojtek232"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:7010/api/v1/update-check-out",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 2,\r\n    \"reservation_id\": 0,\r\n    \"reservation\": {\r\n        \"id\": 0,\r\n        \"reservation_date\": \"\",\r\n        \"pick_up_date\": \"\",\r\n        \"status\": \"\"\r\n    },\r\n    \"book_id\": 5,\r\n    \"book\": {\r\n        \"id\": 5,\r\n        \"isbn\": \"9268-5-2105-9\",\r\n        \"available\": false\r\n    },\r\n    \"reader_id\": \"wojtek232\",\r\n    \"employee_id\": \"jan.kowalski@example.com\",\r\n    \"check_out_date\": \"2021-01-07\",\r\n    \"return_date\": \"2021-01-20\",\r\n    \"return_term\": \"2021-01-28\",\r\n    \"late_return_penalty\": 0\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:7010/api/v1/update-check-out",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7010",
+					"path": [
+						"api",
+						"v1",
+						"update-check-out"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:7010/api/v1/add-check-out",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reservation_id\": null,\r\n    \"book_id\": 5,\r\n    \"book\": {\r\n        \"id\": 5,\r\n        \"isbn\": \"9268-5-2105-9\",\r\n        \"available\": false\r\n    },\r\n    \"reader_id\": \"wojtek232\",\r\n    \"employee_id\": \"jan.kowalski@example.com\",\r\n    \"check_out_date\": \"2021-01-07\",\r\n    \"return_date\": \"2021-01-20\",\r\n    \"return_term\": \"2021-01-28\",\r\n    \"late_return_penalty\": 0\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:7010/api/v1/add-check-out",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7010",
+					"path": [
+						"api",
+						"v1",
+						"add-check-out"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:7010/api/v1/delete-check-out/id/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reservation_id\": null,\r\n    \"book_id\": 5,\r\n    \"book\": {\r\n        \"id\": 5,\r\n        \"isbn\": \"9268-5-2105-9\",\r\n        \"available\": false\r\n    },\r\n    \"reader_id\": \"wojtek232\",\r\n    \"employee_id\": \"jan.kowalski@example.com\",\r\n    \"check_out_date\": \"2021-01-07\",\r\n    \"return_date\": \"2021-01-20\",\r\n    \"return_term\": \"2021-01-28\",\r\n    \"late_return_penalty\": 0\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:7010/api/v1/delete-check-out/id/4",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "7010",
+					"path": [
+						"api",
+						"v1",
+						"delete-check-out",
+						"id",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:6060/get-packages/courier/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:6060/api/v1/get-packages/courier/3",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "6060",
+					"path": [
+						"api",
+						"v1",
+						"get-packages",
+						"courier",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

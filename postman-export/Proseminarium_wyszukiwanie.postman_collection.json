@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "c769eb8c-792a-49ca-bfbb-4351b10b931b",
+		"name": "Proseminarium_wyszukiwanie",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://127.0.0.1:5000/search/author",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"first_name\": \"Conrad\",\r\n    \"last_name\": \"Baumann\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000//api/v1/search/author",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"",
+						"api",
+						"v1",
+						"search",
+						"author"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/search/isbn",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"isbn\": \"9025-0-4794-7\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000//api/v1/search/isbn",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"",
+						"api",
+						"v1",
+						"search",
+						"isbn"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/search/title",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Placeat molestiae dolorem.\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/search/title",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"search",
+						"title"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/search/publisher",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"publisher\": \"Professional B-Mobile Corporation\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/search/publisher",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"search",
+						"publisher"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/search/test",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Placeat molestiae dolorem.\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/search/title",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"search",
+						"title"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

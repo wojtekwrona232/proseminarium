@@ -1,0 +1,206 @@
+{
+	"info": {
+		"_postman_id": "3af7fa71-b233-40ee-9d88-549fbf73ff86",
+		"name": "Proseminarium_autoryzacja",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://127.0.0.1:5000/signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "first_name",
+							"value": "Wojciech",
+							"type": "text"
+						},
+						{
+							"key": "last_name",
+							"value": "Wrona",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "wojtekwrona232@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "login",
+							"value": "wojtek232",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "wojtek232",
+							"type": "text"
+						},
+						{
+							"key": "library",
+							"value": "5fd66f6263bde330b052cb2d",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "aleja Tadeusza Rejtana 16C, 35-310 Rzeszów",
+							"type": "text"
+						},
+						{
+							"key": "city",
+							"value": "Rzeszów",
+							"type": "text"
+						},
+						{
+							"key": "zip_code",
+							"value": "35-310",
+							"type": "text"
+						},
+						{
+							"key": "account_type",
+							"value": "EMPLOYEE_ADMIN",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/signup",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "first_name",
+							"value": "Wojciech",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "last_name",
+							"value": "Wrona",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "wojtekwrona232@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "login",
+							"value": "wojtek232",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "wojtek232",
+							"type": "text"
+						},
+						{
+							"key": "library",
+							"value": "5fd66f6263bde330b052cb2d",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "address",
+							"value": "aleja Tadeusza Rejtana 16C, 35-310 Rzeszów",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "city",
+							"value": "Rzeszów",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "zip_code",
+							"value": "35-310",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "account_type",
+							"value": "EMPLOYEE_ADMIN",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/user",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjVmZmJhOGFlZjM1Mzk1ZmI0MmU0N2E4ZCIsImV4cCI6MTYxMDMzNjgwM30.p2xHaMNiEG7O1SCpn8nMUEDn8_PCJWswMiNaOKK5sms",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/user",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

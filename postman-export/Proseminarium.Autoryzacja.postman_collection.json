@@ -1,0 +1,317 @@
+{
+	"info": {
+		"_postman_id": "31e671fc-582a-4d1a-b6d0-356f64b080db",
+		"name": "Proseminarium.Autoryzacja",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://127.0.0.1:5000/api/v1/resources/libraries/new",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Biblioteka publiczna w Husowie\", \r\n    \"address\": \"adres biblioteki w Husowie\", \r\n    \"city\": \"Husów\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/resources/libraries/new",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"resources",
+						"libraries",
+						"new"
+					]
+				},
+				"description": "New library"
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/api/v1/resources/libraries/remove",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Biblioteka publiczna w Husowie\", \r\n    \"address\": \"adres biblioteki w Husowie\", \r\n    \"city\": \"Husów\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/resources/libraries/remove",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"resources",
+						"libraries",
+						"remove"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/api/v1/resources/libraries/all",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/resources/libraries/all",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"resources",
+						"libraries",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/api/v1/resources/accounts/current",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"5fda7387b112623114a901ef\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/resources/accounts/new",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"resources",
+						"accounts",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/api/v1/resources/accounts/all",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/resources/accounts/all",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"resources",
+						"accounts",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/api/v1/resources/accounts/new",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"first_name\": \"Mark\",\r\n\"last_name\": \"Zucckerberg\",\r\n\"email\": \"mark.zucckerberg@example.com\",\r\n\"login\": \"mark.zucckerberg\",\r\n\"password\": \"moje_haslo\",\r\n\"library\": \"5fd66f6263bde330b052cb2d\",\r\n\"address\": \"aleja Tadeusza Rejtana 16C, 35-310 Rzeszów\",\r\n\"city\": \"Rzeszów\",\r\n\"zip_code\": \"35-310\",\r\n\"date_created\": \"2020-12-13\",\r\n\"account_type\": \"EMPLOYEE_ADMIN\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/resources/accounts/new",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"resources",
+						"accounts",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/api/v1/resources/accounts/edit",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"5fdaa34dda154c7e2edd85ad\",\r\n    \"first_name\": \"Bill\",\r\n    \"last_name\": \"Gates\",\r\n    \"email\": \"mark.zucckerberg@example.com\",\r\n    \"address\": \"aleja Tadeusza Rejtana 16C, 35-310 Rzeszów\",\r\n    \"city\": \"Rzeszów\",\r\n    \"zip_code\": \"35-310\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/resources/accounts/edit",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"resources",
+						"accounts",
+						"edit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/api/v1/resources/accounts/edit/library",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"5fdaa34dda154c7e2edd85ad\",\r\n    \"library\": \"5fd66f6263bde330b052cb2f\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/resources/accounts/edit/library",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"resources",
+						"accounts",
+						"edit",
+						"library"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/api/v1/resources/accounts/edit/password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"5fdaa34dda154c7e2edd85ad\",\r\n    \"password\": \"this-is-a-new-password\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/resources/accounts/edit/password",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"resources",
+						"accounts",
+						"edit",
+						"password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/api/v1/resources/accounts/remove",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"login\": \"mark.zucckerberg\",\r\n    \"email\": \"mark.zucckerberg@example.com\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/resources/accounts/remove",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"resources",
+						"accounts",
+						"remove"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
