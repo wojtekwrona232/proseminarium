@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Status przesyłek</title>
+    <title>Podgląd wypożyczeń</title>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
@@ -25,15 +25,8 @@
             background: url("https://mdbootstrap.com/img/Photos/Others/forest1.jpg") no-repeat center center;
             background-size: cover;
         }
-    .padding{
-        padding-top: 12px!important;
-    }
-    tr{
-        padding:5px;
-    }
-    td{
-        padding-bottom: 10px!important;
-    }
+
+
     </style>
 
 </head>
@@ -69,7 +62,7 @@
                         <a class="nav-link" href="search_book_pracownik.html">Wyszukaj</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Status przesyłki</a>
+                        <a class="nav-link" href="package_status.html">Status przesyłki</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="login.html">Wyloguj</a>
@@ -96,7 +89,7 @@
                                 <div class="card-body">
 
                                     <div class="form-header mbutton" style="margin-bottom: 37px;">
-                                        <h3><i class="fas fa-shipping-fast mt-2"></i> Status przesyłek</h3>
+                                        <h3><i class="fas fa-hand-holding-heart mt-2"></i> Podgląd wypożyczeń</h3>
                                     </div>
                                     <!--Header-->
                                     <div class='table-responsive'>
@@ -106,10 +99,10 @@
                                             <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Od biblioteki</th>
-                                                <th>Do biblioteki</th>
-                                                <th>Książka</th>
-                                                <th>Status</th>
+                                                <th>Wypożyczona książka</th>
+                                                <th>Czytelnik</th>
+                                                <th>Od</th>
+                                                <th>Do</th>
 
                                             </tr>
                                             </thead>
@@ -118,52 +111,40 @@
                                             <tbody>
                                             <tr>
                                                 <th scope="row">1</th>
-                                                <td>Szmaragd</td>
-                                                <td>Ametyst</td>
-                                                <td>Lalka
-                                                    </td>
-                                                <td><select class="mdb-select" >
-                                                    <option value="1" selected>Przygotowana</option>
-                                                    <option value="2" >Wysłana</option>
-                                                    <option value="3">Otrzymana</option>
-                                                </select></td>
+                                                <td>Zemsta</td>
+                                                <td>Jan Kowalski</td>
+                                                <td>25.05.2020</td>
+                                                <td>25.06.2020</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">2</th>
-                                                <td>Szmaragd</td>
-                                                <td>Ametyst</td>
-                                                <td>
-                                                    Ziemia obiecana</td>
-                                                <td><select class="mdb-select" >
-                                                    <option value="1">Przygotowana</option>
-                                                    <option value="2" selected>Wysłana</option>
-                                                    <option value="3">Otrzymana</option>
-                                                </select></td>
+                                                <td>Lalka</td>
+                                                <td>Jane Doe</td>
+                                                <td>25.05.2020</td>
+                                                <td>25.06.2020</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">3</th>
-                                                <td>Ametyst</td>
-                                                <td>Szmaragd</td>
-                                                <td>
-                                                    Zemsta</td>
-                                                <td><select class="mdb-select" >
-                                                    <option value="1">Przygotowana</option>
-                                                    <option value="2" >Wysłana</option>
-                                                    <option value="3" selected>Otrzymana</option>
-                                                </select></td>
+                                                <td>Cierpienia młodego Wertera</td>
+                                                <td>John Doe</td>
+                                                <td>25.05.2020</td>
+                                                <td>25.06.2020</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">4</th>
-                                                <td>Szmaragd</td>
-                                                <td>Ametyst</td>
-                                                <td>
-                                                    Cierpienia młodego Wertera</td>
-                                                <td class="padding"><select class="mdb-select" >
-                                                    <option value="1">Przygotowana</option>
-                                                    <option value="2">Wysłana</option>
-                                                    <option value="3" selected>Otrzymana</option>
-                                                </select></td>
+                                                <td>W pustyni i w puszczy</td>
+                                                <td>Grzesiek Czesiek</td>
+                                                <td>25.05.2020</td>
+                                                <td>25.06.2020</td>
                                             </tr>
+                                            <tr>
+                                                <th scope="row">5</th>
+                                                <td>Dziady cz. III</td>
+                                                <td>Test User</td>
+                                                <td>29.02.2020</td>
+                                                <td>11.02.2020</td>
+                                            </tr>
+
                                             </tbody>
                                             <!--Table body-->
                                         </table>
@@ -172,16 +153,16 @@
                                 </div>
                                 <!--/Form with header-->
 
+                                </div>
                             </div>
+
                         </div>
-
+                        <!--Grid column-->
                     </div>
-                    <!--Grid column-->
                 </div>
-            </div>
-            <!--Grid row-->
+                <!--Grid row-->
 
-        </div>
+            </div>
         </div>
     </section>
     <!--Intro Section-->
