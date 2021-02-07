@@ -1,0 +1,41 @@
+version: "3.5"
+services:
+  db:
+    container_name: transport-db
+    image: mysql/mysql-server:latest
+    volumes: 
+      - container-volume:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: otaH4n8AR*4B4SAkIH@B0RyvYk.y
+      MYSQL_DATABASE: transport
+      MYSQL_ROOT_HOST: '%'
+    networks: 
+      - transport
+  
+  web:
+    container_name: transport
+    build: ./
+    ports:
+      - "8000:8000"
+    environment:
+      DB_HOST: db
+    depends_on:
+      - db
+    networks: 
+      transport:
+      shared:
+        ipv4_address: '10.1.0.100'
+
+volumes:
+  container-volume:
+
+networks:
+  transport:    
+  shared:
+    name: shared
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.1.0.0/24

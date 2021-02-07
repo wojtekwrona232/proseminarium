@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/gorilla/mux"
 	"log"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 func main() {
@@ -29,5 +30,5 @@ func main() {
 	api.HandleFunc("/delete-packages/package-number/{packageNumber}", deletePackageNumber).Methods(http.MethodGet)
 	api.HandleFunc("/delete-packages/package-id/{packageId}", deletePackageId).Methods(http.MethodGet)
 
-	log.Fatal(http.ListenAndServe(":6060", router))
+	log.Fatal(http.ListenAndServe(":8000", router))
 }

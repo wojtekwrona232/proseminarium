@@ -32,5 +32,5 @@ func main() {
 	api.HandleFunc("/add-check-out", addCheckOut).Methods(http.MethodPost)
 	api.HandleFunc("/delete-check-out/id/{checkOutId}", deleteCheckOutId).Methods(http.MethodGet)
 
-	log.Fatal(http.ListenAndServe(":8001", router))
+	log.Fatal(http.ListenAndServe(":8002", router))
 }

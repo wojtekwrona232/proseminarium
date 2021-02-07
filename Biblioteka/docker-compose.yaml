@@ -1,0 +1,41 @@
+version: "3.5"
+services:
+  db:
+    container_name: library-A-db
+    image: mysql/mysql-server:latest
+    volumes: 
+      - container-volume:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: Ic3P3dZUvid9YdKAb-@P3JaDOp4s
+      MYSQL_DATABASE: library
+      MYSQL_ROOT_HOST: '%'
+    networks: 
+      - library
+  
+  web:
+    container_name: libraryA
+    build: ./
+    ports:
+      - "8001:8001"
+    environment:
+      DB_HOST: db
+    depends_on:
+      - db
+    networks: 
+      library:
+      shared:
+        ipv4_address: '10.1.0.101'
+
+volumes:
+  container-volume:
+
+networks:
+  library:    
+  shared:
+    name: shared
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.1.0.0/24
