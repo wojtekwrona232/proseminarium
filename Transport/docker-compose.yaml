@@ -3,14 +3,14 @@ services:
   db:
     container_name: transport-db
     image: mysql/mysql-server:latest
-    volumes: 
-      - container-volume:/var/lib/mysql
     ports:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: otaH4n8AR*4B4SAkIH@B0RyvYk.y
       MYSQL_DATABASE: transport
       MYSQL_ROOT_HOST: '%'
+    volumes: 
+      - ./db_sql:/docker-entrypoint-initdb.d/:ro
     networks: 
       - transport
   
@@ -27,9 +27,6 @@ services:
       transport:
       shared:
         ipv4_address: '10.1.0.100'
-
-volumes:
-  container-volume:
 
 networks:
   transport:    

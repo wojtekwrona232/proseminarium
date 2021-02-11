@@ -2,9 +2,10 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/gorilla/mux"
 	"net/http"
 	"strconv"
+
+	"github.com/gorilla/mux"
 )
 
 func getBooksAvailability(w http.ResponseWriter, _ *http.Request) {
@@ -34,7 +35,7 @@ func getBooksAvailability(w http.ResponseWriter, _ *http.Request) {
 	}
 }
 
-func getBookAvailability(w http.ResponseWriter, r *http.Request)  {
+func getBookAvailability(w http.ResponseWriter, r *http.Request) {
 	var erro error
 	erro = initDB()
 	if erro != nil {
@@ -44,19 +45,10 @@ func getBookAvailability(w http.ResponseWriter, r *http.Request)  {
 
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
-	bookId := -1
-
-	var err error
-	if val, ok := params["bookId"]; ok {
-		bookId, err = strconv.Atoi(val)
-		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			return
-		}
-	}
+	bookId := params["bookId"]
 
 	var book []Book
-	db.Preload("Book").First(&book, bookId)
+	db.Where("isbn = ?", bookId).Find(&book)
 
 	var err1 error
 	err1 = json.NewEncoder(w).Encode(book)

@@ -6,6 +6,7 @@ from api.publishers_api import *
 from api.search import *
 from api.translator_data_api import *
 from api.translators_api import *
+import os
 
 app = Flask(__name__)
 app.register_blueprint(searchAPI, url_prefix='/api/v1/search')
@@ -18,6 +19,7 @@ app.register_blueprint(TranslatorsApi, url_prefix='/api/v1/translators')
 
 
 if __name__ == '__main__':
-    # app.run(host='0.0.0.0')
-    app.run()
+    ENVIRONMENT_DEBUG = os.environ.get("APP_DEBUG", True)
+    ENVIRONMENT_PORT = os.environ.get("APP_PORT", 5000)
+    app.run(host='0.0.0.0', port=ENVIRONMENT_PORT, debug=ENVIRONMENT_DEBUG)
 

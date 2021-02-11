@@ -1,35 +1,43 @@
 version: "3.5"
 services:
   db:
-    container_name: library-B-db
+    container_name: autoryzacja-db
     image: mysql/mysql-server:latest
     ports:
-      - "3308:3306"
+      - "3310:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: Ic3P3dZUvid9YdKAb-@P3JaDOp4B
-      MYSQL_DATABASE: libraryB
+      MYSQL_ROOT_PASSWORD: 6GX3uAqbMoWqx2l-iuDU47YmGkGh
+      MYSQL_DATABASE: authentication
       MYSQL_ROOT_HOST: '%'
     volumes: 
       - ./db_sql:/docker-entrypoint-initdb.d/:ro
     networks: 
-      - libraryB
+      - database
   
-  web:
-    container_name: libraryB
+  flask:
+    container_name: autoryzacja
     build: ./
     ports:
-      - "8002:8002"
+      - "6000:6000"
     environment:
       DB_HOST: db
+      APP_DEBUG: "False"
+      APP_PORT: 6000
     depends_on:
       - db
+    volumes: 
+      - appdata:/var/www
     networks: 
-      libraryB:
+      database:
       shared:
-        ipv4_address: '10.1.0.121'
+        ipv4_address: '10.1.0.111'
+
+volumes: 
+  appdata:
+    driver: local
 
 networks:
-  libraryB:    
+  database:
   shared:
     name: shared
     ipam:

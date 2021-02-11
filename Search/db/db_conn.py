@@ -2,6 +2,7 @@ from sqlalchemy import engine
 from sqlalchemy.engine import create_engine
 from sqlalchemy.orm import Session
 from sqlalchemy.orm import sessionmaker
+import os
 
 
 # class for orm connection to the database
@@ -14,7 +15,7 @@ class SQLUtil:
 
     # creates new engine for orm
     def create_engine(self):
-        string = 'mysql+pymysql://root:@127.0.0.1/searchmicroservice'
+        string = 'mysql+pymysql://root:+uR3s!UPyH7eHb0jUn9Ax5oS]4k@' + os.getenv('DB_HOST') + ':3306/search'
         self.__engine__ = create_engine(string)
 
     # return current engine for orm

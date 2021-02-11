@@ -8,8 +8,7 @@ searchAPI = Blueprint('search', __name__)
 
 
 def check_for_availability(book_id, url):
-    send = {"isbn": book_id}
-    response = requests.post(url=url, json=send)
+    response = requests.get(url=url)
     return response.json()
 
 
@@ -38,10 +37,10 @@ def make_translators_json(obj):
     }
 
 
-def make_availability_json(obj):
+def make_availability_json(lib_id, available):
     return {
-        "library_id": obj['library_id'],
-        "amount": obj['amount']
+        "library_id": lib_id,
+        "available": available
     }
 
 
@@ -67,10 +66,26 @@ def title_search():
         for m in query2:
             l3.append(make_translators_json(m))
         l4 = []
-        # range to ilość bibliotek
-        for i in range(0, 3):
-            am = check_for_availability(n.isbn, 'http://127.0.0.1:5050/get_amount')
-            l4.append(make_availability_json(am))
+
+        link1 = 'http://10.1.0.120:8001/api/v1/get-book-availability/id/' + n.isbn
+        am = check_for_availability(n.isbn, link1)
+        if am:
+            avail1 = 0
+            for i in am:
+                if i['available'] == True:
+                    avail1 += 1
+            l4.append(make_availability_json(1, avail1))
+        
+        link2 = 'http://10.1.0.121:8002/api/v1/get-book-availability/id/' + n.isbn
+        am1 = check_for_availability(n.isbn, link2)
+        
+        if am1:
+            avail2 = 0
+            for i in am1:
+                if i['available'] == True:
+                    avail2 += 1
+            l4.append(make_availability_json(2, avail2))
+        
         b = {
             "book": make_book_json(n),
             "authors": l2,
@@ -106,11 +121,27 @@ def isbn_search():
         query2 = DBMethods().get_query(Translators).filter(Translators.book_id == n.id)
         for m in query2:
             l3.append(make_translators_json(m))
+        
         l4 = []
-        # range to ilość bibliotek
-        for i in range(0, 3):
-            am = check_for_availability(n.isbn, 'http://127.0.0.1:5050/get_amount')
-            l4.append(make_availability_json(am))
+
+        link1 = 'http://10.1.0.120:8001/api/v1/get-book-availability/id/' + n.isbn
+        am = check_for_availability(n.isbn, link1)
+        if am:
+            avail1 = 0
+            for i in am:
+                if i['available'] == True:
+                    avail1 += 1
+            l4.append(make_availability_json(1, avail1))
+        
+        link2 = 'http://10.1.0.121:8002/api/v1/get-book-availability/id/' + n.isbn
+        am1 = check_for_availability(n.isbn, link2)
+        if am1:
+            avail2 = 0
+            for i in am1:
+                if i['available'] == True:
+                    avail2 += 1
+            l4.append(make_availability_json(2, avail2))
+        
         b = {
             "book": make_book_json(n),
             "authors": l2,
@@ -148,11 +179,28 @@ def publisher_search():
             query2 = DBMethods().get_query(Translators).filter(Translators.book_id == n.id)
             for m in query2:
                 l3.append(make_translators_json(m))
+            
             l4 = []
-            # range to ilość bibliotek
-            for i in range(0, 3):
-                am = check_for_availability(n.isbn, 'http://127.0.0.1:5050/get_amount')
-                l4.append(make_availability_json(am))
+
+            link1 = 'http://10.1.0.120:8001/api/v1/get-book-availability/id/' + n.isbn
+            am = check_for_availability(n.isbn, link1)
+            if am:
+                avail1 = 0
+                for i in am:
+                    if i['available'] == True:
+                        avail1 += 1
+                l4.append(make_availability_json(1, avail1))
+            
+            link2 = 'http://10.1.0.121:8002/api/v1/get-book-availability/id/' + n.isbn
+            am1 = check_for_availability(n.isbn, link2)
+            
+            if am1:
+                avail2 = 0
+                for i in am1:
+                    if i['available'] == True:
+                        avail2 += 1
+                l4.append(make_availability_json(2, avail2))
+            
             b = {
                 "book": make_book_json(n),
                 "authors": l2,
@@ -195,11 +243,28 @@ def author_search():
                 query2 = DBMethods().get_query(Translators).filter(Translators.book_id == n.id)
                 for m in query2:
                     l3.append(make_translators_json(m))
+                
                 l4 = []
-                # range to ilość bibliotek
-                for i in range(0, 3):
-                    am = check_for_availability(n.isbn, 'http://127.0.0.1:5050/get_amount')
-                    l4.append(make_availability_json(am))
+
+                link1 = 'http://10.1.0.120:8001/api/v1/get-book-availability/id/' + n.isbn
+                am = check_for_availability(n.isbn, link1)
+                if am:
+                    avail1 = 0
+                    for i in am:
+                        if i['available'] == True:
+                            avail1 += 1
+                    l4.append(make_availability_json(1, avail1))
+                
+                link2 = 'http://10.1.0.121:8002/api/v1/get-book-availability/id/' + n.isbn
+                am1 = check_for_availability(n.isbn, link2)
+                
+                if am1:
+                    avail2 = 0
+                    for i in am1:
+                        if i['available'] == True:
+                            avail2 += 1
+                    l4.append(make_availability_json(2, avail2))
+        
                 b = {
                     "book": make_book_json(n),
                     "authors": l2,
