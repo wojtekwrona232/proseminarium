@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Czytelnik Zalogowany</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,600&display=swap" rel="stylesheet">
+    <style>
+
+        .card-body{
+            padding: 30px;
+        }
+        button{
+            width:300px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!--Main Navigation-->
+<header>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="#"><strong>Szmaragd Czytelnik</strong></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
+                    aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="search_book_user.html">Wyszukaj</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Wyloguj</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar -->
+
+    <!--Intro Section-->
+    <section class="view intro-1">
+        <div class="mask rgba-gradient">
+            <div class="container h-100 d-flex justify-content-center align-items-center">
+
+                <!--Grid row-->
+                <div class="row  pt-5 mt-3">
+
+                    <!--Grid column-->
+                    <div class="col-md-12">
+                        <div class="card wow fadeIn" data-wow-delay="0.3s">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <!--Header-->
+                                    <div class="form-header mbutton_long" style="border-radius: 0.2em;" >
+                                        <h3><i class="fas fa-id-card"></i>&nbsp;&nbsp;Witaj John Doe</h3>
+                                    </div>
+
+                                    <div class="text-center pl-2 pr-2 pb-3">
+                                        <div class=" col-12 mt-1">
+                                            <a href="borrow_user.html"><button class="btn btn-lg mbutton btn-rounded">Wypożyczenie książki</button></a>
+                                        </div>
+                                        <div class=" col-12 mt-1">
+                                            <a href="reserve_user.html"><button class="btn btn-lg mbutton_outline btn-rounded">Rezerwacja książki</button></a>
+                                        </div>
+                                        <div class=" col-12 mt-1">
+                                            <a href="view_borrowed_user.html"><button class="btn btn-lg mbutton2 btn-rounded">Podgląd wypożyczeń</button></a>
+                                        </div>
+                                        <div class=" col-12 mt-1">
+                                            <a href="return_book.html"><button class="btn btn-lg mbutton2_outline btn-rounded">Zwróć książkę</button></a>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--Grid column-->
+                        </div>
+                    </div>
+                    <!--Grid row-->
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--Intro Section-->
+
+</header>
+<!--Main Navigation-->
+
+<!--  SCRIPTS  -->
+<!-- JQuery -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="js/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="js/mdb.min.js"></script>
+<script>
+    new WOW().init();
+    $(document).ready(function () {
+        $('.mdb-select').materialSelect();
+    });
+</script>
+</body>
+
+</html>
