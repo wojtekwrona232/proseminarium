@@ -89,12 +89,12 @@
                                     </div>
                                     <!--Header-->
                                     <div class="md-form">
-                                        <input type="text" id="form1" class="form-control">
-                                        <label for="form1">Wyszukaj książkę</label>
+                                        <input type="text" id="search" class="form-control">
+                                        <label for="search">Wyszukaj książkę</label>
                                     </div>
                                     <div class='table-responsive'>
                                         <!--Table-->
-                                        <table id="tablePreview" class="table table-hover">
+                                        <table id="table" class="table table-hover">
                                             <!--Table head-->
                                             <thead>
                                             <tr>
@@ -183,16 +183,16 @@
                                 </div>
                                 <!--/Form with header-->
 
-                                </div>
                             </div>
-
                         </div>
-                        <!--Grid column-->
-                    </div>
-                </div>
-                <!--Grid row-->
 
+                    </div>
+                    <!--Grid column-->
+                </div>
             </div>
+            <!--Grid row-->
+
+        </div>
         </div>
     </section>
     <!--Intro Section-->
@@ -214,9 +214,16 @@
     $(document).ready(function () {
         $('.mdb-select').materialSelect();
         $("tr:odd").css("color", "#054a2e");
-
     });
+    var $rows = $('#table tr');
+    $('#search').keyup(function() {
+        var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
 
+        $rows.show().filter(function() {
+            var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+            return !~text.indexOf(val);
+        }).hide();
+    });
 </script>
 </body>
 
