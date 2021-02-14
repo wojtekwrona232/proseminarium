@@ -97,26 +97,35 @@
                                         <div class="col-1"></div>
                                         <div class="col-10">
                                             <!--Grid row-->
+                                            <form class="needs-validation" novalidate>
                                             <div class="col-12 ">
                                                 <div class="md-form" style="margin-top: 0px;width:300px;">
                                                     <i class="fas fa-file-signature prefix"></i>
-                                                    <input type="text" id="orangeForm-name" class="form-control">
+                                                    <input type="text" id="orangeForm-name" class="form-control" pattern="[^a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]*.{3,}" required>
                                                     <label for="orangeForm-name">Imię</label>
+                                                    <div class="invalid-tooltip">
+                                                        Podaj imię - tylko litery dozwolone.
+                                                    </div>
                                                 </div>
                                             </div>
                                             <!--Grid row-->
                                             <div class="col-12 ">
                                                 <div class="md-form" style="width:300px;">
                                                     <i class="fas fa-file-signature prefix"></i>
-                                                    <input type="text" id="orangeForm-surname" class="form-control">
+                                                    <input type="text" id="orangeForm-surname" class="form-control" pattern="[^a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]*{3,}" required>
                                                     <label for="orangeForm-surname">Nazwisko</label>
+                                                    <div class="invalid-tooltip">
+                                                        Podaj nazwisko - tylko litery dozwolone.
+                                                    </div>
                                                 </div>
                                             </div>
                                             <!--Grid row-->
                                             <div class="text-center mt-5">
-                                                <button class="btn mbutton btn-rounded">Dodaj</button>
+                                                <button class="btn mbutton btn-rounded" type="submit">Dodaj</button>
                                             </div>
                                         </div>
+                                    </div>
+                                </form>
                                         <!--Grid row-->
                                         <div class="col-1"></div>
                                     </div>
@@ -152,6 +161,22 @@
     $(document).ready(function () {
         $('.mdb-select').materialSelect();
     });
+
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 </script>
 </body>
 

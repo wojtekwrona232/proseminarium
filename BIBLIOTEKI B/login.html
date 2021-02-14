@@ -51,10 +51,12 @@
             box-shadow: 0 1px 0 0 #00d679 !important;
 
         }
-
+        .form-control{
+            color:white!important;
+        }
 
         .mbackground {
-            background: rgba(32, 56, 32, 0.77);
+            background: rgba(45, 71, 45, 0.78);
         }
 
 
@@ -123,25 +125,31 @@
                                 <div class="form-header mbutton" style="margin-bottom: 37px;">
                                     <h3><i class="fas fa-user mt-2"></i>&nbspZaloguj się</h3>
                                 </div>
-
+                                <form class="needs-validation" novalidate>
                                 <!--Body-->
                                 <div class="md-form mt-4">
                                     <i class="fas fa-envelope prefix white-text"></i>
-                                    <input type="text" id="orangeForm-email" class="form-control">
+                                    <input type="email" id="orangeForm-email" class="form-control" required>
                                     <label for="orangeForm-email">Twój e-mail</label>
+                                    <div class="invalid-tooltip">
+                                        Podaj email.
+                                    </div>
                                 </div>
 
                                 <div class="md-form">
                                     <i class="fas fa-lock prefix white-text"></i>
-                                    <input type="password" id="orangeForm-pass" class="form-control mactive">
+                                    <input type="password" id="orangeForm-pass" class="form-control mactive"  pattern=".{3,}" required>
                                     <label for="orangeForm-pass">Twoje hasło</label>
+                                    <div class="invalid-tooltip">
+                                        Podaj hasło.
+                                    </div>
                                 </div>
 
 
                                 <div class="text-center mt-4">
-                                    <button class="btn mbutton btn-lg">Sign in</button>
+                                    <button class="btn mbutton btn-lg" type="submit">Sign in</button>
 
-
+                                </form>
                                 </div>
                             </div>
                             <!--/Form with header-->
@@ -169,6 +177,21 @@
 <script>
     new WOW().init();
 
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 </script>
 </body>
 </html>

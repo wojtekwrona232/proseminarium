@@ -93,24 +93,32 @@
                                         <h3><i class="fas fa-book mt-2"></i>&nbspDodaj książkę</h3>
                                     </div>
                                     <!--Grid row-->
-                                    <div class="row mt-5">
+                                    <form class="needs-validation" novalidate>
+                                    <form class="row mt-5">
                                         <div class="col-1"></div>
                                         <div class="col-10">
                                             <!--Grid row-->
                                             <div class="col-12 ">
                                                 <div class="md-form" style="margin-top: 0px; width:400px;">
                                                     <i class="fas fa-barcode prefix"></i>
-                                                    <input type="text" id="orangeForm-barcode" class="form-control">
+                                                    <input type="text" id="orangeForm-barcode" class="form-control" pattern="(?:(?=.{17}$)97[89][ -](?:[0-9]+[ -]){2}[0-9]+[ -][0-9]|97[89][0-9]{10}|(?=.{13}$)(?:[0-9]+[ -]){2}[0-9]+[ -][0-9Xx]|[0-9]{9}[0-9Xx])" required>
                                                     <label for="orangeForm-barcode">ISBN</label>
+                                                    <div class="invalid-tooltip">
+                                                        Wprowadź poprawny ISBN.
+                                                    </div>
                                                 </div>
+
                                             </div>
                                             <!--Grid row-->
                                             <!--Grid row-->
                                             <div class="col-12 ">
                                                 <div class="md-form" style="margin-top: 0px; width:400px;">
                                                     <i class="fas fa-heading prefix "></i>
-                                                    <input type="text" id="orangeForm-title" class="form-control">
+                                                    <input type="text" id="orangeForm-title" class="form-control" pattern=".{3,}" required>
                                                     <label for="orangeForm-title">Tytuł</label>
+                                                    <div class="invalid-tooltip">
+                                                        Podaj tytuł.
+                                                    </div>
                                                 </div>
                                             </div>
                                             <!--Grid row-->
@@ -119,8 +127,11 @@
                                             <div class="col-12 ">
                                                 <div class="md-form" style="margin-top: 0px; width:400px;">
                                                     <i class="fas fa-building prefix"></i>
-                                                    <input type="text" id="orangeForm-pub" class="form-control">
+                                                    <input type="text" id="orangeForm-pub" class="form-control" pattern=".{3,}" required>
                                                     <label for="orangeForm-pub">Wydawnictwo</label>
+                                                    <div class="invalid-tooltip">
+                                                        Podaj wydawnictwo.
+                                                    </div>
                                                 </div>
                                             </div>
                                             <!--Grid row-->
@@ -128,8 +139,11 @@
                                             <div class="col-12 ">
                                                 <div class="md-form" style="margin-top: 0px; width:400px;">
                                                     <i class="fas fa-calendar-alt prefix"></i>
-                                                    <input type="number" id="orangeForm-release-year" class="form-control">
+                                                    <input type="number" id="orangeForm-release-year" class="form-control" min="1800" required>
                                                     <label for="orangeForm-release-year">Rok wydania</label>
+                                                    <div class="invalid-tooltip">
+                                                        Podaj rok wydania.
+                                                    </div>
                                                 </div>
                                             </div>
                                             <!--Grid row-->
@@ -137,15 +151,19 @@
                                             <div class="col-12 ">
                                                 <div class="md-form" style="margin-top: 0px; width:400px;">
                                                     <i class="fas fa-edit prefix"></i>
-                                                    <input type="number" id="orangeForm-number" class="form-control">
+                                                    <input type="number" id="orangeForm-number" class="form-control" required>
                                                     <label for="orangeForm-number">Numer Wydania</label>
+                                                    <div class="invalid-tooltip">
+                                                        Podaj numer wydania.
+                                                    </div>
                                                 </div>
                                             </div>
                                             <!--Grid row-->
                                             <div class="text-center mt-5">
-                                                <button class="btn mbutton btn-rounded">Dodaj</button>
+                                                <button class="btn mbutton btn-rounded" type="submit">Dodaj</button>
                                             </div>
                                         </div>
+                                    </form>
                                         <!--Grid row-->
                                         <div class="col-1"></div>
                                     </div>
@@ -181,6 +199,22 @@
     $(document).ready(function () {
         $('.mdb-select').materialSelect();
     });
+
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 </script>
 </body>
 
