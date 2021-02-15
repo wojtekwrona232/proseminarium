@@ -108,3 +108,12 @@ h6 {
 }
 .dropdown-content li>a, .dropdown-content li>span {    color: #2E2E2E;}
 .dropdown-content li>a:hover, .dropdown-content li>span:hover {    color: #8d4fe3;}
+.c1{
+    background-color: #9068c7!important;
+}
+.c2{
+    background-color: #6864D1!important;
+}
+.c3{
+    background-color: #405fdb!important;
+}

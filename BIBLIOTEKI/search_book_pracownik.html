@@ -38,15 +38,7 @@
             padding-left: 10px!important;
             padding-right: 10px!important;
         }
-        .c1{
-            background-color: #9068c7!important;
-        }
-        .c2{
-            background-color: #6864D1!important;
-        }
-        .c3{
-            background-color: #405fdb!important;
-        }
+
     </style>
 
 </head>
@@ -113,12 +105,12 @@
                                     </div>
                                     <!--Header-->
                                     <div class="md-form">
-                                        <input type="text" id="form1" class="form-control">
-                                        <label for="form1">Wyszukaj książkę</label>
+                                        <input type="text" id="search" class="form-control">
+                                        <label for="search">Wyszukaj książkę</label>
                                     </div>
                                     <div class='table-responsive'>
                                         <!--Table-->
-                                        <table id="tablePreview" class="table table-hover">
+                                        <table id="table" class="table table-hover">
                                             <!--Table head-->
                                             <thead>
                                             <tr>
@@ -240,7 +232,15 @@
         $("tr:odd").css("color", "#370064");
 
     });
+    var $rows = $('#table tr');
+    $('#search').keyup(function() {
+        var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
 
+        $rows.show().filter(function() {
+            var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+            return !~text.indexOf(val);
+        }).hide();
+    });
 </script>
 </body>
 
