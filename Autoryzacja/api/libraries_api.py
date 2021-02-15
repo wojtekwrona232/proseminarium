@@ -14,6 +14,7 @@ def single_library():
     db = DBMethods()
     lib = db.get_query(Libraries).filter_by(id=lib_id).first()
     library = {
+        "id": lib.id,
         "name": lib.name,
         "address": lib.address,
         "city": lib.city,
@@ -35,6 +36,7 @@ def all_libraries():
     libraries = []
     for libs in query:
         library = {
+            "id": libs.id,
             "name": libs.name,
             "address": libs.address,
             "city": libs.city,

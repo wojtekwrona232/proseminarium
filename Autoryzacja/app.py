@@ -93,12 +93,18 @@ def login():
         # generates the JWT Token
         token = jwt.encode({
             'id': str(user.login),
+            'status': user.account_type.name,
             'exp': datetime.datetime.utcnow() + timedelta(minutes=30)
         }, app.config['SECRET_KEY'])
         session['username'] = user.login
         # return make_response(jsonify({'token': token.decode('UTF-8')}), 201)
         file = {
-            "token": token.decode('utf-8')
+            "token": token.decode('utf-8'),
+            'status': user.account_type.name,
+            'id': str(user.id),
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'email': user.email
         }
         return jsonify(file), 201
         # returns 403 if password is wrong
@@ -113,7 +119,7 @@ def signup():
     data = request.form
 
     # gets name, email and password
-    name, email, log = data.get('name'), data.get('email'), data.get('login')
+    email, log = data.get('email'), data.get('login')
 
     # checking for existing user
 

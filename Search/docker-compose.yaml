@@ -18,11 +18,11 @@ services:
     container_name: flask
     build: ./
     ports:
-      - "5000:5000"
+      - "6001:6001"
     environment:
       DB_HOST: db
       APP_DEBUG: "False"
-      APP_PORT: 5000
+      APP_PORT: 6001
       MYSQL_ROOT_PASS: +uR3s!UPyH7eHb0jUn9Ax5oS]4k
     depends_on:
       - db

@@ -44,6 +44,61 @@ def make_availability_json(lib_id, available):
     }
 
 
+@searchAPI.route('/all', methods=['GET'])
+def search_all():
+    now = datetime.datetime.now()
+    meta = {
+        "export": {
+            "date": str(now.date()),
+            "time": now.strftime("%H:%M:%S")
+        }
+    }
+    books = []
+    query = DBMethods().get_all(Books)
+    for n in query:
+        l2 = []
+        query1 = DBMethods().get_query(Authors).filter(Authors.book_id == n.id)
+        for m in query1:
+            l2.append(make_authors_json(m))
+        l3 = []
+        query2 = DBMethods().get_query(Translators).filter(Translators.book_id == n.id)
+        for m in query2:
+            l3.append(make_translators_json(m))
+        l4 = []
+
+        link1 = 'http://10.1.0.120:8001/api/v1/get-book-availability/id/' + n.isbn
+        am = check_for_availability(n.isbn, link1)
+        if am:
+            avail1 = 0
+            for i in am:
+                if i['available'] == True:
+                    avail1 += 1
+            l4.append(make_availability_json(1, avail1))
+        
+        link2 = 'http://10.1.0.121:8002/api/v1/get-book-availability/id/' + n.isbn
+        am1 = check_for_availability(n.isbn, link2)
+        
+        if am1:
+            avail2 = 0
+            for i in am1:
+                if i['available'] == True:
+                    avail2 += 1
+            l4.append(make_availability_json(2, avail2))
+        
+        b = {
+            "book": make_book_json(n),
+            "authors": l2,
+            "translators": l3,
+            "availability": l4
+        }
+        books.append(b)
+    file = {
+        "meta": meta,
+        "books": books
+    }
+    return json.dumps(file, ensure_ascii=False, indent=1).encode('utf8')
+
+
 @searchAPI.route('/title', methods=['POST'])
 def title_search():
     obj = json.loads(request.data, strict=False)
