@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, make_response, jsonify, session, url_for, redirect
 import requests
+import ast
 import datetime
 
 app = Flask(__name__)
@@ -10,6 +11,31 @@ app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 @app.route('/parcel-status', methods=['GET', 'POST'])
 def parcel_status():
     return render_template('package_status.html')
+
+
+@app.route('/show-book', methods=['GET'])
+def show_book():
+    data = {'isbn': str(request.args.get('isbn'))}
+    get_data = requests.post('http://127.0.0.1:6001/api/v1/search/isbn', data=data)
+    book = get_data.json()
+    if session.get('status') == 'EMPLOYEE':
+        return render_template('view_book_pracownik.html',
+                               isbn=book['books']['book']['isbn'],
+                               title=book['books']['book']['title'],
+                               authors=book['books']['authors'],
+                               translators=book['books']['translators'],
+                               publisher=book['books']['book']['publisher'],
+                               published_year=book['books']['book']['year_published'],
+                               edition_nr=book['books']['book']['edition_nr'])
+    elif session.get('status') == 'USER':
+        return render_template('view_book_user.html',
+                               isbn=book['books']['book']['isbn'],
+                               title=book['books']['book']['title'],
+                               authors=book['books']['authors'],
+                               translators=book['books']['translators'],
+                               publisher=book['books']['book']['publisher'],
+                               published_year=book['books']['book']['year_published'],
+                               edition_nr=book['books']['book']['edition_nr'])
 
 
 @app.route('/search-book', methods=['GET', 'POST'])

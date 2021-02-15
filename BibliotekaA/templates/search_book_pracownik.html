@@ -47,6 +47,12 @@
         .c3{
             background-color: #405fdb!important;
         }
+
+        .table-responsive {
+            overflow-y: auto;
+            max-height: 600px;
+        }
+
     </style>
 
 </head>
@@ -113,12 +119,12 @@
                                     </div>
                                     <!--Header-->
                                     <div class="md-form">
-                                        <input type="text" id="form1" class="form-control">
+                                        <input type="text" id="search" class="form-control">
                                         <label for="form1">Wyszukaj książkę</label>
                                     </div>
                                     <div class='table-responsive'>
                                         <!--Table-->
-                                        <table id="tablePreview" class="table table-hover">
+                                        <table id="table" class="table table-hover">
                                             <!--Table head-->
                                             <thead>
                                             <tr>
@@ -155,23 +161,24 @@
                                                 </td>
                                                 <td>{{ b.book.year_published }}</td>
                                                 <td>{{ b.book.edition_nr }}</td>
+                                                <td>{{ b.book.publisher }}</td>
                                                 <td>
-                                                    {% if b.availability == None %}
+                                                    {% if not b.availability %}
                                                         <p>Rzeszów: brak</p><p>Łańcut: brak</p>
                                                     {% else %}
                                                         {% for i in b.availability %}
                                                             {% if i.library_id == 1 %}
                                                                 <p>Rzeszów: {{ i.available }}</p>
-                                                            {% endif %}
-                                                            {% if i.library_id == 1 %}
+                                                            {% elif i.library_id == 2 %}
                                                                 <p>Łańcut: {{ i.available }}</p>
                                                             {% endif %}
                                                         {% endfor %}
                                                     {% endif %}
+
                                                 </td>
-                                                <td><a href="view_book_pracownik.html">
+                                                <td><a href="{{ url_for('show_book', isbn=(b.book.isbn|string)) }}">
                                                     <button type="button" class="btn btn-sm c1">Podgląd</button></a>
-                                                    <a href="borrow_pracownik.html">
+                                                    <a href="#">
                                                     <button type="button" class="btn btn-sm c2">Wypożycz</button></a>
                                                     <a href="reserve_pracownik.html">
                                                     <button type="button" class="btn btn-sm c3">Zarezerwuj</button></a>
@@ -220,7 +227,15 @@
         $("tr:odd").css("color", "#370064");
 
     });
+    var $rows = $('#table tr');
+    $('#search').keyup(function() {
+        var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
 
+        $rows.show().filter(function() {
+            var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+            return !~text.indexOf(val);
+        }).hide();
+    });
 </script>
 </body>
 
