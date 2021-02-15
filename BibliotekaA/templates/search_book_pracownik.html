@@ -123,8 +123,13 @@
                                             <thead>
                                             <tr>
                                                 <th>#</th>
+                                                <th>ISBN</th>
                                                 <th>Tytuł</th>
                                                 <th>Autor</th>
+                                                <th>Tłumacz</th>
+                                                <th>Rok wydania</th>
+                                                <th>Nr wydania</th>
+                                                <th>Wydawca</th>
                                                 <th>Dostępność</th>
                                                 <th>Opcje</th>
 
@@ -133,11 +138,37 @@
                                             <!--Table head-->
                                             <!--Table body-->
                                             <tbody>
+                                            {% for b in books %}
                                             <tr>
-                                                <th scope="row">1</th>
-                                                <td>Zemsta</td>
-                                                <td>Aleksander Fredro</td>
-                                                <td><p>Ametyst: 5</p><p>Szmaragd: 5</p></td>
+                                                <th scope="row">{{ b.book.id }}</th>
+                                                <td>{{ b.book.isbn }}</td>
+                                                <td>{{ b.book.title }}</td>
+                                                <td>
+                                                    {% for i in b.authors %}
+                                                        <p>{{ i.first_name + ' ' + i.last_name }}</p>
+                                                    {% endfor %}
+                                                </td>
+                                                <td>
+                                                    {% for i in b.translators %}
+                                                        <p>{{ i.first_name + ' ' + i.last_name }}</p>
+                                                    {% endfor %}
+                                                </td>
+                                                <td>{{ b.book.year_published }}</td>
+                                                <td>{{ b.book.edition_nr }}</td>
+                                                <td>
+                                                    {% if b.availability == None %}
+                                                        <p>Rzeszów: brak</p><p>Łańcut: brak</p>
+                                                    {% else %}
+                                                        {% for i in b.availability %}
+                                                            {% if i.library_id == 1 %}
+                                                                <p>Rzeszów: {{ i.available }}</p>
+                                                            {% endif %}
+                                                            {% if i.library_id == 1 %}
+                                                                <p>Łańcut: {{ i.available }}</p>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                </td>
                                                 <td><a href="view_book_pracownik.html">
                                                     <button type="button" class="btn btn-sm c1">Podgląd</button></a>
                                                     <a href="borrow_pracownik.html">
@@ -146,58 +177,7 @@
                                                     <button type="button" class="btn btn-sm c3">Zarezerwuj</button></a>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Lalka</td>
-                                                <td>Bolesław Prus</td>
-                                                <td><p>Ametyst: 6</p><p>Szmaragd: 2</p></td>
-                                                <td><a href="view_book_pracownik.html">
-                                                    <button type="button" class="btn btn-sm c1">Podgląd</button></a>
-                                                    <a href="borrow_pracownik.html">
-                                                        <button type="button" class="btn btn-sm c2">Wypożycz</button></a>
-                                                    <a href="reserve_pracownik.html">
-                                                        <button type="button" class="btn btn-sm c3">Zarezerwuj</button></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Cierpienia młodego Wertera</td>
-                                                <td>Johann Wolfgan </td>
-                                                <td><p>Ametyst: 4</p><p>Szmaragd: 1</p></td>
-                                                <td><a href="view_book_pracownik.html">
-                                                    <button type="button" class="btn btn-sm c1">Podgląd</button></a>
-                                                    <a href="borrow_pracownik.html">
-                                                        <button type="button" class="btn btn-sm c2">Wypożycz</button></a>
-                                                    <a href="reserve_pracownik.html">
-                                                        <button type="button" class="btn btn-sm c3">Zarezerwuj</button></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">4</th>
-                                                <td>W pustyni i w puszczy</td>
-                                                <td>Henryk Sienkiewicz</td>
-                                                <td><p>Ametyst: 9</p><p>Szmaragd: brak</p></td>
-                                                <td><a href="view_book_pracownik.html">
-                                                    <button type="button" class="btn btn-sm c1">Podgląd</button></a>
-                                                    <a href="borrow_pracownik.html">
-                                                        <button type="button" class="btn btn-sm c2">Wypożycz</button></a>
-                                                    <a href="reserve_pracownik.html">
-                                                        <button type="button" class="btn btn-sm c3">Zarezerwuj</button></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">5</th>
-                                                <td>Dziady cz. III</td>
-                                                <td>Adam Mickiewicz</td>
-                                                <td><p>Ametyst: brak</p><p>Szmaragd: 2</p></td>
-                                                <td><a href="view_book_pracownik.html">
-                                                    <button type="button" class="btn btn-sm c1">Podgląd</button></a>
-                                                    <a href="borrow_pracownik.html">
-                                                        <button type="button" class="btn btn-sm c2">Wypożycz</button></a>
-                                                    <a href="reserve_pracownik.html">
-                                                        <button type="button" class="btn btn-sm c3">Zarezerwuj</button></a>
-                                                </td>
-                                            </tr>
+                                            {% endfor %}
 
                                             </tbody>
                                             <!--Table body-->

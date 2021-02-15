@@ -14,11 +14,12 @@ def parcel_status():
 
 @app.route('/search-book', methods=['GET', 'POST'])
 def search_book():
+    get_books = requests.get('http://127.0.0.1:6001/api/v1/search/all')
+    books_json = get_books.json()
     if session.get('status') == 'EMPLOYEE':
-        get_books = requests.post('http://127.0.0.1:6001')
-        return render_template('search_book_pracownik.html')
+        return render_template('search_book_pracownik.html', books=books_json['books'])
     elif session.get('status') == 'USER':
-        return render_template('search_book_user.html')
+        return render_template('search_book_user.html', books=books_json['books'])
 
 
 @app.route('/register', methods=['GET', 'POST'])
