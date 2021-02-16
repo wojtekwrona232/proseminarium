@@ -1,2 +1,3 @@
-docker exec -it mysqlTransport bash   //wykonywanie dzialan na konsoli bash w kontenerze
-docker run -p 3306:3306 -d --name=mysqlLibraryB mysql/mysql-server:latest  /tworzenie nowego kontenera z baza danych mysql
+docker exec -it mysqlTransport bash   //wykonywanie dzialan na konsoli bash w kontenerze, mysqltransport - nazwa kontenera
+docker run -p 3306:3306 -d --name=mysqlLibraryB mysql/mysql-server:latest  //tworzenie nowego kontenera z baza danych mysql
+docker-compose up //zbudowanie nowego kontenera na podstawie pliku 'docker-compose.yaml'
