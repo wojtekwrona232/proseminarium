@@ -66,13 +66,13 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="search_book_pracownik.html">Wyszukaj</a>
+                        <a class="nav-link" href="{{ url_for('search_book') }}">Wyszukaj</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Status przesyłki</a>
+                        <a class="nav-link" href="{{ url_for('parcel_status') }}">Status przesyłki</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login.html">Wyloguj</a>
+                        <a class="nav-link" href="{{ url_for('logout') }}">Wyloguj</a>
                     </li>
 
                 </ul>

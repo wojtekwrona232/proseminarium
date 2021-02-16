@@ -8,6 +8,34 @@ app.config['SECRET_KEY'] = b'\xaa\x89u\xf7M\xf03\xcb\x1b\xc6#\xd2"\x8b\xf8\xb7'
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 
 
+@app.route('/add-book', methods=['GET', 'POST'])
+def add_book():
+    if session.get('status') == 'EMPLOYEE':
+        return render_template('addbook.html')
+    return jsonify({'error': 'invalid user'}), 403
+
+
+@app.route('/add-author', methods=['GET', 'POST'])
+def add_author():
+    if session.get('status') == 'EMPLOYEE':
+        return render_template('addauthor.html')
+    return jsonify({'error': 'invalid user'}), 403
+
+
+@app.route('/add-translator', methods=['GET', 'POST'])
+def add_translator():
+    if session.get('status') == 'EMPLOYEE':
+        return render_template('addtranslator.html')
+    return jsonify({'error': 'invalid user'}), 403
+
+
+@app.route('/add-publisher', methods=['GET', 'POST'])
+def add_publisher():
+    if session.get('status') == 'EMPLOYEE':
+        return render_template('addpublisher.html')
+    return jsonify({'error': 'invalid user'}), 403
+
+
 @app.route('/parcel-status', methods=['GET', 'POST'])
 def parcel_status():
     return render_template('package_status.html')
@@ -27,7 +55,7 @@ def show_book():
                                publisher=book['books']['book']['publisher'],
                                published_year=book['books']['book']['year_published'],
                                edition_nr=book['books']['book']['edition_nr'])
-    elif session.get('status') == 'USER':
+    if session.get('status') == 'READER':
         return render_template('view_book_user.html',
                                isbn=book['books']['book']['isbn'],
                                title=book['books']['book']['title'],
@@ -38,14 +66,18 @@ def show_book():
                                edition_nr=book['books']['book']['edition_nr'])
 
 
-@app.route('/search-book', methods=['GET', 'POST'])
+@app.route('/search-book-user', methods=['GET', 'POST'])
+def search_book_user():
+    get_books = requests.get('http://127.0.0.1:6001/api/v1/search/all')
+    books_json = get_books.json()
+    return render_template('search_book_user.html', books=books_json['books'])
+
+
+@app.route('/search-book-emp', methods=['GET', 'POST'])
 def search_book():
     get_books = requests.get('http://127.0.0.1:6001/api/v1/search/all')
     books_json = get_books.json()
-    if session.get('status') == 'EMPLOYEE':
-        return render_template('search_book_pracownik.html', books=books_json['books'])
-    elif session.get('status') == 'USER':
-        return render_template('search_book_user.html', books=books_json['books'])
+    return render_template('search_book_pracownik.html', books=books_json['books'])
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -120,4 +152,4 @@ def logout():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

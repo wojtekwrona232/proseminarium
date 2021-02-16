@@ -77,21 +77,20 @@
                            aria-haspopup="true" aria-expanded="false">Dodaj
                         </a>
                         <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
-                            <a class="dropdown-item" href="addbook.html">Książkę</a>
-                            <a class="dropdown-item" href="addauthor.html">Autora</a>
-                            <a class="dropdown-item" href="addtranslator.html">Tłumacza</a>
-                            <a class="dropdown-item" href="addpublisher.html">Wydawcę</a>
-                            <a class="dropdown-item" href="addlibrary.html">Bibliotekę</a>
+                            <a class="dropdown-item" href="{{ url_for('add_book') }}">Książkę</a>
+                            <a class="dropdown-item" href="{{ url_for('add_author') }}">Autora</a>
+                            <a class="dropdown-item" href="{{ url_for('add_translator') }}">Tłumacza</a>
+                            <a class="dropdown-item" href="{{ url_for('add_publisher') }}">Wydawcę</a>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Wyszukaj</a>
+                        <a class="nav-link" href="{{url_for('search_book')}}">Wyszukaj</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="package_status.html">Status przesyłki</a>
+                        <a class="nav-link" href="{{ url_for('parcel_status') }}">Status przesyłki</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login.html">Wyloguj</a>
+                        <a class="nav-link" href="{{ url_for('logout') }}">Wyloguj</a>
                     </li>
 
                 </ul>
@@ -176,12 +175,11 @@
                                                     {% endif %}
 
                                                 </td>
-                                                <td><a href="{{ url_for('show_book', isbn=(b.book.isbn|string)) }}">
-                                                    <button type="button" class="btn btn-sm c1">Podgląd</button></a>
-                                                    <a href="#">
-                                                    <button type="button" class="btn btn-sm c2">Wypożycz</button></a>
-                                                    <a href="reserve_pracownik.html">
-                                                    <button type="button" class="btn btn-sm c3">Zarezerwuj</button></a>
+                                                <td>
+                                                    {#<!--<a href="{{ url_for('show_book', isbn=(b.book.isbn|string)) }}">-->#}
+                                                    <a href="#"><button type="button" class="btn btn-sm c1">Podgląd</button></a>
+                                                    <a href="#"><button type="button" class="btn btn-sm c2">Wypożycz</button></a>
+                                                    <a href="#"><button type="button" class="btn btn-sm c3">Zarezerwuj</button></a>
                                                 </td>
                                             </tr>
                                             {% endfor %}
@@ -225,8 +223,8 @@
     $(document).ready(function () {
         $('.mdb-select').materialSelect();
         $("tr:odd").css("color", "#370064");
-
     });
+
     var $rows = $('#table tr');
     $('#search').keyup(function() {
         var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
@@ -236,6 +234,7 @@
             return !~text.indexOf(val);
         }).hide();
     });
+
 </script>
 </body>
 
