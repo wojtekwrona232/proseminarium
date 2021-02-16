@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Wyszukaj książkę</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,600&display=swap" rel="stylesheet">
+    <style>
+
+
+        .intro-2 {
+            background: url("https://mdbootstrap.com/img/Photos/Others/forest1.jpg") no-repeat center center;
+            background-size: cover;
+        }
+
+        td p{
+            margin-bottom: 0;
+        }
+        td {
+            padding-top:15px!important;
+            padding-bottom: 15px!important;
+        }
+        td button{
+            color: white!important;
+            padding-left: 10px!important;
+            padding-right: 10px!important;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!--Main Navigation-->
+<header>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="afterlogon_user.html"><strong>Ametyst Czytelnik</strong></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
+                    aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="search_book_user.html">Wyszukaj</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Wyloguj</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar -->
+
+    <!--Intro Section-->
+    <section class="view intro-2">
+        <div class="mask rgba-gradient">
+            <div class="container h-100 d-flex justify-content-center align-items-center">
+
+                <!--Grid row-->
+                <div class="row  pt-5 mt-3">
+
+                    <!--Grid column-->
+                    <div class="col-md-12">
+                        <div class="card wow fadeIn" data-wow-delay="0.3s">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <div class="form-header mbutton" style="margin-bottom: 37px;">
+                                        <h3><i class="fas fa-search mt-2"></i> Wyszukaj książkę</h3>
+                                    </div>
+                                    <!--Header-->
+                                    <div class="md-form">
+                                        <input type="text" id="search" class="form-control">
+                                        <label for="search">Wyszukaj książkę</label>
+                                    </div>
+                                    <div class='table-responsive'>
+                                        <!--Table-->
+                                        <table id="table" class="table table-hover">
+                                            <!--Table head-->
+                                            <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Tytuł</th>
+                                                <th>Autor</th>
+                                                <th>Dostępność</th>
+                                                <th>Opcje</th>
+
+                                            </tr>
+                                            </thead>
+                                            <!--Table head-->
+                                            <!--Table body-->
+                                            <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>Zemsta</td>
+                                                <td>Aleksander Fredro</td>
+                                                <td><p>Ametyst: 5</p><p>Szmaragd: 5</p></td>
+                                                <td><a href="view_book_user.html">
+                                                    <button type="button" class="btn btn-sm c1">Podgląd</button></a>
+                                                    <a href="borrow_user.html">
+                                                        <button type="button" class="btn btn-sm c2">Wypożycz</button></a>
+                                                    <a href="reserve_user.html">
+                                                        <button type="button" class="btn btn-sm c3">Zarezerwuj</button></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>Lalka</td>
+                                                <td>Bolesław Prus</td>
+                                                <td><p>Ametyst: 6</p><p>Szmaragd: 2</p></td>
+                                                <td><a href="view_book_user.html">
+                                                    <button type="button" class="btn btn-sm c1">Podgląd</button></a>
+                                                    <a href="borrow_user.html">
+                                                        <button type="button" class="btn btn-sm c2">Wypożycz</button></a>
+                                                    <a href="reserve_user.html">
+                                                        <button type="button" class="btn btn-sm c3">Zarezerwuj</button></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>Cierpienia młodego Wertera</td>
+                                                <td>Johann Wolfgan </td>
+                                                <td><p>Ametyst: 4</p><p>Szmaragd: 1</p></td>
+                                                <td><a href="view_book_user.html">
+                                                    <button type="button" class="btn btn-sm c1">Podgląd</button></a>
+                                                    <a href="borrow_user.html">
+                                                        <button type="button" class="btn btn-sm c2">Wypożycz</button></a>
+                                                    <a href="reserve_user.html">
+                                                        <button type="button" class="btn btn-sm c3">Zarezerwuj</button></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">4</th>
+                                                <td>W pustyni i w puszczy</td>
+                                                <td>Henryk Sienkiewicz</td>
+                                                <td><p>Ametyst: 9</p><p>Szmaragd: brak</p></td>
+                                                <td><a href="view_book_user.html">
+                                                    <button type="button" class="btn btn-sm c1">Podgląd</button></a>
+                                                    <a href="borrow_user.html">
+                                                        <button type="button" class="btn btn-sm c2">Wypożycz</button></a>
+                                                    <a href="reserve_user.html">
+                                                        <button type="button" class="btn btn-sm c3">Zarezerwuj</button></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">5</th>
+                                                <td>Dziady cz. III</td>
+                                                <td>Adam Mickiewicz</td>
+                                                <td><p>Ametyst: brak</p><p>Szmaragd: 2</p></td>
+                                                <td><a href="view_book_user.html">
+                                                    <button type="button" class="btn btn-sm c1">Podgląd</button></a>
+                                                    <a href="borrow_user.html">
+                                                        <button type="button" class="btn btn-sm c2">Wypożycz</button></a>
+                                                    <a href="reserve_user.html">
+                                                        <button type="button" class="btn btn-sm c3">Zarezerwuj</button></a>
+                                                </td>
+                                            </tr>
+
+                                            </tbody>
+                                            <!--Table body-->
+                                        </table>
+                                        <!--Table-->
+                                    </div>
+                                </div>
+                                <!--/Form with header-->
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--Grid column-->
+                    </div>
+                </div>
+                <!--Grid row-->
+
+            </div>
+        </div>
+    </section>
+    <!--Intro Section-->
+
+</header>
+<!--Main Navigation-->
+
+<!--  SCRIPTS  -->
+<!-- JQuery -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="js/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="js/mdb.min.js"></script>
+<script>
+    new WOW().init();
+    $(document).ready(function () {
+        $('.mdb-select').materialSelect();
+        $("tr:odd").css("color", "#370064");
+    });
+    var $rows = $('#table tr');
+    $('#search').keyup(function() {
+        var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+
+        $rows.show().filter(function() {
+            var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+            return !~text.indexOf(val);
+        }).hide();
+    });
+</script>
+</body>
+
+</html>
