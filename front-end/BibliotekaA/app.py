@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, make_response, jsonify, sessi
 import requests
 import ast
 import datetime
+import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = b'\xaa\x89u\xf7M\xf03\xcb\x1b\xc6#\xd2"\x8b\xf8\xb7'
@@ -44,7 +45,7 @@ def parcel_status():
 @app.route('/show-book', methods=['GET'])
 def show_book():
     data = {'isbn': str(request.args.get('isbn'))}
-    get_data = requests.post('http://127.0.0.1:6001/api/v1/search/isbn', data=data)
+    get_data = requests.post('http://10.1.0.110:6001/api/v1/search/isbn', data=data)
     book = get_data.json()
     if session.get('status') == 'EMPLOYEE':
         return render_template('view_book_pracownik.html',
@@ -68,21 +69,21 @@ def show_book():
 
 @app.route('/search-book-user', methods=['GET', 'POST'])
 def search_book_user():
-    get_books = requests.get('http://127.0.0.1:6001/api/v1/search/all')
+    get_books = requests.get('http://10.1.0.110:6001/api/v1/search/all')
     books_json = get_books.json()
     return render_template('search_book_user.html', books=books_json['books'])
 
 
 @app.route('/search-book-emp', methods=['GET', 'POST'])
 def search_book():
-    get_books = requests.get('http://127.0.0.1:6001/api/v1/search/all')
+    get_books = requests.get('http://10.1.0.110:6001/api/v1/search/all')
     books_json = get_books.json()
     return render_template('search_book_pracownik.html', books=books_json['books'])
 
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    get_libraries = requests.post('http://127.0.0.1:6000/api/v1/resources/libraries/all')
+    get_libraries = requests.post('http://10.1.0.111:6000/api/v1/resources/libraries/all')
     # print(get_libraries.json())
     libraries = get_libraries.json()
 
@@ -99,7 +100,7 @@ def register():
             "zip_code": request.form.get('zipcode'),
             "account_type": "READER"
         }
-        new_user = requests.post('http://127.0.0.1:6000/signup', data=send)
+        new_user = requests.post('http://10.1.0.111:6000/signup', data=send)
         return redirect(url_for('login'))
     return render_template('register.html', libraries=libraries['libraries'])
 
@@ -119,7 +120,7 @@ def login():
                 'login': str(login_f),
                 'password': str(password)
             }
-            get_token = requests.post('http://127.0.0.1:6000/login', data=send)
+            get_token = requests.post('http://10.1.0.111:6000/login', data=send)
             if get_token.status_code != 201:
                 message = {'message': 'Could not verify. Wrong password or username or the account does not exist'}
                 return make_response(jsonify(message), 403)
@@ -152,4 +153,6 @@ def logout():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    ENVIRONMENT_DEBUG = os.environ.get("APP_DEBUG", True)
+    ENVIRONMENT_PORT = os.environ.get("APP_PORT", 6050)
+    app.run(host='0.0.0.0', port=ENVIRONMENT_PORT, debug=ENVIRONMENT_DEBUG)
