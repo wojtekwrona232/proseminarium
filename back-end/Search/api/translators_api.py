@@ -9,7 +9,7 @@ TranslatorsApi = Blueprint('translators', __name__)
 def make_json(obj):
     return {
         "book_id": obj.book_id,
-        "author_id": obj.author_id
+        "translator_id": obj.translator_id
     }
 
 
@@ -149,31 +149,18 @@ def add_new_translators():
             "time": now.strftime("%H:%M:%S")
         }
     }
-    new_book = DBMethods().get_query(Books).filter(Books.isbn.contains(obj['isbn']))
-    new_book_id = 0
-    for m in new_book:
-        new_book_id = m.id
+    new_book = DBMethods().get_query(Books).filter_by(id=obj['id']).first()
 
-    new_translator = DBMethods().get_query(TranslatorsData).filter(
-        TranslatorsData.first_name.contains(obj['translator']['first_name']),
-        TranslatorsData.last_name.contains(obj['translator']['last_name']))
+    new_translator = DBMethods().get_query(TranslatorsData).filter_by(id=obj['translator_id']).first()
 
-    new_translator_id = 0
-    for m in new_translator:
-        new_translator_id = m.id
-
-    d = Translators(book_id=new_book_id, translator_id=new_translator_id)
+    d = Translators(book_id=new_book.id, translator_id=new_translator.id)
 
     DBMethods().add_entity(d)
 
-    query = DBMethods().get_query(Translators).filter(Translators.book_id.contains(new_book_id),
-                                                      Translators.translator_id.contains(new_translator_id))
-    l = []
-    for m in query:
-        l.append(make_json(m))
+    query = DBMethods().get_query(Translators).filter_by(book_id=new_book.id, translator_id=new_translator.id).first()
     file = {
         "meta": meta,
-        "Translators": l
+        "Translators": make_json(query)
     }
     return json.dumps(file, ensure_ascii=False, indent=4).encode('utf8')
 

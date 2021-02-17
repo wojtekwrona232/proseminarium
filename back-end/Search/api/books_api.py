@@ -8,6 +8,7 @@ BooksAPI = Blueprint('books', __name__)
 
 def make_json(obj):
     return {
+        "id": obj.id,
         "isbn": obj.isbn,
         "title": obj.title,
         "publisher_id": obj.publisher_id,
@@ -46,13 +47,10 @@ def get_books_id():
             "time": now.strftime("%H:%M:%S")
         }
     }
-    query = DBMethods().get_query(Books).filter(Books.id.contains(obj['id']))
-    l = []
-    for m in query:
-        l.append(make_json(m))
+    query = DBMethods().get_query(Books).filter_by(id=obj['id']).first()
     file = {
         "meta": meta,
-        "Books": l
+        "Books": make_json(query)
     }
     return json.dumps(file, ensure_ascii=False, indent=4).encode('utf8')
 
@@ -161,30 +159,20 @@ def add_new_book():
             "time": now.strftime("%H:%M:%S")
         }
     }
-    new_publisher = DBMethods().get_query(Publishers).filter(Publishers.name.contains(obj['publisher_name']))
-    new_buyer_id = 0
-    for m in new_publisher:
-        new_buyer_id = m.id
+    new_publisher = DBMethods().get_query(Publishers).filter_by(id=obj['publisher_id']).first()
 
     d = Books(isbn=obj['isbn'],
               title=obj['title'],
-              publisher_id=new_buyer_id,
+              publisher_id=obj['publisher_id'],
               year_published=obj['year_published'],
               edition_nr=obj['edition_nr'])
 
     DBMethods().add_entity(d)
 
-    query = DBMethods().get_query(Books).filter(Books.isbn.contains(obj['isbn']),
-                                                Books.title.contains(obj['title']),
-                                                Books.publisher_id.contains(obj['publisher_id']),
-                                                Books.year_published.contains(obj['year_published']),
-                                                Books.edition_nr.contains(obj['edition_nr']))
-    l = []
-    for m in query:
-        l.append(make_json(m))
+    query = DBMethods().get_query(Books).filter_by(isbn=obj['isbn']).first()
     file = {
         "meta": meta,
-        "Books": l
+        "Books": make_json(query)
     }
     return json.dumps(file, ensure_ascii=False, indent=4).encode('utf8')
 

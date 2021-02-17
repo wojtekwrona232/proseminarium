@@ -141,29 +141,19 @@ def add_new_authors():
             "time": now.strftime("%H:%M:%S")
         }
     }
-    new_book = DBMethods().get_query(Books).filter(Books.isbn.contains(obj['isbn']))
-    new_book_id = 0
-    for m in new_book:
-        new_book_id = m.id
+    new_book = DBMethods().get_query(Books).filter_by(id=obj['id']).first()
 
-    new_author = DBMethods().get_query(AuthorData).filter(AuthorData.first_name.contains(obj['author']['first_name']),
-                                                          AuthorData.last_name.contains(obj['author']['last_name']))
-    new_author_id = 0
-    for m in new_author:
-        new_author_id = m.id
+    new_author = DBMethods().get_query(AuthorData).filter_by(id=obj['author_id']).first()
 
-    d = Authors(book_id=new_book_id, author_id=new_author_id)
+    d = Authors(book_id=new_book.id, author_id=new_author.id)
 
     DBMethods().add_entity(d)
 
-    query = DBMethods().get_query(Authors).filter(Authors.book_id.contains(new_book_id),
-                                                  Authors.author_id.contains(new_author_id))
-    l = []
-    for m in query:
-        l.append(make_json(m))
+    query = DBMethods().get_query(Authors).filter_by(book_id=new_book.id, author_id=new_author.id).first()
+
     file = {
         "meta": meta,
-        "authors": l
+        "authors": make_json(query)
     }
     return json.dumps(file, ensure_ascii=False, indent=4).encode('utf8')
 

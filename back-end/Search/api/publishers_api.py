@@ -8,6 +8,7 @@ PublishersAPI = Blueprint('publishers', __name__)
 
 def make_json(obj):
     return {
+        "id": obj.id,
         "name": obj.name
     }
 
@@ -42,13 +43,10 @@ def get_publishers_id():
             "time": now.strftime("%H:%M:%S")
         }
     }
-    query = DBMethods().get_query(Publishers).filter(Publishers.id.contains(obj['id']))
-    l = []
-    for m in query:
-        l.append(make_json(m))
+    query = DBMethods().get_query(Publishers).filter_by(id=obj['id']).first()
     file = {
         "meta": meta,
-        "publishers": l
+        "publishers": make_json(query)
     }
     return json.dumps(file, ensure_ascii=False, indent=4).encode('utf8')
 

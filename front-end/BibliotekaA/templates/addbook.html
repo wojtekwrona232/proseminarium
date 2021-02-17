@@ -58,15 +58,14 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="search_book_pracownik.html">Wyszukaj</a>
+                        <a class="nav-link" href="{{ url_for('search_book') }}">Wyszukaj</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="package_status.html">Status przesyłki</a>
+                        <a class="nav-link" href="{{ url_for('parcel_status') }}">Status przesyłki</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login.html">Wyloguj</a>
+                        <a class="nav-link" href="{{ url_for('logout') }}">Wyloguj</a>
                     </li>
-
                 </ul>
             </div>
         </div>
@@ -92,15 +91,48 @@
                                         <h3><i class="fas fa-book mt-2"></i>&nbspDodaj książkę</h3>
                                     </div>
                                     <!--Grid row-->
-                                    <form class="needs-validation" novalidate>
-                                        <form class="row mt-5">
+                                        <form class="row mt-5 needs-validation" method="post" action="{{ url_for('add_book') }}" novalidate>
                                             <div class="col-1"></div>
                                             <div class="col-10">
                                                 <!--Grid row-->
                                                 <div class="col-12 ">
+                                                    <div class="md-form" style="margin-top: 0px; width:400px;">Autorzy</div>
+                                                        <div class="col-12">
+                                                        <ul id="listAuthorsWithHandle">
+                                                        </ul>
+                                                    </div>
+
+                                                    <label for="itemsDataAuthor">Wybierz autorów</label>
+                                                    <select class="mdb-select" id="itemsDataAuthor" name="itemsDataAuthor">
+                                                        {% for item in authors %}
+                                                            <option value="{{ item.id }}">{{ item.first_name + ' ' + item.last_name }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                    <button id="button_add_author" type="button" class="btn mbutton btn-rounded">Dodaj autora</button>
+                                                </div>
+                                                <!--Grid row-->
+                                                <!--Grid row-->
+                                                <div class="col-12 ">
+                                                    <div class="md-form" style="margin-top: 0px; width:400px;">Tłumacze</div>
+                                                        <div class="col-12">
+                                                        <ul id="listTranslatorsWithHandle">
+                                                        </ul>
+                                                    </div>
+
+                                                    <label for="itemsDataTranslator">Wybierz tłumaczy</label>
+                                                    <select class="mdb-select" id="itemsDataTranslator" name="itemsDataTranslator">
+                                                        {% for item in translators %}
+                                                            <option value="{{ item.id }}">{{ item.first_name + ' ' + item.last_name }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                    <button id="button_add_translator" type="button" class="btn mbutton btn-rounded">Dodaj tłumacza</button>
+                                                </div>
+                                                <!--Grid row-->
+                                                <!--Grid row-->
+                                                <div class="col-12 ">
                                                     <div class="md-form" style="margin-top: 0px; width:400px;">
                                                         <i class="fas fa-barcode prefix"></i>
-                                                        <input type="text" id="orangeForm-barcode" class="form-control" pattern="(?:(?=.{17}$)97[89][ -](?:[0-9]+[ -]){2}[0-9]+[ -][0-9]|97[89][0-9]{10}|(?=.{13}$)(?:[0-9]+[ -]){2}[0-9]+[ -][0-9Xx]|[0-9]{9}[0-9Xx])" required>
+                                                        <input name="isbn" type="text" id="orangeForm-barcode" class="form-control" pattern="(?:(?=.{17}$)97[89][ -](?:[0-9]+[ -]){2}[0-9]+[ -][0-9]|97[89][0-9]{10}|(?=.{13}$)(?:[0-9]+[ -]){2}[0-9]+[ -][0-9Xx]|[0-9]{9}[0-9Xx])" required>
                                                         <label for="orangeForm-barcode">ISBN</label>
                                                         <div class="invalid-tooltip">
                                                             Wprowadź poprawny ISBN.
@@ -113,7 +145,7 @@
                                                 <div class="col-12 ">
                                                     <div class="md-form" style="margin-top: 0px; width:400px;">
                                                         <i class="fas fa-heading prefix "></i>
-                                                        <input type="text" id="orangeForm-title" class="form-control" pattern=".{3,}" required>
+                                                        <input name="title" type="text" id="orangeForm-title" class="form-control" pattern=".{3,}" required>
                                                         <label for="orangeForm-title">Tytuł</label>
                                                         <div class="invalid-tooltip">
                                                             Podaj tytuł.
@@ -124,12 +156,16 @@
 
                                                 <!--Grid row-->
                                                 <div class="col-12 ">
-                                                    <div class="md-form" style="margin-top: 0px; width:400px;">
-                                                        <i class="fas fa-building prefix"></i>
-                                                        <input type="text" id="orangeForm-pub" class="form-control" pattern=".{3,}" required>
-                                                        <label for="orangeForm-pub">Wydawnictwo</label>
+                                                    <div class="md-form" style="margin-top: 0px;">
+                                                        <i class="fas fa-book-reader prefix"></i>
+                                                        <select class="mdb-select" id="orangeForm-lib" name="publisher">
+                                                            {%  for l in publishers %}
+                                                                <option value="{{ l['id'] }}">{{ l['name'] }}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                        <label for="orangeForm-lib">Biblioteka</label>
                                                         <div class="invalid-tooltip">
-                                                            Podaj wydawnictwo.
+                                                            Wybierz wydawnictwo.
                                                         </div>
                                                     </div>
                                                 </div>
@@ -138,7 +174,7 @@
                                                 <div class="col-12 ">
                                                     <div class="md-form" style="margin-top: 0px; width:400px;">
                                                         <i class="fas fa-calendar-alt prefix"></i>
-                                                        <input type="number" id="orangeForm-release-year" class="form-control" min="1800" required>
+                                                        <input name="publish_year" type="number" id="orangeForm-release-year" class="form-control" min="1800" required>
                                                         <label for="orangeForm-release-year">Rok wydania</label>
                                                         <div class="invalid-tooltip">
                                                             Podaj rok wydania.
@@ -150,7 +186,7 @@
                                                 <div class="col-12 ">
                                                     <div class="md-form" style="margin-top: 0px; width:400px;">
                                                         <i class="fas fa-edit prefix"></i>
-                                                        <input type="number" id="orangeForm-number" class="form-control" required>
+                                                        <input name="edition" type="number" id="orangeForm-number" class="form-control" required>
                                                         <label for="orangeForm-number">Numer Wydania</label>
                                                         <div class="invalid-tooltip">
                                                             Podaj numer wydania.
@@ -214,6 +250,28 @@
             });
         }, false);
     })();
+
+
+    $('#button_add_author').off('click').on('click', function() {
+        let val = $('#itemsDataAuthor').val();
+        let val3 = $( "#itemsDataAuthor option:selected" ).text();
+            if (val !== undefined && val !== '') {
+                $('#listAuthorsWithHandle').append(`<li><input type="hidden" name="itemsAuthorsData" value="${val}">${val3}</input></li>`);
+            } else {
+                //display message or action if input value is blank
+            }
+    });
+
+    $('#button_add_translator').off('click').on('click', function() {
+        let val = $('#itemsDataTranslator').val();
+        let val3 = $( "#itemsDataTranslator option:selected" ).text();
+            if (val !== undefined && val !== '') {
+                $('#listTranslatorsWithHandle').append(`<li><input type="hidden" name="itemsTranslatorsData" value="${val}">${val3}</input></li>`);
+            } else {
+                //display message or action if input value is blank
+            }
+    });
+
 </script>
 </body>
 

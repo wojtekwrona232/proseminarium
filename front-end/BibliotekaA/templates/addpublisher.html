@@ -39,7 +39,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
         <div class="container">
-            <a class="navbar-brand" href="afterlogon_pracownik.html"><strong>Ametyst Pracownik</strong></a>
+            <a class="navbar-brand" href="{{ url_for('home') }}"><strong>Ametyst Pracownik</strong></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
                     aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -58,15 +58,14 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="search_book_pracownik.html">Wyszukaj</a>
+                        <a class="nav-link" href="{{ url_for('search_book') }}">Wyszukaj</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="package_status.html">Status przesyłki</a>
+                        <a class="nav-link" href="{{ url_for('parcel_status') }}">Status przesyłki</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login.html">Wyloguj</a>
+                        <a class="nav-link" href="{{ url_for('logout') }}">Wyloguj</a>
                     </li>
-
                 </ul>
             </div>
         </div>
@@ -86,7 +85,7 @@
                         <div class="card wow fadeIn" data-wow-delay="0.3s">
                             <div class="card">
                                 <div class="card-body">
-                                    <form class="needs-validation" novalidate>
+                                    <form method="post" action="{{ url_for('add_publisher') }}" class="needs-validation" novalidate>
 
                                         <!--Header-->
                                         <div class="form-header mbutton" style="margin-bottom: 37px;">
@@ -100,7 +99,7 @@
 
                                                 <div class="md-form" style="margin-top: 0px;">
                                                     <i class="fas fa-file-signature prefix"></i>
-                                                    <input type="text" id="orangeForm-name" class="form-control" pattern=".{3,}" style="width:450px;" required>
+                                                    <input name="publisher_name" type="text" id="orangeForm-name" class="form-control" pattern=".{3,}" style="width:450px;" required>
                                                     <label for="orangeForm-name">Nazwa</label>
                                                     <div class="invalid-tooltip">
                                                         Podaj nazwę wydawnictwa.
@@ -113,9 +112,8 @@
                                                 </div>
                                             </div>
                                             <!--Grid row-->
+                                        </div>
                                     </form>
-                                </div>
-
                             </div>
                         </div>
 

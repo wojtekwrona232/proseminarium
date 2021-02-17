@@ -39,7 +39,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
         <div class="container">
-            <a class="navbar-brand" href="afterlogon_pracownik.html"><strong>Ametyst Pracownik</strong></a>
+            <a class="navbar-brand" href="{{ url_for('home') }}"><strong>Ametyst Pracownik</strong></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
                     aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -58,15 +58,14 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="search_book_pracownik.html">Wyszukaj</a>
+                        <a class="nav-link" href="{{ url_for('search_book') }}">Wyszukaj</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="package_status.html">Status przesyłki</a>
+                        <a class="nav-link" href="{{ url_for('parcel_status') }}">Status przesyłki</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login.html">Wyloguj</a>
+                        <a class="nav-link" href="{{ url_for('logout') }}">Wyloguj</a>
                     </li>
-
                 </ul>
             </div>
         </div>
@@ -91,54 +90,39 @@
                                     <div class="form-header mbutton" style="margin-bottom: 37px;">
                                         <h3><i class="fas fa-user mt-2"></i> Dodaj tłumacza</h3>
                                     </div>
-                                    <form class="needs-validation" novalidate>
-                                        <!--Grid row-->
-                                        <div class="row mt-5">
-                                            <div class="col-1"></div>
-                                            <div class="col-10">
-                                                <!--Grid row-->
+                                    <div class="row mt-5">
+                                        <div class="col-1"></div>
+                                        <div class="col-10">
+                                            <!--Grid row-->
+                                            <form method="post" action="{{ url_for('add_translator') }}" class="needs-validation" novalidate>
                                                 <div class="col-12 ">
-                                                    <div class="md-form" style="margin-top: 0px;">
-                                                        <i class="fas fa-user prefix"></i>
-                                                        <input type="text" id="orangeForm-name" class="form-control" style="width:300px;" pattern=".{3,}" required>
-                                                        <label for="orangeForm-name">Nazwa</label>
+                                                    <div class="md-form" style="margin-top: 0px;width:300px;">
+                                                        <i class="fas fa-file-signature prefix"></i>
+                                                        <input name="first_name" type="text" id="orangeForm-name" class="form-control" pattern="[^a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]*.{3,}" required>
+                                                        <label for="orangeForm-name">Imię</label>
                                                         <div class="invalid-tooltip">
-                                                            Podaj nazwę.
+                                                            Podaj imię - tylko litery dozwolone.
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <!--Grid row-->
-                                                <!--Grid row-->
                                                 <div class="col-12 ">
-                                                    <div class="md-form" style="margin-top: 0px;">
-                                                        <i class="fas fa-city prefix "></i>
-                                                        <input type="text" id="orangeForm-city" class="form-control"style="width:300px;"  pattern=".{3,}" required>
-                                                        <label for="orangeForm-city">Miejscowość</label>
+                                                    <div class="md-form" style="width:300px;">
+                                                        <i class="fas fa-file-signature prefix"></i>
+                                                        <input name="last_name" type="text" id="orangeForm-surname" class="form-control" pattern="[^a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]*{3,}" required>
+                                                        <label for="orangeForm-surname">Nazwisko</label>
                                                         <div class="invalid-tooltip">
-                                                            Podaj miejscowość.
+                                                            Podaj nazwisko - tylko litery dozwolone.
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <!--Grid row-->
-                                                <!--Grid row-->
-                                                <div class="col-12 ">
-                                                    <div class="md-form" style="margin-top: 0px;">
-                                                        <i class="fas fa-building prefix"></i>
-                                                        <input type="text" id="orangeForm-street" class="form-control"style="width:300px;" pattern=".{3,}"  required>
-                                                        <label for="orangeForm-street">Ulica i numer domu</label>
-                                                        <div class="invalid-tooltip">
-                                                            Podaj ulicę i numer.
-                                                        </div>
-                                                    </div>
-
                                                 </div>
                                                 <!--Grid row-->
                                                 <div class="text-center mt-5">
                                                     <button class="btn mbutton btn-rounded" type="submit">Dodaj</button>
                                                 </div>
-
-                                            </div>
-                                    </form>
+                                            </form>
+                                        </div>
+                                    </div>
                                     <!--Grid row-->
                                     <div class="col-1"></div>
                                 </div>

@@ -8,6 +8,7 @@ translatorsDataAPI = Blueprint('translators-data', __name__)
 
 def make_json(obj):
     return {
+        "id": obj.id,
         "first_name": obj.first_name,
         "last_name": obj.last_name
     }
@@ -44,13 +45,10 @@ def get_translators_data_id():
         },
         "title": "buyers with specified id"
     }
-    query = DBMethods().get_query(TranslatorsData).filter(TranslatorsData.id.contains(obj['id']))
-    l = []
-    for m in query:
-        l.append(make_json(m))
+    query = DBMethods().get_query(TranslatorsData).filter_by(id=obj['id']).first()
     file = {
         "meta": meta,
-        "translators_data": l
+        "translators_data": make_json(query)
     }
     return json.dumps(file, ensure_ascii=False, indent=4).encode('utf8')
 
