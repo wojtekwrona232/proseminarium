@@ -25,11 +25,10 @@
             background: url("https://mdbootstrap.com/img/Photos/Others/forest1.jpg") no-repeat center center;
             background-size: cover;
         }
-        .card-body{
-            padding: 30px;
-        }
-        button{
+
+        .special_button{
             width:300px;
+            margin-bottom: 20px;
         }
 
     </style>
@@ -102,7 +101,7 @@
                     <div class="col-md-12">
                         <div class="card wow fadeIn" data-wow-delay="0.3s">
                             <div class="card">
-                                <form class="md-form" action="{{ url_for('reserve_book') }}" method="post">
+                                <form  class="needs-validation" novalidate method="post" action="{{ url_for('reserve_book') }}" method="post">
                                     <div class="card-body">
 
                                         <!--Header-->
@@ -129,15 +128,18 @@
                                                 {% endif %}
                                             {% endfor %}
                                         </select>
+                                        
                                         <label class="mdb-main-label">Książka</label>
                                         <div class="md-form mb-2">
-                                            <input name="pick_up_date" placeholder="Selected date" type="text" id="date-picker-example"
-                                                   class="form-control datepicker" data-value="2021/01/01">
+                                            <input name="pick_up_date" placeholder="Selected date" type="text" id="date-picker-example" placeholder="Wybierz datę"
+                                                   class="form-control datepicker" required />
                                             <label for="date-picker-example">Na</label>
+                                            <div class="invalid-feedback">Wybierz poprawną datę.</div>
+                                        </div>
                                         </div>
 
                                         <div class="text-center mt-4">
-                                            <button class="btn mbutton special_button ">Zarezerwuj książkę</button>
+                                            <button class="btn mbutton special_button " type="submit">Zarezerwuj książkę</button>
                                         </div>
                                     </div>
                                 </form>
@@ -183,12 +185,53 @@
     $(document).ready(function () {
         $('.mdb-select').materialSelect();
     });
-    $('.datepicker').pickadate();
 
-    $('.datepicker').datepicker({
-        format: 'yyyy-m-d',
-        startDate: '+3d'
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+// Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+// Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+
+    $(document).ready(function() {
+        $('.datepicker').pickadate();
+        $('.datepicker').removeAttr('readonly');
+    });
+
+
+    $('.datepicker').pickadate({
+        monthsFull: ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik',
+            'Listopad', 'Grudzień'],
+        monthsShort: ['Sty', 'Lut', 'Mar', 'Kwi', 'Maj', 'Cze', 'Lip', 'Sie', 'Wrz', 'Paź', 'Lis', 'Gru'],
+        weekdaysFull: ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota' ],
+        weekdaysShort: ['nie','pon', 'wto', 'śro', 'czw', 'pią', 'sob' ],
+        labelMonthNext: 'Następny miesiąc',
+        labelMonthPrev: 'Poprzedni miesiąc',
+        labelMonthSelect: 'Wybierz miesiąc',
+        labelYearSelect: 'Wybierz rok',
+        today: 'dziś',
+        clear: 'wyczyść',
+        close: 'zamknij',
+        firstDay: 1,
+        disable: [
+            7
+        ],
+        min: 3,
+        max: 121
     })
+
+
 
 </script>
 </body>

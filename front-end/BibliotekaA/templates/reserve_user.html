@@ -20,38 +20,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,600&display=swap" rel="stylesheet">
     <style>
 
-        .picker__box .picker__table .picker__day.picker__day--today {
-            color: #6f00ea;
-        }
-
-
-        .picker__box .picker__table .picker__day--selected, .picker__box .picker__table .picker__day--selected:hover, .picker__box .picker__table .picker--focused {
-            background-color: #783fc4 !important;
-            color: white !important;
-        }
-
-
-        .picker__box .picker__header .picker__date-display {
-            background-color: #833de3 !important;
-        }
-
-        .picker__box .picker__footer .picker__button--today:before {
-            top: -.05em;
-            width: 0;
-            border-top: .66em solid #6f00ea;
-            border-left: .66em solid transparent;
-        }
-
-
         .intro-2 {
             background: url("https://mdbootstrap.com/img/Photos/Others/forest1.jpg") no-repeat center center;
             background-size: cover;
         }
-        .card-body{
-            padding: 30px;
-        }
-        button{
+
+        .special_button{
             width:300px;
+            margin-bottom: 20px;
         }
 
     </style>
@@ -103,7 +79,7 @@
                     <div class="col-md-12">
                         <div class="card wow fadeIn" data-wow-delay="0.3s">
                             <div class="card">
-                                <form class="md-form" action="{{ url_for('reserve_book') }}" method="post">
+                                <form class="needs-validation" novalidate method="post" action="{{ url_for('reserve_book') }}" method="post">
                                     <div class="card-body">
 
                                         <!--Header-->
@@ -122,18 +98,20 @@
                                                     {% endif %}
                                                 {% endfor %}
                                             </select>
-                                            <label class="mdb-main-label">Książka</label>
-                                            <div class="md-form mb-2">
-                                                <input name="pick_up_date" placeholder="Selected date" type="text" id="date-picker-example"
-                                                       class="form-control datepicker" data-value="2021/01/01">
-                                                <label for="date-picker-example">Na</label>
-                                            </div>
-
-                                        <div class="text-center mt-4">
-                                            <button class="btn mbutton special_button ">Zarezerwuj książkę</button>
+                                        <label class="mdb-main-label">Książka</label>
+                                        <div class="md-form mb-2">
+                                            <input name="pick_up_date" placeholder="Selected date" type="text" id="date-picker-example" placeholder="Wybierz datę"
+                                                   class="form-control datepicker" required />
+                                            <label for="date-picker-example">Na</label>
+                                            <div class="invalid-feedback">Wybierz poprawną datę.</div>
                                         </div>
                                     </div>
-                                </form>
+
+                                    <div class="text-center mt-4">
+                                        <button class="btn mbutton special_button" type="submit">Zarezerwuj książkę</button>
+                                    </div>
+                            </div>
+                            </form>
                                 <!--/Form with header-->
                             </div>
 
@@ -176,29 +154,44 @@
     $(document).ready(function () {
         $('.mdb-select').materialSelect();
     });
-    $('.datepicker').pickadate();
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 
-    $(document).ready(function () {
-		var dt = new Date();
-        dt.setDate(dt.getDate() + 3);
-        var d = new Date();
-        var monthNames = ["January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"];
-        today = monthNames[d.getMonth()] + ' ' + d.getDate() + ' ' + d.getFullYear();
+    $('.datepicker').pickadate({
+        monthsFull: ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik',
+            'Listopad', 'Grudzień'],
+        monthsShort: ['Sty', 'Lut', 'Mar', 'Kwi', 'Maj', 'Cze', 'Lip', 'Sie', 'Wrz', 'Paź', 'Lis', 'Gru'],
+        weekdaysFull: ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota' ],
+        weekdaysShort: ['nie','pon', 'wto', 'śro', 'czw', 'pią', 'sob' ],
+        labelMonthNext: 'Następny miesiąc',
+        labelMonthPrev: 'Poprzedni miesiąc',
+        labelMonthSelect: 'Wybierz miesiąc',
+        labelYearSelect: 'Wybierz rok',
+        today: 'dziś',
+        clear: 'wyczyść',
+        close: 'zamknij',
+        firstDay: 1,
+        disable: [
+            7
+        ],
+        min: 3,
+        max: 121
+    })
 
-        $('#date-picker-example').datepicker({
-            defaultDate: "+3d",
-            minDate: dt,
-            maxDate: "+3M",
-            dateFormat: 'yy-mm-dd',
-            showOtherMonths: true,
-            changeMonth: true,
-            selectOtherMonths: true,
-            required: true,
-            showOn: "focus",
-            numberOfMonths: 1,
-        });
-    });
+
 
 </script>
 </body>
