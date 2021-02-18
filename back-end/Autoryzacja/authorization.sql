@@ -57,7 +57,7 @@ INSERT INTO `accounts` (`id`, `first_name`, `last_name`, `login`, `password`, `l
 
 CREATE TABLE `libraries` (
   `id` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
   `city` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -67,7 +67,7 @@ CREATE TABLE `libraries` (
 --
 
 INSERT INTO `libraries` (`id`, `name`, `address`, `city`) VALUES
-(1, 'Wojewódzka i Miejska Biblioteka Publiczna w Rzeszo', 'Sokoła 13, 35-010 Rzeszów', 'Rzeszów'),
+(1, 'Wojewódzka i Miejska Biblioteka Publiczna w Rzeszowie', 'Sokoła 13, 35-010 Rzeszów', 'Rzeszów'),
 (2, 'Miejska Biblioteka Publiczna w Łańcucie', 'Moniuszki 2, 37-100 Łańcut', 'Łańcut');
 
 --

@@ -79,13 +79,10 @@
 
                                     <div class="text-center pl-2 pr-2 pb-3">
                                         <div class=" col-12 mt-1">
-                                            <a href="borrow_user.html"><button class="btn btn-lg mbutton btn-rounded">Wypożyczenie książki</button></a>
+                                            <a href="{{ url_for('reserve_book') }}"><button class="btn btn-lg btn-outline-secondary btn-rounded">Rezerwacja książki</button></a>
                                         </div>
                                         <div class=" col-12 mt-1">
-                                            <a href="reserve_user.html"><button class="btn btn-lg btn-outline-secondary btn-rounded">Rezerwacja książki</button></a>
-                                        </div>
-                                        <div class=" col-12 mt-1">
-                                            <a href="view_borrowed_user.html"><button class="btn btn-lg mbutton2 btn-rounded">Podgląd wypożyczeń</button></a>
+                                            <a href="{{ url_for('view_borrowed') }}"><button class="btn btn-lg mbutton2 btn-rounded">Podgląd wypożyczeń</button></a>
                                         </div>
                                     </div>
                                 </div>

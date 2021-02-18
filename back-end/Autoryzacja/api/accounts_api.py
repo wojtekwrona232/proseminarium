@@ -10,20 +10,16 @@ accApi = Blueprint('accounts', __name__)
 
 def make_file_json(obj):
     return {
+            "id": obj.id,
             "first_name": obj.first_name,
             "last_name": obj.last_name,
             "email": obj.email,
-            "library": {
-                    "name": obj.library_id.name,
-                    "address": obj.library_id.address,
-                    "city": obj.library_id.city,
-                }
-            ,
+            "library": obj.library_id,
             "address": obj.address,
             "city": obj.city,
             "zip_code": obj.zip_code,
-            "date_created": obj.date_created,
-            "account_type": obj.account_type
+            "date_created": str(obj.date_created),
+            "account_type": obj.account_type.name
     }
 
 

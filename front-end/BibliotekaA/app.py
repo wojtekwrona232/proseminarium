@@ -1,25 +1,368 @@
-from flask import Flask, render_template, request, make_response, jsonify, session, url_for, redirect
+from flask import Flask, render_template, request, make_response, jsonify, session, url_for, redirect, Response
 import requests
 import os
 import json
+import datetime
+import calendar
+import enum
+
+
+class ReservationEnum(enum.Enum):
+    W_REALIZACJI = 0
+    W_TRANSPORCIE = 1
+    GOTOWA_DO_ODBIORU = 2
+    ANULOWANO = 3
+    ODEBRANO = 4
+
+
+def add_months(sourcedate, months):
+    month = sourcedate.month - 1 + months
+    year = sourcedate.year + month // 12
+    month = month % 12 + 1
+    day = min(sourcedate.day, calendar.monthrange(year, month)[1])
+    return datetime.date(year, month, day)
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = b'\xaa\x89u\xf7M\xf03\xcb\x1b\xc6#\xd2"\x8b\xf8\xb7'
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 
+EMPLOYEE = 'EMPLOYEE'
+READER = 'READER'
+
+
+@app.route('/return-book', methods=['GET', 'POST'])
+def return_book():
+    if session.get('status') == EMPLOYEE:
+        data = str('http://10.1.0.120:8001/api/v1/get-check-out/id/') + str(request.args.get('check'))
+        get_check = requests.get(url=str(data))
+        res_details = get_check.json()
+        r = res_details[0]
+
+        penalty = 0.0
+
+        # dates = datetime.date.fromisoformat(r['check_out_date']) - datetime.datetime.today().strftime('%Y-%m-%d')
+
+        make = {
+            "id": r['id'],
+            "reservation_id": r['reservation_id'],
+            "reservation": {
+                "id": r['reservation']['id'],
+                "reservation_date": r['reservation']['reservation_date'],
+                "pick_up_date": r['reservation']['pick_up_date'],
+                "status": ReservationEnum.ODEBRANO.name
+            },
+            "book_id": r['book_id'],
+            "book": {
+                "id": r['id'],
+                "isbn": r['book']['isbn'],
+                "available": False
+            },
+            "reader_id": r['reader_id'],
+            "employee_id": session.get('email'),
+            "check_out_date": r['check_out_date'],
+            "return_date": str(datetime.datetime.today().strftime('%Y-%m-%d')),
+            "return_term": r['return_term'],
+            "late_return_penalty": 0.0
+        }
+        requests.post('http://10.1.0.120:8001/api/v1/update-check-out', data=json.dumps(make))
+
+        return view_reservations()
+    return Response(status=403)
+
+
+@app.route('/borrow-reservation', methods=['GET', 'POST'])
+def borrow_reservation():
+    if session.get('status') == EMPLOYEE:
+        data = str('http://10.1.0.120:8001/api/v1/get-reservations/id/') + str(request.args.get('res_id'))
+        get_data = requests.get(url=str(data))
+        reservation = get_data.json()
+        res = reservation[0]
+
+        data1 = str('http://10.1.0.120:8001/api/v1/get-check-out/id/') + str(request.args.get('check'))
+        get_check = requests.get(url=str(data1))
+        res_details = get_check.json()
+        r = res_details[0]
+
+        make = {
+            "id": r['id'],
+            "reservation_id": res['id'],
+            "reservation": {
+                "id": res['id'],
+                "reservation_date": res['reservation_date'],
+                "pick_up_date": res['pick_up_date'],
+                "status": ReservationEnum.ODEBRANO.name
+            },
+            "book_id": r['book_id'],
+            "book": {
+                "id": r['id'],
+                "isbn": r['book']['isbn'],
+                "available": False
+            },
+            "reader_id": r['reader_id'],
+            "employee_id": session.get('email'),
+            "check_out_date": str(datetime.datetime.today().strftime('%Y-%m-%d')),
+            "return_date": None,
+            "return_term": str(add_months(datetime.datetime.today(), 1).strftime('%Y-%m-%d')),
+            "late_return_penalty": 0.0
+        }
+        requests.post('http://10.1.0.120:8001/api/v1/update-check-out', data=json.dumps(make))
+
+        return view_reservations()
+    return Response(status=403)
+
+
+@app.route('/change-reservation-status', methods=['GET', 'POST'])
+def change_reservation_status():
+    if session.get('status') == EMPLOYEE:
+        res_enum = ['W_REALIZACJI', 'W_TRANSPORCIE', 'GOTOWA_DO_ODBIORU', 'ANULOWANO']
+
+        if request.method == 'POST':
+            data = str('http://10.1.0.120:8001/api/v1/get-reservations/id/') + str(request.form.get('res_id'))
+            get_data = requests.get(url=str(data))
+            reservation = get_data.json()
+
+            data1 = str('http://10.1.0.120:8001/api/v1/get-check-out/id/') + str(request.form.get('check_id'))
+            get_check = requests.get(url=str(data1))
+            res_details = get_check.json()
+
+            res_stat = request.form.get('res_stat')
+            res = reservation[0]
+            make = {
+                "id": res['id'],
+                "reservation_date": res['reservation_date'],
+                "pick_up_date": res['pick_up_date'],
+                "status": res_enum[int(res_stat)-1]
+            }
+            requests.post('http://10.1.0.120:8001/api/v1/update-reservation', data=json.dumps(make))
+            return render_template('change_reservation_status.html', enum_status=res_enum, res=reservation[0], check=res_details[0])
+
+        data = str('http://10.1.0.120:8001/api/v1/get-reservations/id/') + str(request.args.get('res_id'))
+        get_data = requests.get(url=str(data))
+        reservation = get_data.json()
+
+        data1 = str('http://10.1.0.120:8001/api/v1/get-check-out/id/') + str(request.args.get('check'))
+        get_check = requests.get(url=str(data1))
+        res_details = get_check.json()
+
+        return render_template('change_reservation_status.html', enum_status=res_enum, res=reservation[0], check=res_details[0])
+    return Response(status=403)
+
+
+@app.route('/view-reservations', methods=['GET', 'POST'])
+def view_reservations():
+    if session.get('status') == EMPLOYEE:
+        get_books = requests.get('http://10.1.0.110:6001/api/v1/search/all')
+        books = get_books.json()
+
+        get_check_outs = requests.get('http://10.1.0.120:8001/api/v1/get-check-outs/all')
+        book_lib = get_check_outs.json()
+
+        get_readers = requests.post('http://10.1.0.111:6000/api/v1/resources/accounts/all')
+        readers = get_readers.json()
+
+        return render_template('view_reservations_pracownik.html', checks=book_lib, books=books['books'], readers=readers['accounts'])
+    if session.get('status') == READER:
+        get_books = requests.get('http://10.1.0.110:6001/api/v1/search/all')
+        books = get_books.json()
+
+        get_check_outs = requests.get('http://10.1.0.120:8001/api/v1/get-check-outs/all')
+        book_lib = get_check_outs.json()
+
+        return render_template('view_reservations_user.html', checks=book_lib, books=books['books'])
+    return Response(status=403)
+
+
+@app.route('/view-borrowed', methods=['GET', 'POST'])
+def view_borrowed():
+    if session.get('status') == EMPLOYEE:
+        get_books = requests.get('http://10.1.0.110:6001/api/v1/search/all')
+        books = get_books.json()
+
+        get_check_outs = requests.get('http://10.1.0.120:8001/api/v1/get-check-outs/all')
+        book_lib = get_check_outs.json()
+
+        get_readers = requests.post('http://10.1.0.111:6000/api/v1/resources/accounts/all')
+        readers = get_readers.json()
+
+        return render_template('view_borrowed_pracownik.html', checks=book_lib, books=books['books'], readers=readers['accounts'])
+    if session.get('status') == READER:
+        get_books = requests.get('http://10.1.0.110:6001/api/v1/search/all')
+        books = get_books.json()
+
+        get_check_outs = requests.get('http://10.1.0.120:8001/api/v1/get-check-outs/all')
+        book_lib = get_check_outs.json()
+
+        return render_template('view_borrowed_user.html', checks=book_lib, books=books['books'])
+    return Response(status=403)
+
+
+@app.route('/reserve-book', methods=['GET', 'POST'])
+def reserve_book():
+    if session.get('status') == EMPLOYEE:
+        get_books = requests.get('http://10.1.0.110:6001/api/v1/search/all')
+        books = get_books.json()
+
+        get_book_lib = requests.get('http://10.1.0.120:8001/api/v1/get-books-availability/all')
+        book_lib = get_book_lib.json()
+
+        get_readers = requests.post('http://10.1.0.111:6000/api/v1/resources/accounts/all')
+        readers = get_readers.json()
+
+        if request.method == 'POST':
+            reader = request.form.get('reader')
+            book = request.form.get('book')
+            pick_up_date = request.form.get('pick_up_date')
+            emp_id = session.get('email')
+
+            book_id = -1
+            for i in book_lib:
+                if i['isbn'] == book and i['available'] is True:
+                    book_id = i['id']
+                    break
+
+            if book_id > 0:
+                make_resveration = {
+                    "reservation_date": str(datetime.datetime.today().strftime('%Y-%m-%d')),
+                    "pick_up_date": str(pick_up_date),
+                    "status": ReservationEnum.W_REALIZACJI.name
+                }
+                get_response = requests.post('http://10.1.0.120:8001/api/v1/add-reservation', data=json.dumps(make_resveration))
+                reservation = get_response.json()
+
+                make_check_out = {
+                    "reservation_id": reservation['id'],
+                    "reservation": {
+                        "reservation_date": reservation['reservation_date'],
+                        "pick_up_date": reservation['pick_up_date'],
+                        "status": reservation['status']
+                    },
+                    "book_id": book_id,
+                    "book": {
+                        "id": book_id,
+                        "isbn": book,
+                        "available": False
+                    },
+                    "reader_id": reader,
+                    "employee_id": emp_id,
+                    "check_out_date": None,
+                    "return_date": None,
+                    "return_term": None,
+                    "late_return_penalty": 0.0
+                }
+                requests.post('http://10.1.0.120:8001/api/v1/add-check-out', data=json.dumps(make_check_out))
+            return render_template('reserve_pracownik.html', readers=readers['accounts'], books=books['books'])
+        return render_template('reserve_pracownik.html', readers=readers['accounts'], books=books['books'])
+    if session.get('status') == READER:
+        get_books = requests.get('http://10.1.0.110:6001/api/v1/search/all')
+        books = get_books.json()
+
+        get_book_lib = requests.get('http://10.1.0.120:8001/api/v1/get-books-availability/all')
+        book_lib = get_book_lib.json()
+
+        if request.method == 'POST':
+            reader = session.get('email')
+            book = request.form.get('book')
+            pick_up_date = request.form.get('pick_up_date')
+
+            book_id = -1
+            for i in book_lib:
+                if i['isbn'] == book and i['available'] is True:
+                    book_id = i['id']
+                    break
+
+            if book_id > 0:
+                make_resveration = {
+                    "reservation_date": str(datetime.datetime.today().strftime('%Y-%m-%d')),
+                    "pick_up_date": str(pick_up_date),
+                    "status": ReservationEnum.W_REALIZACJI.name
+                }
+                get_response = requests.post('http://10.1.0.120:8001/api/v1/add-reservation', data=json.dumps(make_resveration))
+                reservation = get_response.json()
+
+                make_check_out = {
+                    "reservation_id": reservation['id'],
+                    "reservation": {
+                        "reservation_date": reservation['reservation_date'],
+                        "pick_up_date": reservation['pick_up_date'],
+                        "status": reservation['status']
+                    },
+                    "book_id": book_id,
+                    "book": {
+                        "id": book_id,
+                        "isbn": book,
+                        "available": False
+                    },
+                    "reader_id": reader,
+                    "employee_id": None,
+                    "check_out_date": None,
+                    "return_date": None,
+                    "return_term": None,
+                    "late_return_penalty": 0.0
+                }
+                requests.post('http://10.1.0.120:8001/api/v1/add-check-out', data=json.dumps(make_check_out))
+            return render_template('reserve_user.html', books=books['books'])
+        return render_template('reserve_user.html', books=books['books'])
+    return Response(status=403)
+
+
+@app.route('/borrow-book', methods=['GET', 'POST'])
+def borrow_book():
+    if session.get('status') == EMPLOYEE:
+        get_readers = requests.post('http://10.1.0.111:6000/api/v1/resources/accounts/all')
+        readers = get_readers.json()
+
+        get_books = requests.get('http://10.1.0.110:6001/api/v1/search/all')
+        books = get_books.json()
+
+        get_book_lib = requests.get('http://10.1.0.120:8001/api/v1/get-books-availability/all')
+        book_lib = get_book_lib.json()
+
+        if request.method == 'POST':
+            reader = request.form.get('reader')
+            book = request.form.get('book')
+            emp_id = session.get('email')
+
+            book_id = -1
+            for i in book_lib:
+                if i['isbn'] == book and i['available'] is True:
+                    book_id = i['id']
+                    break
+
+            if book_id > 0:
+                make = {
+                    "reservation_id": None,
+                    "book_id": book_id,
+                    "book": {
+                        "id": book_id,
+                        "isbn": book,
+                        "available": False
+                    },
+                    "reader_id": reader,
+                    "employee_id": emp_id,
+                    "check_out_date": str(datetime.datetime.today().strftime('%Y-%m-%d')),
+                    "return_date": None,
+                    "return_term": str(add_months(datetime.datetime.today(), 1).strftime('%Y-%m-%d')),
+                    "late_return_penalty": 0.0
+                }
+                requests.post('http://10.1.0.120:8001/api/v1/add-check-out', data=json.dumps(make))
+            return render_template('borrow_pracownik.html', readers=readers['accounts'], books=books['books'])
+        return render_template('borrow_pracownik.html', readers=readers['accounts'], books=books['books'])
+    return Response(status=403)
+
 
 @app.route('/add-book', methods=['GET', 'POST'])
 def add_book():
-    get_publishers = requests.post('http://10.1.0.110:6001/api/v1/publishers/all')
-    publishers = get_publishers.json()
+    if session.get('status') == EMPLOYEE:
+        get_publishers = requests.post('http://10.1.0.110:6001/api/v1/publishers/all')
+        publishers = get_publishers.json()
 
-    get_authors = requests.post('http://10.1.0.110:6001/api/v1/authors-data/all')
-    authors = get_authors.json()
+        get_authors = requests.post('http://10.1.0.110:6001/api/v1/authors-data/all')
+        authors = get_authors.json()
 
-    get_translators = requests.post('http://10.1.0.110:6001/api/v1/translators-data/all')
-    translators = get_translators.json()
+        get_translators = requests.post('http://10.1.0.110:6001/api/v1/translators-data/all')
+        translators = get_translators.json()
 
-    if session.get('status') == 'EMPLOYEE':
         if request.method == 'POST':
             isbn = request.form.get('isbn')
             title = request.form.get('title')
@@ -66,12 +409,12 @@ def add_book():
 
             return render_template('addbook.html', publishers=publishers['publishers'], authors=authors['authors_data'], translators=translators['translators_data'])
         return render_template('addbook.html', publishers=publishers['publishers'], authors=authors['authors_data'], translators=translators['translators_data'])
-    return jsonify({'error': 'invalid user'}), 403
+    return Response(status=403)
 
 
 @app.route('/add-author', methods=['GET', 'POST'])
 def add_author():
-    if session.get('status') == 'EMPLOYEE':
+    if session.get('status') == EMPLOYEE:
         if request.method == 'POST':
             first_name = request.form.get('first_name')
             last_name = request.form.get('last_name')
@@ -82,12 +425,12 @@ def add_author():
             requests.post('http://10.1.0.110:6001/api/v1/authors-data/add-new', data=json.dumps(make_json))
             return render_template('addauthor.html')
         return render_template('addauthor.html')
-    return jsonify({'error': 'invalid user'}), 403
+    return Response(status=403)
 
 
 @app.route('/add-translator', methods=['GET', 'POST'])
 def add_translator():
-    if session.get('status') == 'EMPLOYEE':
+    if session.get('status') == EMPLOYEE:
         if request.method == 'POST':
             first_name = request.form.get('first_name')
             last_name = request.form.get('last_name')
@@ -98,12 +441,12 @@ def add_translator():
             requests.post('http://10.1.0.110:6001/api/v1/translators-data/add-new', data=json.dumps(make_json))
             return render_template('addtranslator.html')
         return render_template('addtranslator.html')
-    return jsonify({'error': 'invalid user'}), 403
+    return Response(status=403)
 
 
 @app.route('/add-publisher', methods=['GET', 'POST'])
 def add_publisher():
-    if session.get('status') == 'EMPLOYEE':
+    if session.get('status') == EMPLOYEE:
         if request.method == 'POST':
             publisher_name = request.form.get('publisher_name')
             make_json = {
@@ -112,20 +455,22 @@ def add_publisher():
             requests.post('http://10.1.0.110:6001/api/v1/publishers/add-new', data=json.dumps(make_json))
             return render_template('addpublisher.html')
         return render_template('addpublisher.html')
-    return jsonify({'error': 'invalid user'}), 403
+    return Response(status=403)
 
 
 @app.route('/parcel-status', methods=['GET', 'POST'])
 def parcel_status():
-    return render_template('package_status.html')
+    if session.get('status') == EMPLOYEE:
+        return render_template('package_status.html')
+    return Response(status=403)
 
 
 @app.route('/show-book', methods=['GET'])
 def show_book():
-    data = {'isbn': str(request.args.get('isbn'))}
-    get_data = requests.post('http://10.1.0.110:6001/api/v1/search/isbn', data=json.dumps(data))
-    book = get_data.json()
-    if session.get('status') == 'EMPLOYEE':
+    if session.get('status') == EMPLOYEE:
+        data = {'isbn': str(request.args.get('isbn'))}
+        get_data = requests.post('http://10.1.0.110:6001/api/v1/search/isbn', data=json.dumps(data))
+        book = get_data.json()
         return render_template('view_book_pracownik.html',
                                isbn=book['books']['book']['isbn'],
                                title=book['books']['book']['title'],
@@ -134,7 +479,10 @@ def show_book():
                                publisher=book['books']['book']['publisher'],
                                published_year=book['books']['book']['year_published'],
                                edition_nr=book['books']['book']['edition_nr'])
-    if session.get('status') == 'READER':
+    if session.get('status') == READER:
+        data = {'isbn': str(request.args.get('isbn'))}
+        get_data = requests.post('http://10.1.0.110:6001/api/v1/search/isbn', data=json.dumps(data))
+        book = get_data.json()
         return render_template('view_book_user.html',
                                isbn=book['books']['book']['isbn'],
                                title=book['books']['book']['title'],
@@ -143,16 +491,18 @@ def show_book():
                                publisher=book['books']['book']['publisher'],
                                published_year=book['books']['book']['year_published'],
                                edition_nr=book['books']['book']['edition_nr'])
+    return Response(status=403)
 
 
 @app.route('/search-book', methods=['GET', 'POST'])
 def search_book():
     get_books = requests.get('http://10.1.0.110:6001/api/v1/search/all')
     books_json = get_books.json()
-    if session.get('status') == 'EMPLOYEE':
+    if session.get('status') == EMPLOYEE:
         return render_template('search_book_pracownik.html', books=books_json['books'])
-    if session.get('status') == 'READER':
+    if session.get('status') == READER:
         return render_template('search_book_user.html', books=books_json['books'])
+    return Response(status=403)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -180,6 +530,14 @@ def register():
 
 @app.route('/', methods=['GET', 'POST'])
 def start():
+    libraries = requests.post('http://10.1.0.111:6000/api/v1/resources/libraries/all')
+    get_lib = libraries.json()
+    for i in get_lib['libraries']:
+        if i['id'] == 1:
+            session['library_id'] = i['id']
+            session['library_name'] = i['name']
+            session['library_address'] = i['address']
+            session['library_city'] = i['city']
     if session.get('token') is not None:
         return redirect(url_for('home'))
     return redirect(url_for('login'))
@@ -187,14 +545,15 @@ def start():
 
 @app.route('/home', methods=['GET', 'POST'])
 def home():
-    if session['status'] == 'EMPLOYEE':
+    if session['status'] == EMPLOYEE:
         return render_template('afterlogon_pracownik.html',
                                first_name=session['first_name'],
                                last_name=session['last_name'])
-    elif session['status'] == 'READER':
+    elif session['status'] == READER:
         return render_template('afterlogon_user.html',
                                first_name=session['first_name'],
                                last_name=session['last_name'])
+    return Response(status=403)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -218,9 +577,9 @@ def login():
             session['first_name'] = token['first_name']
             session['last_name'] = token['last_name']
             session['email'] = token['email']
-            if token['status'] == 'EMPLOYEE':
+            if token['status'] == EMPLOYEE:
                 return redirect(url_for('home'))
-            elif token['status'] == 'READER':
+            elif token['status'] == READER:
                 return redirect(url_for('home'))
         else:
             return render_template('login.html')
@@ -230,13 +589,15 @@ def login():
 
 @app.route('/logout', methods=['GET', 'POST', 'DELETE'])
 def logout():
-    session.pop('token', None)
-    session.pop('status', None)
-    session.pop('id', None)
-    session.pop('first_name', None)
-    session.pop('last_name', None)
-    session.pop('email', None)
-    return redirect(url_for('login'))
+    if session.get('token') is not None:
+        session.pop('token', None)
+        session.pop('status', None)
+        session.pop('id', None)
+        session.pop('first_name', None)
+        session.pop('last_name', None)
+        session.pop('email', None)
+        return redirect(url_for('start'))
+    return Response(status=403)
 
 
 if __name__ == '__main__':

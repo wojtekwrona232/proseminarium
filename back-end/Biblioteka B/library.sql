@@ -57,7 +57,7 @@ CREATE TABLE `check_outs` (
   `reservation_id` int(11) DEFAULT NULL,
   `book_id` int(11) NOT NULL,
   `reader_id` varchar(255) NOT NULL,
-  `employee_id` varchar(255) NOT NULL,
+  `employee_id` varchar(255) DEFAULT NULL,
   `check_out_date` date DEFAULT NULL,
   `return_date` date DEFAULT NULL,
   `return_term` date DEFAULT NULL,

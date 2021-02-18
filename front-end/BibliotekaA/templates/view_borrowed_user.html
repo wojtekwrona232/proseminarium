@@ -26,6 +26,27 @@
             background-size: cover;
         }
 
+        td p{
+            margin-bottom: 0;
+        }
+        td {
+            padding-top:15px!important;
+            padding-bottom: 15px!important;
+        }
+        td button{
+            color: white!important;
+            padding-left: 10px!important;
+            padding-right: 10px!important;
+        }
+        .c1{
+            background-color: #9068c7!important;
+        }
+        .c2{
+            background-color: #6864D1!important;
+        }
+        .c3{
+            background-color: #405fdb!important;
+        }
 
     </style>
 
@@ -86,43 +107,35 @@
                                                 <th>Wypożyczona książka</th>
                                                 <th>Od</th>
                                                 <th>Do</th>
+                                                <th>Zwrócono</th>
 
                                             </tr>
                                             </thead>
                                             <!--Table head-->
                                             <!--Table body-->
                                             <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Zemsta</td>
-                                                <td>25.05.2020</td>
-                                                <td>25.06.2020</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Lalka</td>
-                                                <td>25.05.2020</td>
-                                                <td>25.06.2020</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Cierpienia młodego Wertera</td>
-                                                <td>25.05.2020</td>
-                                                <td>25.06.2020</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">4</th>
-                                                <td>W pustyni i w puszczy</td>
-                                                <td>25.05.2020</td>
-                                                <td>25.06.2020</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">5</th>
-                                                <td>Dziady cz. III</td>
-                                                <td>29.02.2020</td>
-                                                <td>11.02.2020</td>
-                                            </tr>
-
+                                                {% for i in checks %}
+                                                    {% if i.check_out_date|length == 10 and i.reader_id == session['email'] %}
+                                                        <tr>
+                                                            <td scope="row">{{ i.id }}</td>
+                                                            {%  for b in books %}
+                                                                {% if b.book.isbn == i.book.isbn %}
+                                                                    <td>{{ b.book.title }}</td>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                            <td>{{ i.check_out_date|string }}</td>
+                                                            <td>{{ i.return_term|string }}</td>
+                                                            {% if i.return_date|length == 0 %}
+                                                                <td>Nie</td>
+                                                            {% elif i.return_date|length == 10 %}
+                                                                <td>Tak, {{ i.return_date|string }}</td>
+                                                            {% endif %}
+                                                            <td>
+                                                                <a href="{{ url_for('show_book', isbn=i.book.isbn) }}"><button type="button" class="btn btn-sm c1">Podgląd</button></a>
+                                                            </td>
+                                                        </tr>
+                                                    {% endif %}
+                                                {% endfor %}
                                             </tbody>
                                             <!--Table body-->
                                         </table>

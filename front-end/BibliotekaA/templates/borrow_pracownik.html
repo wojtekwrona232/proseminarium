@@ -90,46 +90,40 @@
                     <div class="col-md-12">
                         <div class="card wow fadeIn" data-wow-delay="0.3s">
                             <div class="card">
-                                <div class="card-body">
+                                <form class="md-form" action="{{ url_for('borrow_book') }}" method="post">
+                                    <div class="card-body">
 
-                                    <!--Header-->
-                                    <div class="form-header mbutton" style="border-radius: 0.2em;" >
-                                        <h3><i class="fas fa-book"></i>&nbsp;&nbsp;Wypożycz książkę</h3>
+                                        <!--Header-->
+                                        <div class="form-header mbutton" style="border-radius: 0.2em;" >
+                                            <h3><i class="fas fa-book"></i>&nbsp;&nbsp;Wypożycz książkę</h3>
+                                        </div>
+
+
+                                        <select name="reader" class="mdb-select md-form" searchable="Znajdź czytelnika...">
+                                            {%  for l in readers %}
+                                                <option value="{{ l['email'] }}">{{ l['first_name'] + ', ' + l['last_name'] + ', ' + l['email'] }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <label class="mdb-main-label">Czytelnik</label>
+
+                                        <select name="book" class="mdb-select md-form" searchable="Wyszukaj książkę...">
+                                            {%  for b in books %}
+                                                {% if b.availability %}
+                                                    {% for i in b.availability %}
+                                                        {% if i.library_id == 1 %}
+                                                            <option value="{{ b.book.isbn }}">{{ i.available|string + ' dostępnych. ' + b.book.title + ', wydana ' + b.book.year_published|string + ', edycja ' + b.book.edition_nr|string }}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </select>
+                                        <label class="mdb-main-label">Książka</label>
+
+                                        <div class="text-center mt-4">
+                                            <button class="btn mbutton special_button ">Wypożycz książkę</button>
+                                        </div>
                                     </div>
-
-
-                                    <select class="mdb-select md-form" searchable="Znajdź czytelnika...">
-                                        <option value="1" >Jan Nowak
-                                        </option>
-                                        <option value="2" >Michał Romak
-                                        </option>
-                                        <option value="3" >Grzesiek Czesiek
-                                        </option>
-                                    </select>
-                                    <label class="mdb-main-label">Czytelnik</label>
-
-                                    <select class="mdb-select md-form" searchable="Wyszukaj książkę...">
-                                        <option value="1" data-secondary-text="Aleksander Fredro">Zemsta
-                                        </option>
-                                        <option value="2" data-secondary-text="Bolesław Prus">Lalka
-                                        </option>
-                                        <option value="3" data-secondary-text="Johann Wolfgang von Goethe">Cierpienia młodego Wertera
-
-                                        </option>
-                                    </select>
-                                    <label class="mdb-main-label">Książka</label>
-                                    <div class="md-form mb-2">
-                                        <input placeholder="Selected date" type="text" id="date-picker-example"
-                                               class="form-control datepicker" data-value="2021/01/14">
-                                        <label for="date-picker-example">Do</label>
-                                    </div>
-
-
-
-                                    <div class="text-center mt-4">
-                                        <button class="btn mbutton special_button ">Wypożycz książkę</button>
-                                    </div>
-                                </div>
+                                </form>
                                 <!--/Form with header-->
                             </div>
 

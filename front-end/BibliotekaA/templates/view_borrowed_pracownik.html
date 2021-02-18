@@ -20,12 +20,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,600&display=swap" rel="stylesheet">
     <style>
 
+        td p{
+            margin-bottom: 0;
+        }
+        td {
+            padding-top:15px!important;
+            padding-bottom: 15px!important;
+        }
+        td button{
+            color: white!important;
+            padding-left: 10px!important;
+            padding-right: 10px!important;
+        }
+
+        .c1{
+            background-color: #9068c7!important;
+        }
+        .c2 {
+            background-color: #6864D1!important;
+        }
 
         .intro-2 {
             background: url("https://mdbootstrap.com/img/Photos/Others/forest1.jpg") no-repeat center center;
             background-size: cover;
         }
 
+        .table-responsive {
+            overflow-y: auto;
+            max-height: 600px;
+        }
 
     </style>
 
@@ -102,48 +125,41 @@
                                                 <th>Czytelnik</th>
                                                 <th>Od</th>
                                                 <th>Do</th>
-
+                                                <th>Zwrócono</th>
+                                                <th>Opcje</th>
                                             </tr>
                                             </thead>
                                             <!--Table head-->
                                             <!--Table body-->
                                             <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Zemsta</td>
-                                                <td>Jan Kowalski</td>
-                                                <td>25.05.2020</td>
-                                                <td>25.06.2020</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Lalka</td>
-                                                <td>Jane Doe</td>
-                                                <td>25.05.2020</td>
-                                                <td>25.06.2020</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Cierpienia młodego Wertera</td>
-                                                <td>John Doe</td>
-                                                <td>25.05.2020</td>
-                                                <td>25.06.2020</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">4</th>
-                                                <td>W pustyni i w puszczy</td>
-                                                <td>Grzesiek Czesiek</td>
-                                                <td>25.05.2020</td>
-                                                <td>25.06.2020</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">5</th>
-                                                <td>Dziady cz. III</td>
-                                                <td>Test User</td>
-                                                <td>29.02.2020</td>
-                                                <td>11.02.2020</td>
-                                            </tr>
-
+                                                {% for i in checks %}
+                                                    {% if i.check_out_date|length == 10 %}
+                                                        <tr>
+                                                            <td scope="row">{{ i.id }}</td>
+                                                            {%  for b in books %}
+                                                                {% if b.book.isbn == i.book.isbn %}
+                                                                    <td>{{ b.book.title }}</td>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                            {%  for r in readers %}
+                                                                {% if r.email == i.reader_id %}
+                                                                    <td>{{ r['first_name'] + ' ' + r['last_name'] }}</td>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                            <td>{{ i.check_out_date|string }}</td>
+                                                            <td>{{ i.return_term|string }}</td>
+                                                            {% if i.return_date|length == 0 %}
+                                                                <td>Nie</td>
+                                                            {% elif i.return_date|length == 10 %}
+                                                                <td>Tak, {{ i.return_date|string }}</td>
+                                                            {% endif %}
+                                                            <td>
+                                                                <a href="{{ url_for('show_book', isbn=i.book.isbn) }}"><button type="button" class="btn btn-sm c1">Podgląd</button></a>
+                                                                <a href="{{ url_for('show_book', check_id=i.id) }}"><button type="button" class="btn btn-sm c2">Zwróć</button></a>
+                                                            </td>
+                                                        </tr>
+                                                    {% endif %}
+                                                {% endfor %}
                                             </tbody>
                                             <!--Table body-->
                                         </table>

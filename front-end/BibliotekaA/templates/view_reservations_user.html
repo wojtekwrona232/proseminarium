@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Zarezerwuj książkę</title>
+    <title>Podgląd wypożyczeń</title>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
@@ -25,12 +25,7 @@
             background: url("https://mdbootstrap.com/img/Photos/Others/forest1.jpg") no-repeat center center;
             background-size: cover;
         }
-        .card-body{
-            padding: 30px;
-        }
-        button{
-            width:300px;
-        }
+
 
     </style>
 
@@ -75,39 +70,60 @@
                     <div class="col-md-12">
                         <div class="card wow fadeIn" data-wow-delay="0.3s">
                             <div class="card">
-                                <form class="md-form" action="{{ url_for('reserve_book') }}" method="post">
-                                    <div class="card-body">
+                                <div class="card-body">
 
-                                        <!--Header-->
-                                        <div class="form-header mbutton" style="border-radius: 0.2em;" >
-                                            <h3><i class="fas fa-book"></i>&nbsp;&nbsp;Zarezerwuj książkę</h3>
-                                        </div>
+                                    <div class="form-header mbutton" style="margin-bottom: 37px;">
+                                        <h3><i class="fas fa-hand-holding-heart mt-2"></i> Podgląd wypożyczeń</h3>
+                                    </div>
+                                    <!--Header-->
+                                    <div class='table-responsive'>
+                                        <!--Table-->
+                                        <table id="tablePreview" class="table table-hover">
+                                            <!--Table head-->
+                                            <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Wypożyczona książka</th>
+                                                <th>Od</th>
+                                                <th>Do</th>
+                                                <th>Zwrócono</th>
 
-                                            <select name="book" class="mdb-select md-form" searchable="Wyszukaj książkę...">
-                                                {%  for b in books %}
-                                                    {% if b.availability %}
-                                                        {% for i in b.availability %}
-                                                            {% if i.library_id == 1 %}
-                                                                <option value="{{ b.book.isbn }}">{{ i.available|string + ' dostępnych. ' + b.book.title + ', wydana ' + b.book.year_published|string + ', edycja ' + b.book.edition_nr|string }}</option>
+                                            </tr>
+                                            </thead>
+                                            <!--Table head-->
+                                            <!--Table body-->
+                                            <tbody>
+                                                {% for i in checks %}
+                                                    {% if i.check_out_date|length == 10 and i.reader_id == session['email'] %}
+                                                        <tr>
+                                                            <td scope="row">{{ i.id }}</td>
+                                                            {%  for b in books %}
+                                                                {% if b.book.isbn == i.book.isbn %}
+                                                                    <td>{{ b.book.title }}</td>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                            <td>{{ i.check_out_date|string }}</td>
+                                                            <td>{{ i.return_term|string }}</td>
+                                                            {% if i.return_date|length == 0 %}
+                                                                <td>Nie</td>
+                                                            {% elif i.return_date|length == 10 %}
+                                                                <td>Tak, {{ i.return_date|string }}</td>
                                                             {% endif %}
-                                                        {% endfor %}
+                                                            <td>
+                                                                <a href="{{ url_for('show_book', isbn=i.book.isbn) }}"><button type="button" class="btn btn-sm c1">Podgląd</button></a>
+                                                            </td>
+                                                        </tr>
                                                     {% endif %}
                                                 {% endfor %}
-                                            </select>
-                                            <label class="mdb-main-label">Książka</label>
-                                            <div class="md-form mb-2">
-                                                <input name="pick_up_date" placeholder="Selected date" type="text" id="date-picker-example"
-                                                       class="form-control datepicker" data-value="2021/01/01">
-                                                <label for="date-picker-example">Na</label>
-                                            </div>
-
-
-                                        <div class="text-center mt-4">
-                                            <button class="btn mbutton special_button ">Zarezerwuj książkę</button>
-                                        </div>
+                                            </tbody>
+                                            <!--Table body-->
+                                        </table>
+                                        <!--Table-->
                                     </div>
-                                </form>
+                                </div>
                                 <!--/Form with header-->
+
+                                </div>
                             </div>
 
                         </div>
@@ -138,30 +154,10 @@
     $(document).ready(function () {
         $('.mdb-select').materialSelect();
     });
-    $('.datepicker').pickadate();
-
-    $(document).ready(function () {
-		var dt = new Date();
-        dt.setDate(dt.getDate() + 3);
-        var d = new Date();
-        var monthNames = ["January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"];
-        today = monthNames[d.getMonth()] + ' ' + d.getDate() + ' ' + d.getFullYear();
-
-        $('#date-picker-example').datepicker({
-            defaultDate: "+3d",
-            minDate: dt,
-            maxDate: "+3M",
-            dateFormat: 'yy-mm-dd',
-            showOtherMonths: true,
-            changeMonth: true,
-            selectOtherMonths: true,
-            required: true,
-            showOn: "focus",
-            numberOfMonths: 1,
-        });
+    $(document).ready(function()
+    {
+        $("tr:odd").css("color", "#370064");
     });
-
 </script>
 </body>
 

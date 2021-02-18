@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Wyszukaj książkę</title>
+    <title>Podgląd rezerwacji</title>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
@@ -20,12 +20,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,600&display=swap" rel="stylesheet">
     <style>
 
-
-        .intro-2 {
-            background: url("https://mdbootstrap.com/img/Photos/Others/forest1.jpg") no-repeat center center;
-            background-size: cover;
-        }
-
         td p{
             margin-bottom: 0;
         }
@@ -38,6 +32,7 @@
             padding-left: 10px!important;
             padding-right: 10px!important;
         }
+
         .c1{
             background-color: #9068c7!important;
         }
@@ -47,10 +42,16 @@
         .c3{
             background-color: #405fdb!important;
         }
+        .intro-2 {
+            background: url("https://mdbootstrap.com/img/Photos/Others/forest1.jpg") no-repeat center center;
+            background-size: cover;
+        }
+
         .table-responsive {
             overflow-y: auto;
             max-height: 600px;
         }
+
     </style>
 
 </head>
@@ -63,19 +64,34 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('home') }}"><strong>Ametyst Czytelnik</strong></a>
+            <a class="navbar-brand" href="{{ url_for('home') }}"><strong>Ametyst Pracownik</strong></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
                     aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
                 <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">Dodaj
+                        </a>
+                        <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
+                            <a class="dropdown-item" href="{{ url_for('add_book') }}">Książkę</a>
+                            <a class="dropdown-item" href="{{ url_for('add_author') }}">Autora</a>
+                            <a class="dropdown-item" href="{{ url_for('add_translator') }}">Tłumacza</a>
+                            <a class="dropdown-item" href="{{ url_for('add_publisher') }}">Wydawcę</a>
+                        </div>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('search_book') }}">Wyszukaj</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('parcel_status') }}">Status przesyłki</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('logout') }}">Wyloguj</a>
                     </li>
+
                 </ul>
             </div>
         </div>
@@ -97,71 +113,52 @@
                                 <div class="card-body">
 
                                     <div class="form-header mbutton" style="margin-bottom: 37px;">
-                                        <h3><i class="fas fa-search mt-2"></i> Wyszukaj książkę</h3>
+                                        <h3><i class="fas fa-hand-holding-heart mt-2"></i> Podgląd rezerwacji</h3>
                                     </div>
                                     <!--Header-->
-                                    <div class="md-form">
-                                        <input type="text" id="search" class="form-control">
-                                        <label for="form1">Wyszukaj książkę</label>
-                                    </div>
                                     <div class='table-responsive'>
                                         <!--Table-->
-                                        <table id="table" class="table table-hover">
+                                        <table id="tablePreview" class="table table-hover">
                                             <!--Table head-->
                                             <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Tytuł</th>
-                                                <th>Autor</th>
-                                                <th>Dostępność</th>
+                                                <th>Zarezerwowana książka</th>
+                                                <th>Czytelnik</th>
+                                                <th>Data rezerwacji</th>
+                                                <th>Data odebrania</th>
+                                                <th>Status</th>
                                                 <th>Opcje</th>
-
                                             </tr>
                                             </thead>
                                             <!--Table head-->
                                             <!--Table body-->
                                             <tbody>
-                                            {% for b in books %}
-                                            <tr>
-                                                <th scope="row">{{ b.book.id }}</th>
-                                                <td>{{ b.book.isbn }}</td>
-                                                <td>{{ b.book.title }}</td>
-                                                <td>
-                                                    {% for i in b.authors %}
-                                                        <p>{{ i.first_name + ' ' + i.last_name }}</p>
-                                                    {% endfor %}
-                                                </td>
-                                                <td>
-                                                    {% for i in b.translators %}
-                                                        <p>{{ i.first_name + ' ' + i.last_name }}</p>
-                                                    {% endfor %}
-                                                </td>
-                                                <td>{{ b.book.year_published }}</td>
-                                                <td>{{ b.book.edition_nr }}</td>
-                                                <td>{{ b.book.publisher }}</td>
-                                                <td>
-                                                    {% if not b.availability %}
-                                                        <p>Rzeszów: brak</p><p>Łańcut: brak</p>
-                                                    {% else %}
-                                                        {% for i in b.availability %}
-                                                            {% if i.library_id == 1 %}
-                                                                <p>Rzeszów: {{ i.available }}</p>
-                                                            {% elif i.library_id == 2 %}
-                                                                <p>Łańcut: {{ i.available }}</p>
-                                                            {% endif %}
-                                                        {% endfor %}
+                                                {% for i in checks %}
+                                                    {% if i.check_out_date|length == 0 and i.reservation_id > 0 %}
+                                                        <tr>
+                                                            <td scope="row">{{ i.id }}</td>
+                                                            {%  for b in books %}
+                                                                {% if b.book.isbn == i.book.isbn %}
+                                                                    <td>{{ b.book.title }}</td>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                            {%  for r in readers %}
+                                                                {% if r.email == i.reader_id %}
+                                                                    <td>{{ r['first_name'] + ' ' + r['last_name'] }}</td>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                            <td>{{ i.reservation.reservation_date|string }}</td>
+                                                            <td>{{ i.reservation.pick_up_date|string }}</td>
+                                                            <td>{{ i.reservation.status }}</td>
+                                                            <td>
+                                                                <a href="{{ url_for('show_book', isbn=i.book.isbn) }}"><button type="button" class="btn btn-sm c1">Podgląd</button></a>
+                                                                <a href="{{ url_for('change_reservation_status', res_id=i.reservation.id, check=i.id) }}"><button type="button" class="btn btn-sm c2">Zmień status</button></a>
+                                                                <a href="{{ url_for('borrow_reservation', res_id=i.reservation.id, check=i.id) }}"><button type="button" class="btn btn-sm c3">Wypożycz</button></a>
+                                                            </td>
+                                                        </tr>
                                                     {% endif %}
-
-                                                </td>
-                                                <td>
-                                                    {#<!--<a href="{{ url_for('show_book', isbn=(b.book.isbn|string)) }}">-->#}
-                                                    <a href="{{ url_for('show_book', isbn=b.book.isbn) }}"><button type="button" class="btn btn-sm c1">Podgląd</button></a>
-                                                    <a href="#"><button type="button" class="btn btn-sm c2">Wypożycz</button></a>
-                                                    <a href="#"><button type="button" class="btn btn-sm c3">Zarezerwuj</button></a>
-                                                </td>
-                                            </tr>
-                                            {% endfor %}
-
+                                                {% endfor %}
                                             </tbody>
                                             <!--Table body-->
                                         </table>
@@ -200,21 +197,11 @@
     new WOW().init();
     $(document).ready(function () {
         $('.mdb-select').materialSelect();
+    });
+    $(document).ready(function()
+    {
         $("tr:odd").css("color", "#370064");
-
     });
-
-    var $rows = $('#table tr');
-    $('#search').keyup(function() {
-        var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
-
-        $rows.show().filter(function() {
-            var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
-            return !~text.indexOf(val);
-        }).hide();
-    });
-
-
 </script>
 </body>
 
