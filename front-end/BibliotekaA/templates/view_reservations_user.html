@@ -99,28 +99,30 @@
                                             <!--Table head-->
                                             <!--Table body-->
                                             <tbody>
-                                                {% for i in checks %}
-                                                    {% if i.check_out_date|length == 10 and i.reader_id == session['email'] %}
-                                                        <tr>
-                                                            <td scope="row">{{ i.id }}</td>
-                                                            {%  for b in books %}
-                                                                {% if b.book.isbn == i.book.isbn %}
-                                                                    <td>{{ b.book.title }}</td>
-                                                                {% endif %}
-                                                            {% endfor %}
-                                                            <td>{{ i.check_out_date|string }}</td>
-                                                            <td>{{ i.return_term|string }}</td>
-                                                            {% if i.return_date|length == 0 %}
-                                                                <td>Nie</td>
-                                                            {% elif i.return_date|length == 10 %}
-                                                                <td>Tak, {{ i.return_date|string }}</td>
-                                                            {% endif %}
-                                                            <td>
-                                                                <a href="{{ url_for('show_book', isbn=i.book.isbn) }}"><button type="button" class="btn btn-sm c1">Podgląd</button></a>
-                                                            </td>
-                                                        </tr>
-                                                    {% endif %}
+                                            {% for i in checks %}
+                                            {% if i.check_out_date|length == 10 and i.reader_id == session['email'] %}
+                                            <tr>
+                                                <td scope="row">{{ i.id }}</td>
+                                                {% for b in books %}
+                                                {% if b.book.isbn == i.book.isbn %}
+                                                <td>{{ b.book.title }}</td>
+                                                {% endif %}
                                                 {% endfor %}
+                                                <td>{{ i.check_out_date|string }}</td>
+                                                <td>{{ i.return_term|string }}</td>
+                                                {% if i.return_date|length == 0 %}
+                                                <td>Nie</td>
+                                                {% elif i.return_date|length == 10 %}
+                                                <td>Tak, {{ i.return_date|string }}</td>
+                                                {% endif %}
+                                                <td>
+                                                    <a href="{{ url_for('show_book', isbn=i.book.isbn) }}">
+                                                        <button type="button" class="btn btn-sm c1">Podgląd</button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            {% endif %}
+                                            {% endfor %}
                                             </tbody>
                                             <!--Table body-->
                                         </table>
@@ -129,16 +131,16 @@
                                 </div>
                                 <!--/Form with header-->
 
-                                </div>
                             </div>
-
                         </div>
-                        <!--Grid column-->
-                    </div>
-                </div>
-                <!--Grid row-->
 
+                    </div>
+                    <!--Grid column-->
+                </div>
             </div>
+            <!--Grid row-->
+
+        </div>
         </div>
     </section>
     <!--Intro Section-->
@@ -150,7 +152,9 @@
 <footer class="page-footer font-small">
 
     <!-- Copyright -->
-    <div class="text-center ">Wojewódzka i Miejska Biblioteka Publiczna w Rzeszowie&nbsp;&nbsp;<i class="fas fa-map-marker"></i>&nbsp;Pigonia 1, 35-310 Rzeszów&nbsp;&nbsp;<i class="fas fa-phone"></i>&nbsp;17 851 85 31
+    <div class="text-center ">Wojewódzka i Miejska Biblioteka Publiczna w Rzeszowie&nbsp;&nbsp;<i
+            class="fas fa-map-marker"></i>&nbsp;Pigonia 1, 35-310 Rzeszów&nbsp;&nbsp;<i class="fas fa-phone"></i>&nbsp;17
+        851 85 31
     </div>
     <!-- Copyright -->
 
@@ -171,8 +175,7 @@
     $(document).ready(function () {
         $('.mdb-select').materialSelect();
     });
-    $(document).ready(function()
-    {
+    $(document).ready(function () {
         $("tr:odd").css("color", "#370064");
     });
 </script>

@@ -25,15 +25,18 @@
             background: url("https://mdbootstrap.com/img/Photos/Others/forest1.jpg") no-repeat center center;
             background-size: cover;
         }
-    .padding{
-        padding-top: 12px!important;
-    }
-    tr{
-        padding:5px;
-    }
-    td{
-        padding-bottom: 10px!important;
-    }
+
+        .padding {
+            padding-top: 12px !important;
+        }
+
+        tr {
+            padding: 5px;
+        }
+
+        td {
+            padding-bottom: 10px !important;
+        }
     </style>
 
 </head>
@@ -46,7 +49,8 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('home') }}"><strong>{{ session['library_name'] + ' - ' + session['first_name'] + ' ' + session['last_name'] }}</strong></a>
+            <a class="navbar-brand" href="{{ url_for('home') }}"><strong>{{ session['library_name'] + ' - ' +
+                session['first_name'] + ' ' + session['last_name'] }}</strong></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
                     aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -132,10 +136,10 @@
                                                 <td>Szmaragd</td>
                                                 <td>Ametyst</td>
                                                 <td>Lalka
-                                                    </td>
-                                                <td><select class="mdb-select" >
+                                                </td>
+                                                <td><select class="mdb-select">
                                                     <option value="1" selected>Przygotowana</option>
-                                                    <option value="2" >Wysłana</option>
+                                                    <option value="2">Wysłana</option>
                                                     <option value="3">Otrzymana</option>
                                                 </select></td>
                                             </tr>
@@ -144,8 +148,9 @@
                                                 <td>Szmaragd</td>
                                                 <td>Ametyst</td>
                                                 <td>
-                                                    Ziemia obiecana</td>
-                                                <td><select class="mdb-select" >
+                                                    Ziemia obiecana
+                                                </td>
+                                                <td><select class="mdb-select">
                                                     <option value="1">Przygotowana</option>
                                                     <option value="2" selected>Wysłana</option>
                                                     <option value="3">Otrzymana</option>
@@ -156,10 +161,11 @@
                                                 <td>Ametyst</td>
                                                 <td>Szmaragd</td>
                                                 <td>
-                                                    Zemsta</td>
-                                                <td><select class="mdb-select" >
+                                                    Zemsta
+                                                </td>
+                                                <td><select class="mdb-select">
                                                     <option value="1">Przygotowana</option>
-                                                    <option value="2" >Wysłana</option>
+                                                    <option value="2">Wysłana</option>
                                                     <option value="3" selected>Otrzymana</option>
                                                 </select></td>
                                             </tr>
@@ -168,8 +174,9 @@
                                                 <td>Szmaragd</td>
                                                 <td>Ametyst</td>
                                                 <td>
-                                                    Cierpienia młodego Wertera</td>
-                                                <td class="padding"><select class="mdb-select" >
+                                                    Cierpienia młodego Wertera
+                                                </td>
+                                                <td class="padding"><select class="mdb-select">
                                                     <option value="1">Przygotowana</option>
                                                     <option value="2">Wysłana</option>
                                                     <option value="3" selected>Otrzymana</option>
@@ -204,7 +211,9 @@
 <footer class="page-footer font-small">
 
     <!-- Copyright -->
-    <div class="text-center ">Wojewódzka i Miejska Biblioteka Publiczna w Rzeszowie&nbsp;&nbsp;<i class="fas fa-map-marker"></i>&nbsp;Pigonia 1, 35-310 Rzeszów&nbsp;&nbsp;<i class="fas fa-phone"></i>&nbsp;17 851 85 31
+    <div class="text-center ">Wojewódzka i Miejska Biblioteka Publiczna w Rzeszowie&nbsp;&nbsp;<i
+            class="fas fa-map-marker"></i>&nbsp;Pigonia 1, 35-310 Rzeszów&nbsp;&nbsp;<i class="fas fa-phone"></i>&nbsp;17
+        851 85 31
     </div>
     <!-- Copyright -->
 
@@ -225,8 +234,7 @@
     $(document).ready(function () {
         $('.mdb-select').materialSelect();
     });
-    $(document).ready(function()
-    {
+    $(document).ready(function () {
         $("tr:odd").css("color", "#370064");
     });
 </script>

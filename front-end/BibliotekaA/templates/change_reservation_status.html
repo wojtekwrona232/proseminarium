@@ -39,7 +39,8 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('home') }}"><strong>{{ session['library_name'] + ' - ' + session['first_name'] + ' ' + session['last_name'] }}</strong></a>
+            <a class="navbar-brand" href="{{ url_for('home') }}"><strong>{{ session['library_name'] + ' - ' +
+                session['first_name'] + ' ' + session['last_name'] }}</strong></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
                     aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -104,7 +105,8 @@
                                         <h3><i class="fas fa-book-reader mt-2"></i>&nbspDodaj bibliotekę</h3>
                                     </div>
                                     <!--Grid row-->
-                                    <form class="needs-validation" novalidate method="post" action="{{ url_for('change_reservation_status') }}">
+                                    <form class="needs-validation" novalidate method="post"
+                                          action="{{ url_for('change_reservation_status') }}">
                                         <form class="row mt-5">
                                             <div class="col-1"></div>
                                             <div class="col-10">
@@ -124,8 +126,9 @@
                                                     <div class="col-12 col-lg-10">
                                                         <div class="md-form" style="margin-top: 0px;">
                                                             <i class="fas fa-book-reader prefix"></i>
-                                                            <select class="mdb-select" id="orangeForm-lib" name="res_stat">
-                                                                {%  for i in enum_status %}
+                                                            <select class="mdb-select" id="orangeForm-lib"
+                                                                    name="res_stat">
+                                                                {% for i in enum_status %}
                                                                 <option value="{{ loop.index }}">{{ i }}</option>
                                                                 {% endfor %}
                                                             </select>
@@ -141,7 +144,8 @@
                                                 <input type="hidden" name="check_id" value="{{ check.id }}">
                                                 <!--Grid row-->
                                                 <div class="text-center mt-5">
-                                                    <button class="btn mbutton btn-rounded" type="submit">Zamień</button>
+                                                    <button class="btn mbutton btn-rounded" type="submit">Zamień
+                                                    </button>
                                                 </div>
                                             </div>
                                         </form>
@@ -170,7 +174,9 @@
 <footer class="page-footer font-small">
 
     <!-- Copyright -->
-    <div class="text-center ">Wojewódzka i Miejska Biblioteka Publiczna w Rzeszowie&nbsp;&nbsp;<i class="fas fa-map-marker"></i>&nbsp;Pigonia 1, 35-310 Rzeszów&nbsp;&nbsp;<i class="fas fa-phone"></i>&nbsp;17 851 85 31
+    <div class="text-center ">Wojewódzka i Miejska Biblioteka Publiczna w Rzeszowie&nbsp;&nbsp;<i
+            class="fas fa-map-marker"></i>&nbsp;Pigonia 1, 35-310 Rzeszów&nbsp;&nbsp;<i class="fas fa-phone"></i>&nbsp;17
+        851 85 31
     </div>
     <!-- Copyright -->
 
@@ -192,12 +198,12 @@
         $('.mdb-select').materialSelect();
     });
 
-    (function() {
+    (function () {
         'use strict';
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             var forms = document.getElementsByClassName('needs-validation');
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
                     if (form.checkValidity() === false) {
                         event.preventDefault();
                         event.stopPropagation();

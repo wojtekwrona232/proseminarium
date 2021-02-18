@@ -26,17 +26,19 @@
             background-size: cover;
         }
 
-        td p{
+        td p {
             margin-bottom: 0;
         }
+
         td {
-            padding-top:15px!important;
-            padding-bottom: 15px!important;
+            padding-top: 15px !important;
+            padding-bottom: 15px !important;
         }
-        td button{
-            color: white!important;
-            padding-left: 10px!important;
-            padding-right: 10px!important;
+
+        td button {
+            color: white !important;
+            padding-left: 10px !important;
+            padding-right: 10px !important;
         }
 
         .table-responsive {
@@ -56,7 +58,8 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('home') }}"><strong>{{ session['library_name'] + ' - ' + session['first_name'] + ' ' + session['last_name'] }}</strong></a>
+            <a class="navbar-brand" href="{{ url_for('home') }}"><strong>{{ session['library_name'] + ' - ' +
+                session['first_name'] + ' ' + session['last_name'] }}</strong></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
                     aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -153,12 +156,12 @@
                                                 <td>{{ b.book.title }}</td>
                                                 <td>
                                                     {% for i in b.authors %}
-                                                        <p>{{ i.first_name + ' ' + i.last_name }}</p>
+                                                    <p>{{ i.first_name + ' ' + i.last_name }}</p>
                                                     {% endfor %}
                                                 </td>
                                                 <td>
                                                     {% for i in b.translators %}
-                                                        <p>{{ i.first_name + ' ' + i.last_name }}</p>
+                                                    <p>{{ i.first_name + ' ' + i.last_name }}</p>
                                                     {% endfor %}
                                                 </td>
                                                 <td>{{ b.book.year_published }}</td>
@@ -166,23 +169,32 @@
                                                 <td>{{ b.book.publisher }}</td>
                                                 <td>
                                                     {% if not b.availability %}
-                                                        <p>Rzeszów: brak</p><p>Łańcut: brak</p>
+                                                    <p>Rzeszów: brak</p>
+                                                    <p>Łańcut: brak</p>
                                                     {% else %}
-                                                        {% for i in b.availability %}
-                                                            {% if i.library_id == 1 %}
-                                                                <p>Rzeszów: {{ i.available }}</p>
-                                                            {% elif i.library_id == 2 %}
-                                                                <p>Łańcut: {{ i.available }}</p>
-                                                            {% endif %}
-                                                        {% endfor %}
+                                                    {% for i in b.availability %}
+                                                    {% if i.library_id == 1 %}
+                                                    <p>Rzeszów: {{ i.available }}</p>
+                                                    {% elif i.library_id == 2 %}
+                                                    <p>Łańcut: {{ i.available }}</p>
+                                                    {% endif %}
+                                                    {% endfor %}
                                                     {% endif %}
 
                                                 </td>
                                                 <td>
-                                                    {#<!--<a href="{{ url_for('show_book', isbn=(b.book.isbn|string)) }}">-->#}
-                                                    <a href="{{ url_for('show_book', isbn=b.book.isbn) }}"><button type="button" class="btn btn-sm c1">Podgląd</button></a>
-                                                    <a href="#"><button type="button" class="btn btn-sm c2">Wypożycz</button></a>
-                                                    <a href="#"><button type="button" class="btn btn-sm c3">Zarezerwuj</button></a>
+                                                    {#
+                                                    <!--<a href="{{ url_for('show_book', isbn=(b.book.isbn|string)) }}">-->
+                                                    #}
+                                                    <a href="{{ url_for('show_book', isbn=b.book.isbn) }}">
+                                                        <button type="button" class="btn btn-sm c1">Podgląd</button>
+                                                    </a>
+                                                    <a href="#">
+                                                        <button type="button" class="btn btn-sm c2">Wypożycz</button>
+                                                    </a>
+                                                    <a href="#">
+                                                        <button type="button" class="btn btn-sm c3">Zarezerwuj</button>
+                                                    </a>
                                                 </td>
                                             </tr>
                                             {% endfor %}
@@ -195,16 +207,16 @@
                                 </div>
                                 <!--/Form with header-->
 
-                                </div>
                             </div>
-
                         </div>
-                        <!--Grid column-->
-                    </div>
-                </div>
-                <!--Grid row-->
 
+                    </div>
+                    <!--Grid column-->
+                </div>
             </div>
+            <!--Grid row-->
+
+        </div>
         </div>
     </section>
     <!--Intro Section-->
@@ -216,7 +228,9 @@
 <footer class="page-footer font-small">
 
     <!-- Copyright -->
-    <div class="text-center ">Wojewódzka i Miejska Biblioteka Publiczna w Rzeszowie&nbsp;&nbsp;<i class="fas fa-map-marker"></i>&nbsp;Pigonia 1, 35-310 Rzeszów&nbsp;&nbsp;<i class="fas fa-phone"></i>&nbsp;17 851 85 31
+    <div class="text-center ">Wojewódzka i Miejska Biblioteka Publiczna w Rzeszowie&nbsp;&nbsp;<i
+            class="fas fa-map-marker"></i>&nbsp;Pigonia 1, 35-310 Rzeszów&nbsp;&nbsp;<i class="fas fa-phone"></i>&nbsp;17
+        851 85 31
     </div>
     <!-- Copyright -->
 
@@ -240,10 +254,10 @@
     });
 
     var $rows = $('#table tr');
-    $('#search').keyup(function() {
+    $('#search').keyup(function () {
         var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
 
-        $rows.show().filter(function() {
+        $rows.show().filter(function () {
             var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
             return !~text.indexOf(val);
         }).hide();

@@ -26,9 +26,8 @@
             background-size: cover;
         }
 
-        .special_button{
-            width:300px;
-            margin-bottom: 20px;
+        .special_button {
+            width: 300px;
         }
 
     </style>
@@ -43,7 +42,8 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('home') }}"><strong>{{ session['library_name'] + ' - ' + session['first_name'] + ' ' + session['last_name'] }}</strong></a>
+            <a class="navbar-brand" href="{{ url_for('home') }}"><strong>{{ session['library_name'] + ' - ' +
+                session['first_name'] + ' ' + session['last_name'] }}</strong></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
                     aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -101,58 +101,69 @@
                     <div class="col-md-12">
                         <div class="card wow fadeIn" data-wow-delay="0.3s">
                             <div class="card">
-                                <form  class="needs-validation" novalidate method="post" action="{{ url_for('reserve_book') }}" method="post">
+                                <form class="needs-validation" novalidate method="post"
+                                      action="{{ url_for('reserve_book') }}" method="post">
                                     <div class="card-body">
 
                                         <!--Header-->
-                                        <div class="form-header mbutton" style="border-radius: 0.2em;" >
+                                        <div class="form-header mbutton" style="border-radius: 0.2em;">
                                             <h3><i class="fas fa-book"></i>&nbsp;&nbsp;Zarezerwuj książkę</h3>
                                         </div>
 
 
-                                        <select name="reader" class="mdb-select md-form" searchable="Znajdź czytelnika...">
-                                            {%  for l in readers %}
-                                                <option value="{{ l['id'] }}">{{ l['first_name'] + ', ' + l['last_name'] + ', ' + l['email'] }}</option>
+                                        <select name="reader" class="mdb-select md-form"
+                                                searchable="Znajdź czytelnika...">
+                                            {% for l in readers %}
+                                            <option value="{{ l['id'] }}">{{ l['first_name'] + ', ' + l['last_name'] +
+                                                ', ' + l['email'] }}
+                                            </option>
                                             {% endfor %}
                                         </select>
                                         <label class="mdb-main-label">Czytelnik</label>
 
                                         <select name="book" class="mdb-select md-form" searchable="Wyszukaj książkę...">
-                                            {%  for b in books %}
-                                                {% if b.availability %}
-                                                    {% for i in b.availability %}
-                                                        {% if i.library_id == 1 %}
-                                                            <option value="{{ b.book.isbn }}">{{ i.available|string + ' dostępnych. ' + b.book.title + ', wydana ' + b.book.year_published|string + ', edycja ' + b.book.edition_nr|string }}</option>
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                {% endif %}
+                                            {% for b in books %}
+                                            {% if b.availability %}
+                                            {% for i in b.availability %}
+                                            {% if i.library_id == 1 %}
+                                            <option value="{{ b.book.isbn }}">{{ i.available|string + ' dostępnych. ' +
+                                                b.book.title + ', wydana ' + b.book.year_published|string + ', edycja '
+                                                + b.book.edition_nr|string }}
+                                            </option>
+                                            {% endif %}
+                                            {% endfor %}
+                                            {% endif %}
                                             {% endfor %}
                                         </select>
-                                        
+
                                         <label class="mdb-main-label">Książka</label>
                                         <div class="md-form mb-2">
-                                            <input name="pick_up_date" placeholder="Selected date" type="text" id="date-picker-example" placeholder="Wybierz datę"
-                                                   class="form-control datepicker" required />
+                                            <input name="pick_up_date" placeholder="Selected date" type="text"
+                                                   id="date-picker-example" placeholder="Wybierz datę"
+                                                   class="form-control datepicker" required/>
                                             <label for="date-picker-example">Na</label>
                                             <div class="invalid-feedback">Wybierz poprawną datę.</div>
                                         </div>
-                                        </div>
-
                                         <div class="text-center mt-4">
-                                            <button class="btn mbutton special_button " type="submit">Zarezerwuj książkę</button>
+                                            <button class="btn mbutton special_button " type="submit">Zarezerwuj
+                                                książkę
+                                            </button>
                                         </div>
                                     </div>
-                                </form>
-                                    <!--/Form with header-->
+
+
                             </div>
-
+                            </form>
+                            <!--/Form with header-->
                         </div>
-                        <!--Grid column-->
-                    </div>
-                </div>
-                <!--Grid row-->
 
+                    </div>
+                    <!--Grid column-->
+                </div>
             </div>
+            <!--Grid row-->
+
+        </div>
         </div>
     </section>
     <!--Intro Section-->
@@ -164,7 +175,9 @@
 <footer class="page-footer font-small">
 
     <!-- Copyright -->
-    <div class="text-center ">Wojewódzka i Miejska Biblioteka Publiczna w Rzeszowie&nbsp;&nbsp;<i class="fas fa-map-marker"></i>&nbsp;Pigonia 1, 35-310 Rzeszów&nbsp;&nbsp;<i class="fas fa-phone"></i>&nbsp;17 851 85 31
+    <div class="text-center ">Wojewódzka i Miejska Biblioteka Publiczna w Rzeszowie&nbsp;&nbsp;<i
+            class="fas fa-map-marker"></i>&nbsp;Pigonia 1, 35-310 Rzeszów&nbsp;&nbsp;<i class="fas fa-phone"></i>&nbsp;17
+        851 85 31
     </div>
     <!-- Copyright -->
 
@@ -186,14 +199,14 @@
         $('.mdb-select').materialSelect();
     });
 
-    (function() {
+    (function () {
         'use strict';
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
 // Fetch all the forms we want to apply custom Bootstrap validation styles to
             var forms = document.getElementsByClassName('needs-validation');
 // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
                     if (form.checkValidity() === false) {
                         event.preventDefault();
                         event.stopPropagation();
@@ -204,7 +217,7 @@
         }, false);
     })();
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.datepicker').pickadate();
         $('.datepicker').removeAttr('readonly');
     });
@@ -214,8 +227,8 @@
         monthsFull: ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik',
             'Listopad', 'Grudzień'],
         monthsShort: ['Sty', 'Lut', 'Mar', 'Kwi', 'Maj', 'Cze', 'Lip', 'Sie', 'Wrz', 'Paź', 'Lis', 'Gru'],
-        weekdaysFull: ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota' ],
-        weekdaysShort: ['nie','pon', 'wto', 'śro', 'czw', 'pią', 'sob' ],
+        weekdaysFull: ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'],
+        weekdaysShort: ['nie', 'pon', 'wto', 'śro', 'czw', 'pią', 'sob'],
         labelMonthNext: 'Następny miesiąc',
         labelMonthPrev: 'Poprzedni miesiąc',
         labelMonthSelect: 'Wybierz miesiąc',
@@ -230,7 +243,6 @@
         min: 3,
         max: 121
     })
-
 
 
 </script>

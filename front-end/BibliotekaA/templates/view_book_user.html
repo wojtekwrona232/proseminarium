@@ -83,15 +83,17 @@
                                     </div>
                                     <!--Header-->
                                     <div>
-                                    <p><b>ISBN: </b>{{ isbn }}</p>
-                                    <p><b>Tytuł: </b>{{ title }}</p>
-                                    <p><b>Autor: </b>{% for i in authors %}{{ i.first_name + ' ' + i.last_name }}<br>{% endfor %}</p>
-                                    <p><b>Tłumacz: </b>{% for i in translators %}{{ i.first_name + ' ' + i.last_name }}<br>{% endfor %}</p>
-                                    <p><b>Wydawnictwo: </b>{{ publisher }}</p>
-                                    <p><b>Rok wydania: </b>{{ published_year }}</p>
-                                    <p><b>Numer wydania: </b>{{ edition_nr }}</p>
-                                </div>
-                                <!--/Form with header-->
+                                        <p><b>ISBN: </b>{{ isbn }}</p>
+                                        <p><b>Tytuł: </b>{{ title }}</p>
+                                        <p><b>Autor: </b>{% for i in authors %}{{ i.first_name + ' ' + i.last_name
+                                            }}<br>{% endfor %}</p>
+                                        <p><b>Tłumacz: </b>{% for i in translators %}{{ i.first_name + ' ' + i.last_name
+                                            }}<br>{% endfor %}</p>
+                                        <p><b>Wydawnictwo: </b>{{ publisher }}</p>
+                                        <p><b>Rok wydania: </b>{{ published_year }}</p>
+                                        <p><b>Numer wydania: </b>{{ edition_nr }}</p>
+                                    </div>
+                                    <!--/Form with header-->
 
                                 </div>
                             </div>
@@ -114,7 +116,9 @@
 <footer class="page-footer font-small">
 
     <!-- Copyright -->
-    <div class="text-center ">Wojewódzka i Miejska Biblioteka Publiczna w Rzeszowie&nbsp;&nbsp;<i class="fas fa-map-marker"></i>&nbsp;Pigonia 1, 35-310 Rzeszów&nbsp;&nbsp;<i class="fas fa-phone"></i>&nbsp;17 851 85 31
+    <div class="text-center ">Wojewódzka i Miejska Biblioteka Publiczna w Rzeszowie&nbsp;&nbsp;<i
+            class="fas fa-map-marker"></i>&nbsp;Pigonia 1, 35-310 Rzeszów&nbsp;&nbsp;<i class="fas fa-phone"></i>&nbsp;17
+        851 85 31
     </div>
     <!-- Copyright -->
 
@@ -135,8 +139,7 @@
     $(document).ready(function () {
         $('.mdb-select').materialSelect();
     });
-    $(document).ready(function()
-    {
+    $(document).ready(function () {
         $("tr:odd").css("color", "#370064");
     });
 </script>

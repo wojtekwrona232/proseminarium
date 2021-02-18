@@ -1,22 +1,22 @@
 html,
 body,
-.view
-{
+.view {
     height: 100%;
 }
 
-header{
-    height:97.5%;
+header {
+    height: 97.5%;
 }
-footer{
-    height: 2.5%!important;
+
+footer {
+    height: 2.5% !important;
     background-color: #685ca6;
     color: #eaeaea !important;
     overflow-y: hidden;
     vertical-align: center;
 }
 
-footer>div{
+footer > div {
     height: 100%;
     background-color: #685ca6;
     color: #eaeaea !important;
@@ -30,12 +30,12 @@ footer>div{
 }
 
 .intro-2 {
-    background: url("https://u.cubeupload.com/xda321/forest1.jpg")no-repeat center center;
+    background: url("https://u.cubeupload.com/xda321/forest1.jpg") no-repeat center center;
     background-size: cover;
 }
 
-.navbar-brand{
-    font-family: 'Lora', serif!important;
+.navbar-brand {
+    font-family: 'Lora', serif !important;
 }
 
 .mbutton, .mbutton:hover {
@@ -47,6 +47,7 @@ footer>div{
     background: #5a60d5;
     color: white;
 }
+
 table th {
     font-size: 1rem;
     font-weight: 600;
@@ -57,8 +58,8 @@ table td {
     font-weight: 400;
 }
 
-.navbar{
-	min-width:530px;
+.navbar {
+    min-width: 530px;
 }
 
 .picker__box .picker__table .picker__day.picker__day--today {
@@ -82,14 +83,15 @@ table td {
 }
 
 
-.select-wrapper.active span.caret, .select-wrapper.active label.mdb-main-label{
-    color:#955ce5
+.select-wrapper.active span.caret, .select-wrapper.active label.mdb-main-label {
+    color: #955ce5
 }
 
-.mbutton_long{
+.mbutton_long {
     background: -webkit-linear-gradient(98deg, rgb(144, 103, 198), rgb(22, 91, 231) 150%);
     color: white;
 }
+
 .navbar:not(.top-nav-collapse) {
     background: transparent !important;
 }
@@ -99,18 +101,21 @@ table td {
     background: -webkit-linear-gradient(98deg, rgba(144, 103, 198, 0.7), rgba(22, 91, 231, 0.7) 200%);
 
 }
-.md-form input:not(.browser-default):focus:not([readonly])+label{
+
+.md-form input:not(.browser-default):focus:not([readonly]) + label {
     color: #7b40ca !important;
-    border-bottom: #7b40ca!important;
+    border-bottom: #7b40ca !important;
 }
-.md-form input:active, .md-form input:focus{
+
+.md-form input:active, .md-form input:focus {
     border-bottom: 1px solid #7b40ca !important;
-    -webkit-box-shadow: 0 1px 0 0 #7b40ca!important;
-    box-shadow: 0 1px 0 0 #7b40ca!important;
+    -webkit-box-shadow: 0 1px 0 0 #7b40ca !important;
+    box-shadow: 0 1px 0 0 #7b40ca !important;
 
 }
-.md-form .prefix.active{
-    color:#7b40ca!important;
+
+.md-form .prefix.active {
+    color: #7b40ca !important;
 }
 
 .card {
@@ -120,21 +125,30 @@ table td {
 h6 {
     line-height: 1.7;
 }
-.dropdown .dropdown-menu.dropdown-default .dropdown-item:hover, .dropdown .dropdown-menu.dropdown-default .dropdown-item:active{
+
+.dropdown .dropdown-menu.dropdown-default .dropdown-item:hover, .dropdown .dropdown-menu.dropdown-default .dropdown-item:active {
     background-color: #8d4fe3 !important;
 }
-.dropdown-content li>a, .dropdown-content li>span {    color: #2E2E2E;}
-.dropdown-content li>a:hover, .dropdown-content li>span:hover {    color: #8d4fe3;}
 
-.c1{
-    background-color: #9068c7!important;
-    color:white!important;
+.dropdown-content li > a, .dropdown-content li > span {
+    color: #2E2E2E;
 }
-.c2{
-    background-color: #6864D1!important;
-    color:white!important;
+
+.dropdown-content li > a:hover, .dropdown-content li > span:hover {
+    color: #8d4fe3;
 }
-.c3{
-    background-color: #405fdb!important;
-    color:white!important;
+
+.c1 {
+    background-color: #9068c7 !important;
+    color: white !important;
+}
+
+.c2 {
+    background-color: #6864D1 !important;
+    color: white !important;
+}
+
+.c3 {
+    background-color: #405fdb !important;
+    color: white !important;
 }

@@ -39,7 +39,8 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('home') }}"><strong>{{ session['library_name'] + ' - ' + session['first_name'] + ' ' + session['last_name'] }}</strong></a>
+            <a class="navbar-brand" href="{{ url_for('home') }}"><strong>{{ session['library_name'] + ' - ' +
+                session['first_name'] + ' ' + session['last_name'] }}</strong></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
                     aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -108,11 +109,14 @@
                                         <div class="col-1"></div>
                                         <div class="col-10">
                                             <!--Grid row-->
-                                            <form method="post" action="{{ url_for('add_author') }}" class="needs-validation" novalidate>
+                                            <form method="post" action="{{ url_for('add_author') }}"
+                                                  class="needs-validation" novalidate>
                                                 <div class="col-12 ">
                                                     <div class="md-form" style="margin-top: 0px;width:300px;">
                                                         <i class="fas fa-file-signature prefix"></i>
-                                                        <input name="first_name" type="text" id="orangeForm-name" class="form-control" pattern="[^a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]*.{3,}" required>
+                                                        <input name="first_name" type="text" id="orangeForm-name"
+                                                               class="form-control"
+                                                               pattern="[^a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]*.{3,}" required>
                                                         <label for="orangeForm-name">Imię</label>
                                                         <div class="invalid-tooltip">
                                                             Podaj imię - tylko litery dozwolone.
@@ -123,7 +127,9 @@
                                                 <div class="col-12 ">
                                                     <div class="md-form" style="width:300px;">
                                                         <i class="fas fa-file-signature prefix"></i>
-                                                        <input name="last_name" type="text" id="orangeForm-surname" class="form-control" pattern="[^a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]*{3,}" required>
+                                                        <input name="last_name" type="text" id="orangeForm-surname"
+                                                               class="form-control"
+                                                               pattern="[^a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]*{3,}" required>
                                                         <label for="orangeForm-surname">Nazwisko</label>
                                                         <div class="invalid-tooltip">
                                                             Podaj nazwisko - tylko litery dozwolone.
@@ -137,20 +143,20 @@
                                             </form>
                                         </div>
                                     </div>
-                                        <!--Grid row-->
-                                        <div class="col-1"></div>
-                                    </div>
-
+                                    <!--Grid row-->
+                                    <div class="col-1"></div>
                                 </div>
+
                             </div>
-
                         </div>
-                        <!--Grid column-->
-                    </div>
-                </div>
-                <!--Grid row-->
 
+                    </div>
+                    <!--Grid column-->
+                </div>
             </div>
+            <!--Grid row-->
+
+        </div>
         </div>
     </section>
     <!--Intro Section-->
@@ -162,7 +168,9 @@
 <footer class="page-footer font-small">
 
     <!-- Copyright -->
-    <div class="text-center ">Wojewódzka i Miejska Biblioteka Publiczna w Rzeszowie&nbsp;&nbsp;<i class="fas fa-map-marker"></i>&nbsp;Pigonia 1, 35-310 Rzeszów&nbsp;&nbsp;<i class="fas fa-phone"></i>&nbsp;17 851 85 31
+    <div class="text-center ">Wojewódzka i Miejska Biblioteka Publiczna w Rzeszowie&nbsp;&nbsp;<i
+            class="fas fa-map-marker"></i>&nbsp;Pigonia 1, 35-310 Rzeszów&nbsp;&nbsp;<i class="fas fa-phone"></i>&nbsp;17
+        851 85 31
     </div>
     <!-- Copyright -->
 
@@ -184,12 +192,12 @@
         $('.mdb-select').materialSelect();
     });
 
-    (function() {
+    (function () {
         'use strict';
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             var forms = document.getElementsByClassName('needs-validation');
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
                     if (form.checkValidity() === false) {
                         event.preventDefault();
                         event.stopPropagation();
