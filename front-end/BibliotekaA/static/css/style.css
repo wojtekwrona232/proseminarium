@@ -1,10 +1,29 @@
-
 html,
 body,
-header,
-.view {
+.view
+{
     height: 100%;
 }
+
+header{
+    height:97.5%;
+}
+footer{
+    height: 2.5%!important;
+    background-color: #685ca6;
+    color: #eaeaea !important;
+    overflow-y: hidden;
+    vertical-align: center;
+}
+
+footer>div{
+    height: 100%;
+    background-color: #685ca6;
+    color: #eaeaea !important;
+    font-size: 1.5vh;
+    font-weight: 300;
+}
+
 .intro-1 {
     background: url("https://u.cubeupload.com/xda321/login.jpg") no-repeat center center;
     background-size: cover;
@@ -58,8 +77,6 @@ table td {
 }
 
 .picker__box .picker__footer .picker__button--today:before {
-    top: -.05em;
-    width: 0;
     border-top: .66em solid #6f00ea;
     border-left: .66em solid transparent;
 }

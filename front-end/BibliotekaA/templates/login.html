@@ -22,10 +22,30 @@
 
         html,
         body,
-        header,
-        .view {
+        .view
+        {
             height: 100%;
         }
+
+        header{
+           height:97.5%;
+        }
+        footer{
+            height: 2.5%!important;
+            background-color: #5f4080;
+            color: #eaeaea !important;
+            overflow-y: hidden;
+            vertical-align: center;
+        }
+
+        footer>div{
+            height: 100%;
+            background-color: #5f4080;
+            color: #eaeaea !important;
+            font-size: 1.5vh;
+            font-weight: 300;
+        }
+
 
         .navbar-brand {
             font-family: 'Lora', serif !important;
@@ -103,6 +123,8 @@
             background-color: #aca2ff !important;
             border: 2px solid #aca2ff !important;
         }
+
+
     </style>
 </head>
 <body>
@@ -184,6 +206,16 @@
 </header>
 <!--Main Navigation-->
 
+<!-- Footer -->
+<footer class="page-footer font-small">
+
+    <!-- Copyright -->
+    <div class="text-center ">Wojewódzka i Miejska Biblioteka Publiczna w Rzeszowie&nbsp;&nbsp;<i class="fas fa-map-marker"></i>&nbsp;Pigonia 1, 35-310 Rzeszów&nbsp;&nbsp;<i class="fas fa-phone"></i>&nbsp;17 851 85 31
+    </div>
+    <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
 
 <!-- jQuery -->
 <script type="text/javascript" src="../static/js/jquery.min.js"></script>

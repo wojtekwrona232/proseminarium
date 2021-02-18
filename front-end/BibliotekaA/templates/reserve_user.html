@@ -20,6 +20,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,600&display=swap" rel="stylesheet">
     <style>
 
+        .picker__box .picker__table .picker__day.picker__day--today {
+            color: #6f00ea;
+        }
+
+
+        .picker__box .picker__table .picker__day--selected, .picker__box .picker__table .picker__day--selected:hover, .picker__box .picker__table .picker--focused {
+            background-color: #783fc4 !important;
+            color: white !important;
+        }
+
+
+        .picker__box .picker__header .picker__date-display {
+            background-color: #833de3 !important;
+        }
+
+        .picker__box .picker__footer .picker__button--today:before {
+            top: -.05em;
+            width: 0;
+            border-top: .66em solid #6f00ea;
+            border-left: .66em solid transparent;
+        }
+
 
         .intro-2 {
             background: url("https://mdbootstrap.com/img/Photos/Others/forest1.jpg") no-repeat center center;
@@ -107,7 +129,6 @@
                                                 <label for="date-picker-example">Na</label>
                                             </div>
 
-
                                         <div class="text-center mt-4">
                                             <button class="btn mbutton special_button ">Zarezerwuj książkę</button>
                                         </div>
@@ -129,6 +150,17 @@
 
 </header>
 <!--Main Navigation-->
+
+<!-- Footer -->
+<footer class="page-footer font-small">
+
+    <!-- Copyright -->
+    <div class="text-center ">Wojewódzka i Miejska Biblioteka Publiczna w Rzeszowie&nbsp;&nbsp;<i class="fas fa-map-marker"></i>&nbsp;Pigonia 1, 35-310 Rzeszów&nbsp;&nbsp;<i class="fas fa-phone"></i>&nbsp;17 851 85 31
+    </div>
+    <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
 
 <!--  SCRIPTS  -->
 <!-- JQuery -->
