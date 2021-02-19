@@ -1,0 +1,154 @@
+html,
+body,
+.view {
+    height: 100%;
+}
+
+header {
+    height: 97.5%;
+}
+
+footer {
+    height: 2.5% !important;
+    background-color: #685ca6;
+    color: #eaeaea !important;
+    overflow-y: hidden;
+    vertical-align: center;
+}
+
+footer > div {
+    height: 100%;
+    background-color: #685ca6;
+    color: #eaeaea !important;
+    font-size: 1.5vh;
+    font-weight: 300;
+}
+
+.intro-1 {
+    background: url("https://u.cubeupload.com/xda321/login.jpg") no-repeat center center;
+    background-size: cover;
+}
+
+.intro-2 {
+    background: url("https://u.cubeupload.com/xda321/forest1.jpg") no-repeat center center;
+    background-size: cover;
+}
+
+.navbar-brand {
+    font-family: 'Lora', serif !important;
+}
+
+.mbutton, .mbutton:hover {
+    background: #8d4fe3;
+    color: white;
+}
+
+.mbutton2, .mbutton2:hover {
+    background: #5a60d5;
+    color: white;
+}
+
+table th {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+table td {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.navbar {
+    min-width: 530px;
+}
+
+.picker__box .picker__table .picker__day.picker__day--today {
+    color: #6f00ea;
+}
+
+
+.picker__box .picker__table .picker__day--selected, .picker__box .picker__table .picker__day--selected:hover, .picker__box .picker__table .picker--focused {
+    background-color: #783fc4 !important;
+    color: white !important;
+}
+
+
+.picker__box .picker__header .picker__date-display {
+    background-color: #833de3 !important;
+}
+
+.picker__box .picker__footer .picker__button--today:before {
+    border-top: .66em solid #6f00ea;
+    border-left: .66em solid transparent;
+}
+
+
+.select-wrapper.active span.caret, .select-wrapper.active label.mdb-main-label {
+    color: #955ce5
+}
+
+.mbutton_long {
+    background: -webkit-linear-gradient(98deg, rgb(144, 103, 198), rgb(22, 91, 231) 150%);
+    color: white;
+}
+
+.navbar:not(.top-nav-collapse) {
+    background: transparent !important;
+}
+
+
+.rgba-gradient {
+    background: -webkit-linear-gradient(98deg, rgba(144, 103, 198, 0.7), rgba(22, 91, 231, 0.7) 200%);
+
+}
+
+.md-form input:not(.browser-default):focus:not([readonly]) + label {
+    color: #7b40ca !important;
+    border-bottom: #7b40ca !important;
+}
+
+.md-form input:active, .md-form input:focus {
+    border-bottom: 1px solid #7b40ca !important;
+    -webkit-box-shadow: 0 1px 0 0 #7b40ca !important;
+    box-shadow: 0 1px 0 0 #7b40ca !important;
+
+}
+
+.md-form .prefix.active {
+    color: #7b40ca !important;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.85);
+}
+
+h6 {
+    line-height: 1.7;
+}
+
+.dropdown .dropdown-menu.dropdown-default .dropdown-item:hover, .dropdown .dropdown-menu.dropdown-default .dropdown-item:active {
+    background-color: #8d4fe3 !important;
+}
+
+.dropdown-content li > a, .dropdown-content li > span {
+    color: #2E2E2E;
+}
+
+.dropdown-content li > a:hover, .dropdown-content li > span:hover {
+    color: #8d4fe3;
+}
+
+.c1 {
+    background-color: #9068c7 !important;
+    color: white !important;
+}
+
+.c2 {
+    background-color: #6864D1 !important;
+    color: white !important;
+}
+
+.c3 {
+    background-color: #405fdb !important;
+    color: white !important;
+}

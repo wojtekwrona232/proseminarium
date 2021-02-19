@@ -42,8 +42,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('home') }}"><strong>{{ session['library_name'] + ' - ' +
-                session['first_name'] + ' ' + session['last_name'] }}</strong></a>
+            <a class="navbar-brand" href="{{ url_for('home') }}"><strong>Biblioteka {{ session['library_city'] + ' - ' + session['first_name'] + ' ' + session['last_name'] }}</strong></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
                     aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -71,6 +70,7 @@
                             <a class="dropdown-item" href="{{ url_for('add_author') }}">Autora</a>
                             <a class="dropdown-item" href="{{ url_for('add_translator') }}">Tłumacza</a>
                             <a class="dropdown-item" href="{{ url_for('add_publisher') }}">Wydawcę</a>
+                            <a class="dropdown-item" href="{{ url_for('add_book_in_library') }}">Dodaj książkę w bibliotece</a>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -114,7 +114,7 @@
                                         <select name="reader" class="mdb-select md-form"
                                                 searchable="Znajdź czytelnika...">
                                             {% for l in readers %}
-                                            <option value="{{ l['id'] }}">{{ l['first_name'] + ', ' + l['last_name'] +
+                                            <option value="{{ l['email'] }}">{{ l['first_name'] + ', ' + l['last_name'] +
                                                 ', ' + l['email'] }}
                                             </option>
                                             {% endfor %}
@@ -175,10 +175,7 @@
 <footer class="page-footer font-small">
 
     <!-- Copyright -->
-    <div class="text-center ">Wojewódzka i Miejska Biblioteka Publiczna w Rzeszowie&nbsp;&nbsp;<i
-            class="fas fa-map-marker"></i>&nbsp;Pigonia 1, 35-310 Rzeszów&nbsp;&nbsp;<i class="fas fa-phone"></i>&nbsp;17
-        851 85 31
-    </div>
+    <div class="text-center ">{{ session['library_name'] }}&nbsp;&nbsp;<i class="fas fa-map-marker"></i>&nbsp;{{ session['library_address'] + ', ' + session['library_city'] }}&nbsp;&nbsp;<i class="fas fa-phone"></i>&nbsp;{{ session['library_phone'] }}</div>
     <!-- Copyright -->
 
 </footer>

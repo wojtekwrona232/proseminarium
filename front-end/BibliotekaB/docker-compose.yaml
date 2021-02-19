@@ -1,0 +1,28 @@
+version: "3.5"
+services:
+  library_b_gui:
+    container_name: library_b_gui
+    build: ./
+    ports:
+      - "6060:6060"
+    environment:
+      DB_HOST: db
+      APP_DEBUG: "False"
+      APP_PORT: 6060
+    volumes: 
+      - appdata:/var/www
+    networks:
+      shared:
+        ipv4_address: '10.1.0.10'
+
+volumes: 
+  appdata:
+    driver: local
+
+networks:
+  shared:
+    name: shared
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.1.0.0/24

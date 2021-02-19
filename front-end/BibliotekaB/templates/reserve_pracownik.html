@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Dodaj bibliotekę</title>
+    <title>Zarezerwuj książkę</title>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
@@ -26,6 +26,9 @@
             background-size: cover;
         }
 
+        .special_button {
+            width: 300px;
+        }
 
     </style>
 
@@ -39,8 +42,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('home') }}"><strong>{{ session['library_name'] + ' - ' +
-                session['first_name'] + ' ' + session['last_name'] }}</strong></a>
+            <a class="navbar-brand" href="{{ url_for('home') }}"><strong>Biblioteka {{ session['library_city'] + ' - ' + session['first_name'] + ' ' + session['last_name'] }}</strong></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
                     aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -68,6 +70,7 @@
                             <a class="dropdown-item" href="{{ url_for('add_author') }}">Autora</a>
                             <a class="dropdown-item" href="{{ url_for('add_translator') }}">Tłumacza</a>
                             <a class="dropdown-item" href="{{ url_for('add_publisher') }}">Wydawcę</a>
+                            <a class="dropdown-item" href="{{ url_for('add_book_in_library') }}">Dodaj książkę w bibliotece</a>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -98,66 +101,60 @@
                     <div class="col-md-12">
                         <div class="card wow fadeIn" data-wow-delay="0.3s">
                             <div class="card">
-                                <div class="card-body">
+                                <form class="needs-validation" novalidate method="post"
+                                      action="{{ url_for('reserve_book') }}" method="post">
+                                    <div class="card-body">
 
-                                    <!--Header-->
-                                    <div class="form-header mbutton" style="margin-bottom: 37px;">
-                                        <h3><i class="fas fa-book-reader mt-2"></i>&nbspDodaj bibliotekę</h3>
+                                        <!--Header-->
+                                        <div class="form-header mbutton" style="border-radius: 0.2em;">
+                                            <h3><i class="fas fa-book"></i>&nbsp;&nbsp;Zarezerwuj książkę</h3>
+                                        </div>
+
+
+                                        <select name="reader" class="mdb-select md-form"
+                                                searchable="Znajdź czytelnika...">
+                                            {% for l in readers %}
+                                            <option value="{{ l['email'] }}">{{ l['first_name'] + ', ' + l['last_name'] +
+                                                ', ' + l['email'] }}
+                                            </option>
+                                            {% endfor %}
+                                        </select>
+                                        <label class="mdb-main-label">Czytelnik</label>
+
+                                        <select name="book" class="mdb-select md-form" searchable="Wyszukaj książkę...">
+                                            {% for b in books %}
+                                            {% if b.availability %}
+                                            {% for i in b.availability %}
+                                            {% if i.library_id == 2 %}
+                                            <option value="{{ b.book.isbn }}">{{ i.available|string + ' dostępnych. ' +
+                                                b.book.title + ', wydana ' + b.book.year_published|string + ', edycja '
+                                                + b.book.edition_nr|string }}
+                                            </option>
+                                            {% endif %}
+                                            {% endfor %}
+                                            {% endif %}
+                                            {% endfor %}
+                                        </select>
+
+                                        <label class="mdb-main-label">Książka</label>
+                                        <div class="md-form mb-2">
+                                            <input name="pick_up_date" placeholder="Selected date" type="text"
+                                                   id="date-picker-example" placeholder="Wybierz datę"
+                                                   class="form-control datepicker" required/>
+                                            <label for="date-picker-example">Na</label>
+                                            <div class="invalid-feedback">Wybierz poprawną datę.</div>
+                                        </div>
+                                        <div class="text-center mt-4">
+                                            <button class="btn mbutton special_button " type="submit">Zarezerwuj
+                                                książkę
+                                            </button>
+                                        </div>
                                     </div>
-                                    <!--Grid row-->
-                                    <form class="needs-validation" novalidate>
-                                        <form class="row mt-5">
-                                            <div class="col-1"></div>
-                                            <div class="col-10">
-                                                <!--Grid row-->
-                                                <div class="col-12 ">
-                                                    <div class="md-form" style="margin-top: 0px; width:400px;">
-                                                        <i class="fas fa-book-reader prefix"></i>
-                                                        <input type="text" id="orangeForm-name" class="form-control"
-                                                               pattern=".{3,}" required>
-                                                        <label for="orangeForm-name">Nazwa</label>
-                                                        <div class="invalid-tooltip">
-                                                            Podaj nazwę biblioteki.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!--Grid row-->
-                                                <!--Grid row-->
-                                                <div class="col-12 ">
-                                                    <div class="md-form" style="margin-top: 0px; width:400px;">
-                                                        <i class="fas fa-city prefix "></i>
-                                                        <input type="text" id="orangeForm-city" class="form-control"
-                                                               pattern=".{3,}" required>
-                                                        <label for="orangeForm-city">Miejscowość</label>
-                                                        <div class="invalid-tooltip">
-                                                            Podaj miejscowość.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!--Grid row-->
-                                                <!--Grid row-->
-                                                <div class="col-12 ">
-                                                    <div class="md-form" style="margin-top: 0px; width:400px;">
-                                                        <i class="fas fa-building prefix"></i>
-                                                        <input type="text" id="orangeForm-street" class="form-control"
-                                                               pattern=".{3,}" required>
-                                                        <label for="orangeForm-street">Ulica i numer</label>
-                                                        <div class="invalid-tooltip">
-                                                            Podaj ulicę i numer.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!--Grid row-->
-                                                <div class="text-center mt-5">
-                                                    <button class="btn mbutton btn-rounded" type="submit">Dodaj</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                        <!--Grid row-->
-                                        <div class="col-1"></div>
-                                </div>
+
 
                             </div>
+                            </form>
+                            <!--/Form with header-->
                         </div>
 
                     </div>
@@ -178,10 +175,7 @@
 <footer class="page-footer font-small">
 
     <!-- Copyright -->
-    <div class="text-center ">Wojewódzka i Miejska Biblioteka Publiczna w Rzeszowie&nbsp;&nbsp;<i
-            class="fas fa-map-marker"></i>&nbsp;Pigonia 1, 35-310 Rzeszów&nbsp;&nbsp;<i class="fas fa-phone"></i>&nbsp;17
-        851 85 31
-    </div>
+    <div class="text-center ">{{ session['library_name'] }}&nbsp;&nbsp;<i class="fas fa-map-marker"></i>&nbsp;{{ session['library_address'] + ', ' + session['library_city'] }}&nbsp;&nbsp;<i class="fas fa-phone"></i>&nbsp;{{ session['library_phone'] }}</div>
     <!-- Copyright -->
 
 </footer>
@@ -205,7 +199,9 @@
     (function () {
         'use strict';
         window.addEventListener('load', function () {
+// Fetch all the forms we want to apply custom Bootstrap validation styles to
             var forms = document.getElementsByClassName('needs-validation');
+// Loop over them and prevent submission
             var validation = Array.prototype.filter.call(forms, function (form) {
                 form.addEventListener('submit', function (event) {
                     if (form.checkValidity() === false) {
@@ -217,6 +213,35 @@
             });
         }, false);
     })();
+
+    $(document).ready(function () {
+        $('.datepicker').pickadate();
+        $('.datepicker').removeAttr('readonly');
+    });
+
+
+    $('.datepicker').pickadate({
+        monthsFull: ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik',
+            'Listopad', 'Grudzień'],
+        monthsShort: ['Sty', 'Lut', 'Mar', 'Kwi', 'Maj', 'Cze', 'Lip', 'Sie', 'Wrz', 'Paź', 'Lis', 'Gru'],
+        weekdaysFull: ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'],
+        weekdaysShort: ['nie', 'pon', 'wto', 'śro', 'czw', 'pią', 'sob'],
+        labelMonthNext: 'Następny miesiąc',
+        labelMonthPrev: 'Poprzedni miesiąc',
+        labelMonthSelect: 'Wybierz miesiąc',
+        labelYearSelect: 'Wybierz rok',
+        today: 'dziś',
+        clear: 'wyczyść',
+        close: 'zamknij',
+        firstDay: 1,
+        disable: [
+            7
+        ],
+        min: 3,
+        max: 121
+    })
+
+
 </script>
 </body>
 

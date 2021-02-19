@@ -6,13 +6,13 @@ services:
     ports:
       - "3308:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: Ic3P3dZUvid9YdKAb-@P3JaDOp4B
-      MYSQL_DATABASE: libraryB
+      MYSQL_ROOT_PASSWORD: Ic3P3dZUvid9YdKAb-@P3JaDOp4s
+      MYSQL_DATABASE: library
       MYSQL_ROOT_HOST: '%'
     volumes: 
       - ./db_sql:/docker-entrypoint-initdb.d/:ro
     networks: 
-      - libraryB
+      - library
   
   web:
     container_name: libraryB
@@ -24,12 +24,12 @@ services:
     depends_on:
       - db
     networks: 
-      libraryB:
+      library:
       shared:
         ipv4_address: '10.1.0.121'
 
 networks:
-  libraryB:    
+  library:    
   shared:
     name: shared
     ipam:

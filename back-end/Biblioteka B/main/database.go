@@ -38,7 +38,7 @@ type CheckOut struct {
 var db *gorm.DB
 
 func initDB() (err error) {
-	dataSourceName := "root:Ic3P3dZUvid9YdKAb-@P3JaDOp4B@tcp(" + os.Getenv("DB_HOST") + ":3306)/libraryB"
+	dataSourceName := "root:Ic3P3dZUvid9YdKAb-@P3JaDOp4s@tcp(" + os.Getenv("DB_HOST") + ":3306)/library"
 	db, err = gorm.Open("mysql", dataSourceName)
 
 	if err != nil {

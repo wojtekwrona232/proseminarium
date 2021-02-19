@@ -1,7 +1,7 @@
 version: "3.5"
 services:
-  library_gui:
-    container_name: library_gui
+  library_a_gui:
+    container_name: library_a_gui
     build: ./
     ports:
       - "6050:6050"
@@ -13,7 +13,7 @@ services:
       - appdata:/var/www
     networks:
       shared:
-        ipv4_address: '10.1.0.10'
+        ipv4_address: '10.1.0.11'
 
 volumes: 
   appdata:
